@@ -1,0 +1,148 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier;\f4\fmodern\fcharset0 Courier-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red163\green0\blue79;\red255\green255\blue255;
+\red148\green108\blue71;\red73\green17\blue135;\red135\green135\blue135;\red107\green0\blue109;\red0\green0\blue255;
+\red0\green0\blue120;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c70588\c0\c38431;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c65098\c49804\c34902;\cssrgb\c36078\c14902\c60000;\cssrgb\c60000\c60000\c60000;\cssrgb\c50196\c0\c50196;\cssrgb\c0\c0\c100000;
+\cssrgb\c0\c0\c54510;}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 48: Implement a deque data structure 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky 
+\f1\fs24 \
+
+\f2\fs32 Create a new data type that models a double-ended queue using generics, or 
+\f1\i deque
+\f2\i0 . You should be able to push items to the front or back, pop them from the front or back, and get the number of items. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 It\'92s pronounced like \'93deck\'94. 
+\f0\b\fs37\fsmilli18667 Sample input and output 
+\f1\b0\fs24 \
+
+\f2\fs32 Once your data structure has been created, this code should compile and run cleanly: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 var \cf2 numbers \cf5 = \cf2 deque\cf5 <\cf6 Int\cf5 >\cf7 ()\
+\cf2 numbers\cf7 .\cf8 pushBack\cf7 (\cf9 5\cf7 )\
+\cf2 numbers\cf7 .\cf8 pushBack\cf7 (\cf9 8\cf7 )\
+\cf2 numbers\cf7 .\cf8 pushBack\cf7 (\cf9 3\cf7 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8 assert\cf7 (\cf2 numbers\cf7 .\cf6 count \cf5 == \cf9 3\cf7 )\
+\cf8 assert\cf7 (\cf2 numbers\cf7 .\cf8 popFront\cf7 ()\cf5 ! == \cf9 5\cf7 )\
+\cf8 assert\cf7 (\cf2 numbers\cf7 .\cf8 popBack\cf7 ()\cf5 ! == \cf9 3\cf7 )\
+\cf8 assert\cf7 (\cf2 numbers\cf7 .\cf8 popFront\cf7 ()\cf5 ! == \cf9 8\cf7 )\
+\cf8 assert\cf7 (\cf2 numbers\cf7 .\cf8 popBack\cf7 () \cf5 == \cf9 nil\cf7 )\
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 \cb1 Hints 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #1: 
+\f2\b0 Use an internal array for your data.\uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 If you used a class for this, expect to be questioned carefully as to why you didn\'92t choose a struct.\uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 You\'92ll need to declare your whole data type as being generic, e.g. 
+\f4\b \cf10 struct 
+\f1\b0\fs24 \cf2 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\b\fs32 \cf10 deque<T> \{
+\f2\b0 \cf2 . 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #4: 
+\f2\b0 The 
+\f4\b \cf10 popBack() 
+\f2\b0 \cf2 and 
+\f4\b \cf10 popFront() 
+\f2\b0 \cf2 method should return optionals, because the deque might be empty. \uc0\u8232 
+\f1\b Hint #5: 
+\f2\b0 You\'92ll need to mark your methods as 
+\f4\b \cf10 mutating
+\f2\b0 \cf2 . 
+\f1\fs24 \
+
+\b\fs32 Hint #6: 
+\f2\b0 Make sure 
+\f4\b \cf10 count 
+\f2\b0 \cf2 is a property rather than a method. Something like 
+\f4\b \cf10 var count: Int \{ return array.count \} 
+\f2\b0 \cf2 ought to do it. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 I graded this one tricky, but really it\'92s only tricky if you rarely use generics \'96 as data structures go, deques are one of the easiest and so this should have caused you no trouble as long as you are comfortable with generics. 
+\f1\fs24 \
+
+\f2\fs32 With my specific test case code above, you should have written something almost identical to my solution below: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 struct \cf2 deque\cf5 <\cf2 T\cf5 > \cf7 \{\
+\cf3    var \cf2 array \cf5 = \cf7 [\cf2 T\cf7 ]()\
+\cf3    var \cf6 count\cf7 : \cf6 Int \cf7 \{\
+\cf3       return \cf2 array\cf7 .\cf6 count\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4    mutating func \cf8 pushBack\cf7 (\cf9 _ \cf2 obj\cf7 : \cf2 T\cf7 ) \{\
+\cf2       array\cf7 .\cf8 append\cf7 (\cf2 obj\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4    mutating func \cf8 pushFront\cf7 (\cf9 _ \cf2 obj\cf7 : \cf2 T\cf7 ) \{\
+\cf2       array\cf7 .\cf8 insert\cf7 (\cf2 obj\cf7 , \cf2 at\cf7 : \cf9 0\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4    mutating func \cf8 popBack\cf7 () \cf5 -> \cf2 T\cf5 ? \cf7 \{\
+\cf3       return \cf2 array\cf7 .\cf8 popLast\cf7 ()\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 mutating func \cf8 popFront\cf7 () \cf5 -> \cf2 T\cf5 ? \cf7 \{\
+\cf3       if \cf2 array\cf7 .\cf6 isEmpty \cf7 \{\
+\cf3          return \cf9 nil\
+\cf7       \} \cf3 else \cf7 \{\
+\cf3          return \cf2 array\cf7 .\cf8 removeFirst\cf7 ()\
+      \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \
+\} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 The only real piece of interest there is the 
+\f4\b \cf10 popFront() 
+\f2\b0 \cf2 method, because Swift arrays don\'92t have a 
+\f4\b \cf10 popFirst() 
+\f2\b0 \cf2 method we can map to. 
+\f1\fs24 \
+}

@@ -1,0 +1,181 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red148\green108\blue71;\red135\green135\blue135;\red107\green0\blue109;\red73\green17\blue135;
+\red0\green0\blue255;\red169\green0\blue15;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c65098\c49804\c34902;\cssrgb\c60000\c60000\c60000;\cssrgb\c50196\c0\c50196;\cssrgb\c36078\c14902\c60000;
+\cssrgb\c0\c0\c100000;\cssrgb\c72941\c0\c6667;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 30: New JPEGs 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write a function that accepts a path to a directory and returns an array of all JPEGs that have 
+\f1\fs24 \
+
+\f2\fs32 been created in the last 48 hours. 
+\f1\fs24 \
+
+\b\fs32 Tip #1: 
+\f2\b0 For the purpose of this task, just looking for \'93.jpg\'94 and \'93.jpeg\'94 file extensions is sufficient. 
+\f1\fs24 \
+
+\b\fs32 Tip #2: 
+\f2\b0 For this challenge, assume time is regular and constant, i.e. the user has not changed their timezone or moved into or out from daylight savings. 
+\f1\fs24 \
+
+\b\fs32 Tip #3: 
+\f2\b0 Use the terminal command 
+\f3\b \cf3 touch -t YYYYMMDDHHMM somefile.jpg 
+\f2\b0 \cf2 to adjust the creation time of a file, e.g. 
+\f3\b \cf3 touch -t 201612250101
+\f2\b0 \cf2 . 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 \'95 If your directory contains three JPEGs older than 48 hours and three newer, your function should return the names of the three newer. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Hints 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #1: 
+\f2\b0 Use the 
+\f3\b \cf3 contentsOfDirectory() 
+\f2\b0 \cf2 method of 
+\f3\b \cf3 FileManager 
+\f2\b0 \cf2 to pull out the list of files in your target directory. 
+\f1\fs24 \
+
+\b\fs32 Hint #2: 
+\f2\b0 You can compare two dates directly using 
+\f3\b \cf3 >
+\f2\b0 \cf2 . 
+\f1\fs24 \
+
+\b\fs32 Hint #3: 
+\f2\b0 You can read the attributes of a file using the 
+\f3\b \cf3 attributesOfItem() 
+\f2\b0 \cf2 method on 
+\f3\b \cf3 FileManager
+\f2\b0 \cf2 , and you\'92ll want to read the 
+\f3\b \cf3 FileAttributeKey.creationDate 
+\f2\b0 \cf2 from that dictionary. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This challenge tests two things at once: do you feel comfortable working with files, and do you know how to create and compare dates? Neither of these are difficult, but they can show a lack of experience if you\'92re hit with a question like this during an interview. 
+\f1\fs24 \
+
+\f2\fs32 There are three parts to solving this challenge: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+Getting all files in the target directory, using the 
+\f3\b \cf3 contentsOfDirectory() 
+\f2\b0 \cf2 method on 
+\f3\b \cf3 FileManager
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+Filtering by JPEGs. The challenge statement makes it clear that just filtering on the path extension of JPEG and JPG is sufficient, so you can just check the 
+\f3\b \cf3 pathExtension 
+\f2\b0 \cf2 property of each file. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+Filtering by creation date, ensuring that only newer JPEGs are included. \uc0\u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 That last part is the most complicated part of this problem, but even then it\'92s not too hard. You can read all properties of a file, then pull out specifically its creation date, like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 guard let \cf2 attributes \cf6 = \cf4 try\cf6 ? \cf2 fm\cf7 .\cf8 attributesOfItem\cf7 (\cf2 atPath\cf7 :\
+\cf2 file\cf7 .\cf2 path\cf7 ) \cf4 else \cf7 \{ \cf4 continue \cf7 \}\
+\cf4 guard let \cf2 creationDate \cf6 = \cf2 attributes\cf7 [.\cf2 creationDate\cf7 ] \cf4 as? \cf9 Date\
+\cf4 else \cf7 \{ \cf4 continue \cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Once you have the file\'92s creation date, you can filter on files created after 48 hours ago by creating a new 
+\f3\b \cf3 Date 
+\f2\b0 \cf2 with the 
+\f3\b \cf3 timeIntervalSinceNow 
+\f2\b0 \cf2 initializer, passing in -60 
+\f1\i \cf2 60 
+\f2\i0 \cf2 48 \'96 
+\f1\fs24 \
+
+\f2\fs32 i.e., 60 seconds 
+\f1\i \cf2 60 minutes 
+\f2\i0 \cf2 48 hours, with the minus in there to send it backwards in time from now: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 if \cf2 creationDate \cf6 > \cf8 Date\cf7 (\cf2 timeIntervalSinceNow\cf7 : \cf6 -\cf10 60 \cf6 * \cf10 60 \cf6 * \cf10 48\cf7 ) \{ 
+\f2 \cf2 \cb1 Once you definitely have a valid file, you\'92ll need to add it to an array then return that at the 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 end of your function. Here\'92s my solution: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 guard let \cf2 attributes \cf6 = \cf4 try\cf6 ? \cf2 fm\cf7 .\cf8 attributesOfItem\cf7 (\cf2 atPath\cf7 :\
+\cf2 file\cf7 .\cf2 path\cf7 ) \cf4 else \cf7 \{ \cf4 continue \cf7 \}\
+\cf4 guard let \cf2 creationDate \cf6 = \cf2 attributes\cf7 [.\cf2 creationDate\cf7 ] \cf4 as? \cf9 Date\
+\cf4 else \cf7 \{ \cf4 continue \cf7 \}\
+\cf4 func \cf8 challenge30\cf7 (\cf4 in \cf2 directory\cf7 : \cf9 String\cf7 ) \cf6 -> \cf7 [\cf9 String\cf7 ] \{\
+\cf4    let \cf2 fm \cf6 = \cf9 FileManager\cf7 .\cf2 default\
+\cf4    let \cf2 directoryURL \cf6 = \cf8 URL\cf7 (\cf2 fileURLWithPath\cf7 : \cf2 directory\cf7 )\
+\cf4 guard let \cf2 files \cf6 = \cf4 try\cf6 ? \cf2 fm\cf7 .\cf8 contentsOfDirectory\cf7 (\cf2 at\cf7 :\
+\cf2 directoryURL\cf7 , \cf2 includingPropertiesForKeys\cf7 : \cf10 \cb5 nil\cf7 \cb5 ) \cf4 else \cf7 \{ \cf4 return\
+\cf7 [] \}\
+\cf4    var \cf2 jpegs \cf6 = \cf7 [\cf9 String\cf7 ]()\
+\cf4    for \cf2 file \cf4 in \cf2 files \cf7 \{\
+\cf4       if \cf2 file\cf7 .\cf2 pathExtension \cf6 == \cf11 \cb5 "jpg" \cf6 \cb5 || \cf2 file\cf7 .\cf2 pathExtension \cf6 ==\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf11 \cb5 "jpeg" \cf7 \cb5 \{ 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5          guard let \cf2 attributes \cf6 = \cf4 try\cf6 ?\
+\cf2 fm\cf7 .\cf8 attributesOfItem\cf7 (\cf2 atPath\cf7 : \cf2 file\cf7 .\cf2 path\cf7 ) \cf4 else \cf7 \{ \cf4 continue \cf7 \}\
+\cf4          guard let \cf2 creationDate \cf6 = \cf2 attributes\cf7 [.\cf2 creationDate\cf7 ] \cf4 as?\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 Date \cf4 else \cf7 \{ \cf4 continue \cf7 \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 if \cf2 creationDate \cf6 > \cf8 Date\cf7 (\cf2 timeIntervalSinceNow\cf7 : \cf6 -\cf10 \cb5 60 \cf6 \cb5 * \cf10 \cb5 60\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \cb5 * \cf10 48\cf7 ) \{\cf7 \cb1 \uc0\u8232 
+\f1\fs24 \cf2 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf2 \cb5 jpegs\cf7 .\cf8 append\cf7 (\cf2 file\cf7 .\cf2 lastPathComponent\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+
+\f4\fs32 \cf7 \cb5 \} \
+\} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 jpegs\
+\}}

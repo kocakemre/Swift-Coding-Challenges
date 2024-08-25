@@ -1,0 +1,116 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier;\f4\fmodern\fcharset0 Courier-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red73\green17\blue135;\red255\green255\blue255;
+\red0\green0\blue120;\red163\green0\blue79;\red107\green0\blue109;\red135\green135\blue135;\red148\green108\blue71;
+\red169\green0\blue15;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c36078\c14902\c60000;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c72941\c0\c6667;\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 27: Print last lines 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write a function that accepts a filename on disk, then prints its last 
+\f1\i N 
+\f2\i0 lines in reverse order, all 
+\f1\fs24 \
+
+\f2\fs32 on a single line separated by commas. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Here is your test input file: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 Antony And Cleopatra\
+Coriolanus\
+Cymbeline\
+Hamlet\
+Julius Caesar\
+King Lear\
+Macbeth\
+Othello\
+Twelfth Night\
+\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2 \cf2 \cb1 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If asked to print the last 3 lines, your code should output \'93Twelfth Night, Othello, Macbeth\'94. \uc0\u8232 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If asked to print the last 100 lines, your code should output \'93Twelfth Night, Othello, Macbeth, King Lear, Julius Caesar, Hamlet, Cymbeline, Coriolanus, Antony and Cleopatra\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If asked to print the last 0 lines, your could should print nothing. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Use the 
+\f4\b \cf5 contentsOfFile 
+\f2\b0 \cf2 initializer to pull in the text, then 
+\f4\b \cf5 components(separatedBy:) 
+\f2\b0 \cf2 to create an array of lines. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 Arrays have a built-in 
+\f4\b \cf5 reverse() 
+\f2\b0 \cf2 method that flip them around in-place. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 You need to print the last 
+\f1\i N 
+\f2\i0 lines, but of course you don\'92t want to read beyond the size of the array. Make sure you use the 
+\f4\b \cf5 min() 
+\f2\b0 \cf2 function to choose the lesser of the two. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This is a nice and simple challenge, and is the kind of thing you\'92ll hit in real-world coding all the time. Hopefully, then, you found it a breeze: use 
+\f4\b \cf5 contentsOfFile 
+\f2\b0 \cf2 to get a multiline 
+\f4\b \cf5 String 
+\f2\b0 \cf2 of text, use 
+\f4\b \cf5 components(separatedBy: "\\n") 
+\f2\b0 \cf2 to split it into an array of lines, then reverse the array and loop over 
+\f1\i N 
+\f2\i0 items. 
+\f1\fs24 \
+
+\f2\fs32 In order to fully satisfy the challenge\'92s requirements \'96 and to add safety to make sure we don\'92t read outside the array! \'96 we also need to add a couple of 
+\f4\b \cf5 guard 
+\f2\b0 \cf2 statements to eliminate bad input, and use 
+\f4\b \cf5 min() 
+\f2\b0 \cf2 to pick the lowest number between the requested line count and the number of lines in the array. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s the code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf6 \cb4 func \cf7 challenge27\cf8 (\cf2 filename\cf8 : \cf3 String\cf8 , \cf2 lineCount\cf8 : \cf3 Int\cf8 ) \{\
+\cf6    guard let \cf2 input \cf9 = \cf6 try\cf9 ? \cf7 String\cf8 (\cf2 contentsOfFile\cf8 : \cf2 filename\cf8 ) \cf6 else\
+\cf8 \{ \cf6 return \cf8 \}\
+\cf6    var \cf2 lines \cf9 = \cf2 input\cf8 .\cf7 components\cf8 (\cf2 separatedBy\cf8 : \cf10 "\\n"\cf8 )\
+\cf6    guard \cf2 lines\cf8 .\cf3 count \cf9 > \cf11 0 \cf6 else \cf8 \{ \cf6 return \cf8 \}\
+\cf2    lines\cf8 .\cf7 reverse\cf8 ()\
+\cf6    for \cf2 i \cf6 in \cf11 0 \cf8 ..\cf9 < \cf7 min\cf8 (\cf2 lines\cf8 .\cf3 count\cf8 , \cf2 lineCount\cf8 ) \{\
+\cf7       print\cf8 (\cf2 lines\cf8 [\cf2 i\cf8 ])\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf8 \} \} 
+\f1\fs24 \cf2 \cb1 \
+}

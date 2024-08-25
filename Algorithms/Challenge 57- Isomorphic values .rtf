@@ -1,0 +1,202 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid201\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 57: Isomorphic values 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write a function that accepts two values and returns true if they are isomorphic. That is, each 
+\f1\fs24 \
+
+\f2\fs32 part of the value must map to precisely one other, but that might be itself. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 Strings 
+\f3\b \cf3 A 
+\f2\b0 \cf2 and 
+\f3\b \cf3 B 
+\f2\b0 \cf2 are considered isomorphic if you can replace all instances of each letter with another. For example, \'93tort\'94 and \'93pump\'94 are isomorphic, because you can replace both Ts with a P, the O with a U, and the R with an M. For integers you compare individual digits, so 1231 and 4564 are isomorphic numbers. For arrays you compare elements, so [1, 2, 1] and [4, 8, 4] are isomorphic. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 These are all isomorphic values: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\'93clap\'94 and \'93slap\'94 \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\'93rum\'94 and \'93mud\'94 \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\'93pip\'94 and \'93did\'94 \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\'93carry\'94 and \'93baddy\'94 \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\'93cream\'94 and \'93lapse\'94 \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+123123 and 456456 \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+3.14159 and 2.03048 \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+[1, 2, 1, 2, 3] and [4, 5, 4, 5, 6] \uc0\u8232 These are not isomorphic values: \u8232 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\'93carry\'94 and \'93daddy\'94 \'96 the Rs have become D, but C has also become D. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\'93did\'94 and \'93cad\'94 \'96 the first D has become C, but the second has remained D. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\'93maim\'94 and \'93same\'94 \'96 the first M has become S, but the second has become E. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\'93curry\'94 and \'93flurry\'94 \'96 the strings have different lengths. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+112233 and 112211 \'96 the number 1 is being mapped to 1, and the number 3 is also \uc0\u8232 being mapped to 1. \u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 196 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Hints 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #1: 
+\f2\b0 Stringification holds the key to solve this problem simply. Your parameters should both be 
+\f3\b \cf3 Any
+\f2\b0 \cf2 , and you can use the 
+\f3\b \cf3 String(describing:) 
+\f2\b0 \cf2 initializer to stringify them. 
+\f1\fs24 \
+
+\b\fs32 Hint #2: 
+\f2\b0 You need to loop over all the characters in both stringified character arrays. To avoid out of bounds problems, make sure you start by checking both strings are the same length. 
+\f1\fs24 \
+
+\b\fs32 Hint #3: 
+\f2\b0 You should store your character mappings using a dictionary of type 
+\f3\b \cf3 [Character: Character]
+\f2\b0 \cf2 . 
+\f1\fs24 \
+
+\b\fs32 Hint #4: 
+\f2\b0 If you convert the characters of each string into an array you\'92ll find subscripting significantly easier. 
+\f1\fs24 \
+
+\b\fs32 Hint #5: 
+\f2\b0 When you loop over each letter in the current string, you can check if it exists as a key in your character map. For characters that exist, check that its value matches the letter in the second string \'96 if it doesn\'92t, it\'92s not an isomorphic string. 
+\f1\fs24 \
+
+\b\fs32 Hint #6: 
+\f2\b0 If your letter doesn\'92t exist as a key in the character map, it\'92s possible the second string\'92s letter does exist as a value attached to a different key. If so, it\'92s not an isomorphic string. 
+\f1\fs24 \
+
+\b\fs32 Hint #7: 
+\f2\b0 If the character isn\'92t already a key, and the second string\'92s letter isn\'92t already a value, then add the character and matching second string letter to your character mapping dictionary. 
+\f1\fs24 \
+
+\b\fs32 Hint #8: 
+\f2\b0 If you\'92ve made it through all the characters in the first string and not encountered any problems, you have an isomorphic string. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 If you were faced with this challenge in other languages, chances are it would target strings specifically. However, Swift has two advantages that many other languages do not: its 
+\f3\b \cf3 Any 
+\f2\b0 \cf2 type lets us represent any kind of data without needing generics, and its 
+\f3\b \cf3 String(describing:) 
+\f2\b0 \cf2 initializer lets us describe any kind of data using strings and characters. 
+\f1\fs24 \
+
+\f2\fs32 The combination of these two features makes this challenge surprisingly straightforward to solve: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls3\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+Convert both parameters to strings. \uc0\u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+Ensure they are both the same length. \uc0\u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+Create a character map dictionary that stores which input character maps to which \uc0\u8232 output character. \u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+Convert both strings to arrays of characters so that we can subscript them more easily. \uc0\u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	5.	}\expnd0\expndtw0\kerning0
+Loop over every character in the first string and check whether it exists in our character \uc0\u8232 map. \u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	6.	}\expnd0\expndtw0\kerning0
+If it does exist and the existing mapping doesn\'92t match the corresponding letter in the \uc0\u8232 other string, return false. \u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	7.	}\expnd0\expndtw0\kerning0
+If it doesn\'92t exist in the character map, but the corresponding letter already has a \uc0\u8232 mapping, return false because each letter should be mapped only once. \u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	8.	}\expnd0\expndtw0\kerning0
+If we\'92re still in the loop, it means both characters are new, so we set them in the \uc0\u8232 dictionary. \u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	9.	}\expnd0\expndtw0\kerning0
+Return true if we get to the end of the loop with all characters OK. \uc0\u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 That\'92s the answer. It\'92s easy enough, I think, but certainly not simple \'96 Swift does most of the heavy lifting for us with its 
+\f3\b \cf3 Any 
+\f2\b0 \cf2 to 
+\f3\b \cf3 String 
+\f2\b0 \cf2 conversion. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s my code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge57\cf7 (\cf8 first \cf2 firstValue\cf7 : \cf8 Any\cf7 , \cf2 second secondValue\cf7 :\
+\cf8 Any\cf7 ) \cf9 -> \cf8 Bool \cf7 \{\
+\cf4    let \cf8 first \cf9 = \cf6 String\cf7 (\cf2 describing\cf7 : \cf2 firstValue\cf7 )\
+\cf4    let \cf2 second \cf9 = \cf6 String\cf7 (\cf2 describing\cf7 : \cf2 secondValue\cf7 )\
+\cf4    guard \cf8 first\cf7 .\cf2 characters\cf7 .\cf8 count \cf9 == \cf2 second\cf7 .\cf2 characters\cf7 .\cf8 count \cf4 else\
+\cf7 \{ \cf4 return \cf10 false \cf7 \}\
+\cf4    var \cf2 characterMap \cf9 = \cf7 [\cf8 Character\cf7 : \cf8 Character\cf7 ]()\
+\cf4    let \cf2 firstArray \cf9 = \cf6 Array\cf7 (\cf8 first\cf7 .\cf2 characters\cf7 )\
+\cf4    let \cf2 secondArray \cf9 = \cf6 Array\cf7 (\cf2 second\cf7 .\cf2 characters\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 \cb1 www.hackingwithswift.com 198 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 for \cf7 (\cf2 index\cf7 , \cf2 character\cf7 ) \cf4 in \cf2 firstArray\cf7 .\cf6 enumerated\cf7 () \{\
+\cf4       let \cf2 otherCharacter \cf9 = \cf2 secondArray\cf7 [\cf2 index\cf7 ]\
+\cf4       if let \cf2 currentMapping \cf9 = \cf2 characterMap\cf7 [\cf2 character\cf7 ] \{\
+\cf4          if \cf2 currentMapping \cf9 != \cf2 otherCharacter \cf7 \{\
+\cf4             return \cf10 false\
+\cf7          \}\
+      \} \cf4 else \cf7 \{\
+\cf4          if \cf2 characterMap\cf7 .\cf2 values\cf7 .\cf6 contains\cf7 (\cf2 otherCharacter\cf7 ) \{\
+\cf4             return \cf10 false\
+\cf7          \}\
+\cf2          characterMap\cf7 [\cf2 character\cf7 ] \cf9 = \cf2 otherCharacter\
+\cf7       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 return \cf10 true \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+}

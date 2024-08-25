@@ -1,0 +1,368 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red148\green108\blue71;\red135\green135\blue135;\red73\green17\blue135;\red28\green117\blue20;
+\red0\green0\blue255;\red107\green0\blue109;\red169\green0\blue15;\red232\green135\blue8;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c65098\c49804\c34902;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c11373\c52157\c9804;
+\cssrgb\c0\c0\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c72941\c0\c6667;\cssrgb\c93333\c60000\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid201\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat5\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid301\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid4}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 54: Binary search trees 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Taxing\uc0\u8232 Create a binary search tree data structure that can be initialized from an unordered array of 
+\f1\fs24 \
+
+\f2\fs32 comparable values, then write a method that returns whether the tree is balanced. 
+\f1\fs24 \
+
+\b\fs32 Tip #1: 
+\f2\b0 There is more than one description of a balanced binary tree. For the purpose of this challenge, a binary tree is considered balanced when the height of both subtrees for every node differs by no more than 1. 
+\f1\fs24 \
+
+\b\fs32 Tip #2: 
+\f2\b0 Once you complete this challenge, keep your code around because you\'92ll need it in the next one. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 The following values should create balanced trees: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+[2, 1, 3] \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+[5, 1, 7, 6, 2, 1, 9] \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+[5, 1, 7, 6, 2, 1, 9, 1] \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+[5, 1, 7, 6, 2, 1, 9, 1, 3] \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+[50, 25, 100, 26, 101, 24, 99] \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+["k", "t", "d", "a", "z", "m", "f"] \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+[1] \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+[Character]() \uc0\u8232 The following values should not create balanced trees: \u8232 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+[1, 2, 3, 4, 5] \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+[10, 5, 4, 3, 2, 1, 11, 12, 13, 14, 15] \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+["f", "d", "c", "e", "a", "b"] \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f1\b \cf2 Hint #1: 
+\f2\b0 You need to create a binary 
+\f1\i search 
+\f2\i0 tree rather than a plain binary tree. This means inserting nodes into the tree based on whether they are less than or equal (left) or greater than (right) their parent. 
+\f1\fs24 \
+
+\b\fs32 Hint #2: 
+\f2\b0 You should make your data types use a generic value that conforms to 
+\f3\b \cf3 Comparable
+\f2\b0 \cf2 . 
+\f1\fs24 \
+
+\b\fs32 Hint #3: 
+\f2\b0 Each nodes should have a value, plus left and right optional nodes.\uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 To find the correct place for each array item, start at the top of your tree then keep 
+\f1\fs24 \
+
+\f2\fs32 moving left or right until you find nil \'96 that\'92s your place. 
+\f1\fs24 \
+
+\b\fs32 Hint #5: 
+\f2\b0 You might find it useful to make your binary tree type conform to 
+\f3\b \cf3 CustomStringConvertible 
+\f2\b0 \cf2 so you can add a custom 
+\f3\b \cf3 var description: String 
+\f2\b0 \cf2 that prints the contents of your tree. 
+\f1\fs24 \
+
+\b\fs32 Hint #6: 
+\f2\b0 Checking a binary tree is balanced can be done by recursively comparing the minimum depth of both sides of a node against the maximum depth of both sides of a node. The tree can be considered balanced if the two values differ by no more than 1. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Carl Sagan once said, \'93if you wish to make apple pie from scratch, you must first invent the universe.\'94 That is, a simple task becomes more complicated when you realize there are other steps leading up to it. 
+\f1\fs24 \
+
+\f2\fs32 In this challenge, you need to write a method that returns true if a binary tree is balanced, but that first means creating data types to represent a binary tree and its nodes, and also creating an initializer that converts an unsorted array of comparable values into tree nodes. If you were smart, you probably created some sort of way to visualize your tree to help you debug the initializer and depth counters. 
+\f1\fs24 \
+
+\f2\fs32 Let\'92s start with the easy stuff: we can define a binary tree node as a generic class that stores a key, as well as left and right values. In code, it looks like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 class \cf2 Node\cf6 <\cf2 T\cf6 > \cf7 \{\
+\cf4    var \cf2 key\cf7 : \cf2 T\
+\cf4    var \cf2 left\cf7 : \cf8 Node\cf6 <\cf2 T\cf6 >?\
+\cf4    var \cf2 right\cf7 : \cf8 Node\cf6 <\cf2 T\cf6 >?\
+\cf4    init\cf7 (\cf2 key\cf7 : \cf2 T\cf7 ) \{\
+\cf4       self\cf7 .\cf2 key \cf6 = \cf2 key\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 There\'92s no need to constrain the generic type, because that\'92s the complete definition for 
+\f3\b \cf3 Node
+\f2\b0 \cf2 . That class will be used to hold one node somewhere in the tree, but we can create another class that wraps up the whole tree: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 class \cf2 BinarySearchTree\cf6 <\cf2 T\cf7 : \cf8 Comparable\cf6 > \cf7 \{\
+\cf4    var \cf2 root\cf7 : \cf8 Node\cf6 <\cf2 T\cf6 >?\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 So, the 
+\f3\b \cf3 BinarySearchTree 
+\f2\b0 \cf2 has one node, which is the root of the tree, and nothing else. It is another generic type, but this time with a constraint: the nodes it contains must store data that conforms to 
+\f3\b \cf3 Comparable
+\f2\b0 \cf2 . This is required, because we need to place an item to the left of a node if it is less than or equal to it, or to the right of a node otherwise \'96 we need to compare values. 
+\f1\fs24 \
+
+\f2\fs32 Creating a binary search tree from an array of values isn\'92t too tricky, and probably qualifies as \'93CS101\'94: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls3\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+Loop over every item in the array. \uc0\u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+If we have a root node already, set it to be our tracker node \'96 that\'92s the one we\'92re \uc0\u8232 currently comparing against. \u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+If the item is less than or equal to our tracker, and the tracker\'92s left value is nil, make a \uc0\u8232 new node from our item, make it the tracker\'92s left value, then mark this item as being \u8232 placed. \u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+If the item is less than or equal to our tracker but we already have a left value, make \uc0\u8232 
+\f1\fs24 \cf2 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 that left value our new tracker and repeat the loop. 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls4\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	5.	}\expnd0\expndtw0\kerning0
+If the item is greater than our tracker, and tracker\'92s right value is nil, make a new node \uc0\u8232 from our item, make it the tracker\'92s right value, then mark this item as being placed. \u8232 \
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	6.	}\expnd0\expndtw0\kerning0
+If the item is greater than our tracker but we already have a right value, make that right \uc0\u8232 value our new tracker and repeat the loop. \u8232 \
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	7.	}\expnd0\expndtw0\kerning0
+If we don\'92t already have a root node, make one from the item and make that the \uc0\u8232 tracker. \u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 That\'92s it! 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 init\cf7 (\cf2 array\cf7 : [\cf2 T\cf7 ]) \{\
+\cf4    for \cf2 item \cf4 in \cf2 array \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5       // this will be set to true when we've created a node\
+from this item\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5       var \cf2 placed \cf6 = \cf10 \cb5 false\
+\cf4 \cb5       if let \cf2 rootNode \cf6 = \cf2 root \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5          // we have a root node, so make it our tracker\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5          var \cf2 tracker \cf6 = \cf2 rootNode\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf9 \cb5 tracker 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 while \cf2 placed \cf6 == \cf10 \cb5 false \cf7 \cb5 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5    // if we're placing an item that comes before our\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5    if \cf2 item \cf6 <= \cf2 tracker\cf7 .\cf2 key \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5       // if we don't already have a left node\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5       if \cf2 tracker\cf7 .\cf2 left \cf6 == \cf10 \cb5 nil \cf7 \cb5 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5          // make this item our left node\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb5          tracker\cf7 .\cf2 left \cf6 = \cf11 \cb5 Node\cf7 \cb5 (\cf2 key\cf7 : \cf2 item\cf7 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5          // mark it as placed\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb5          placed \cf6 = \cf10 \cb5 true\
+\cf7 \cb5       \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5 // we already have a left node; make that the\
+tracker so we can compare against it.\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb5                tracker \cf6 = \cf2 tracker\cf7 .\cf2 left\cf6 !\
+\cf7             \} \cf4 else \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5                // this item is greater than our tracker, so it\
+needs to sit on its right\
+               // if we don't already have a right node\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5                if \cf2 tracker\cf7 .\cf2 right \cf6 == \cf10 \cb5 nil \cf7 \cb5 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5                   // make this item our right node\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb5                   tracker\cf7 .\cf2 right \cf6 = \cf11 \cb5 Node\cf7 \cb5 (\cf2 key\cf7 : \cf2 item\cf7 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5                   // mark it as placed\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb5                   placed \cf6 = \cf10 \cb5 true\
+\cf7 \cb5                \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \cb5                // we already have a right node; make that the\
+tracker so we can compare against it.\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb5                tracker \cf6 = \cf2 tracker\cf7 .\cf2 right\cf6 !\
+\cf7             \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \}\cf7 \cb1 \uc0\u8232 \cf7 \cb5 \} \cf4 \cb5 else \cf7 \cb5 \{ 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf2 \cb5          root \cf6 = \cf11 \cb5 Node\cf7 \cb5 (\cf2 key\cf7 : \cf2 item\cf7 )\
+      \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \
+\} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 The line 
+\f3\b \cf3 tracker = tracker.right! 
+\f2\b0 \cf2 contains a force unwrap, but it\'92s OK because either 
+\f3\b \cf3 tracker.right 
+\f2\b0 \cf2 was nil and we set its value, or it was not nil and therefore has a value already \'96 either way, it will work. 
+\f1\fs24 \
+
+\f2\fs32 At this point, we have a data structure that works and an initializer to create a tree from an array. You can check that it works by making the tree class conform to 
+\f3\b \cf3 CustomStringConvertible 
+\f2\b0 \cf2 like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf2 {{\NeXTGraphic page182image408.png \width9160 \height720
+}¬}\pard\pardeftab720\sl280\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 class \cf2 BinarySearchTree\cf6 <\cf2 T\cf7 : \cf8 Comparable\cf6 >\cf7 : \cf8 CustomStringConvertible\
+\cf7 \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 You can then create your own 
+\f3\b \cf3 description 
+\f2\b0 \cf2 property that prints the tree in whatever way you find useful. It\'92s not required to fulfill this challenge, but it does make debugging a lot easier! Something like this would be a good place to start: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 var \cf2 description\cf7 : \cf8 String \cf7 \{\
+\cf4    guard let \cf8 first \cf6 = \cf2 root \cf4 else \cf7 \{ \cf4 return \cf12 \cb5 "(Empty)" \cf7 \cb5 \}\
+\cf4    var \cf2 queue \cf6 = \cf7 [\cf8 Node\cf6 <\cf2 T\cf6 >\cf7 ]()\
+\cf2    queue\cf7 .\cf11 \cb5 append\cf7 \cb5 (\cf8 first\cf7 )\
+\cf4    var \cf2 output \cf6 = \cf12 \cb5 ""\
+\cf4 \cb5    while \cf2 queue\cf7 .\cf8 count \cf6 > \cf10 \cb5 0 \cf7 \cb5 \{\
+\cf4       var \cf2 nodesAtCurrentLevel \cf6 = \cf2 queue\cf7 .\cf8 count\
+\cf4       while \cf2 nodesAtCurrentLevel \cf6 > \cf10 \cb5 0 \cf7 \cb5 \{\
+\cf4          let \cf2 node \cf6 = \cf2 queue\cf7 .\cf11 \cb5 removeFirst\cf7 \cb5 ()\
+\cf2          output \cf6 += \cf12 \cb5 "\cf13 \\(\cf12 node\cf7 \cb5 .\cf12 \cb5 key\cf13 ) \cf12 "\
+\cf4 \cb5          if \cf2 node\cf7 .\cf2 left \cf6 != \cf10 \cb5 nil \cf7 \cb5 \{ \cf2 queue\cf7 .\cf11 \cb5 append\cf7 \cb5 (\cf2 node\cf7 .\cf2 left\cf6 !\cf7 ) \}\
+\cf4          if \cf2 node\cf7 .\cf2 right \cf6 != \cf10 \cb5 nil \cf7 \cb5 \{ \cf2 queue\cf7 .\cf11 \cb5 append\cf7 \cb5 (\cf2 node\cf7 .\cf2 right\cf6 !\cf7 ) \}\
+\cf2          nodesAtCurrentLevel \cf6 -= \cf10 \cb5 1\
+\cf7 \cb5       \}\
+\cf2       output \cf6 += \cf12 \cb5 "\\n"\
+\cf7 \cb5    \}\
+\cf4    return \cf2 output\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 That\'92s all the hard stuff out of the way, but there\'92s still one more part of the challenge: creating a method that returns true if the tree is balanced. 
+\f1\fs24 \
+
+\f2\fs32 The simplest way to solve this problem is to start by finding the node with the minimum depth on either side of the tree. This is recursive: it starts at the top and works its way down. At the end of the tree we have a depth of one, and we can sum upwards from there. 
+\f1\fs24 \
+
+\f2\fs32 For example, consider the input array [10, 5, 4, 3, 2, 1, 11, 12, 13, 14, 15], which is one of our test cases. To check whether the tree from that array is balanced, we\'92ll start with 10, then go to the left: 5, 4, 3, 2, and finally 1. This part of the tree will only have left-hand nodes, because all the numbers are lower than their parent. So, 1 has a depth of 1 (it\'92s the end of the tree), and 2 has a depth of 1 + the maximum of the depths of its children. It only has one child, so it\'92s choosing between children with a depth of 1 (its left-hand side), or 0 on its right-hand side, therefore the maximum is 1. 
+\f1\fs24 \
+
+\f2\fs32 The process continues: 3 has a depth of 1 + the maximum of its children (so 3), 4 has a depth of 4, and 5 has a depth of 5. We then move to the right and repeat, but this time it\'92s all right- hand nodes: 15 has a depth of 1, 14 has a depth of 2, 13 has a depth of 3, 12 a depth of 4, and 11 a depth of 5. So, the left- and right-hand sides of our tree both have a maximum depth of 5, and we pass that back to the root element, which has a depth of 1 + the maximum depth of its children, making 6. 
+\f1\fs24 \
+
+\f2\fs32 The process is then repeated, but looking at the 
+\f1\i minimum 
+\f2\i0 depths. Again, it starts at 1, which is the end of the tree so it has a depth of 1. It then moves to 2, which has a depth of 1 on its left- hand side and a depth of zero (nothing) on its right-hand side. As we\'92re now choosing the minimum depths, we\'92ll use zero instead of 1, so we return 1 + 0 for this depth. This goes up to 3, which again does 1 + 0, as do 4 and 5, so the total minimum depth for the left side of the tree is 1. The situation on the right side of the tree is the same, so it also adds up to a minimum depth of 1. Finally, we get back to the root element, 10, which has a depth of 1 + the minimum depth of its children, making 2. 
+\f1\fs24 \
+
+\f2\fs32 Putting those two together, we find a maximum depth of 6 and a minimum depth of 2, and these numbers are allowed to differ by no more than 1 so we can safely say this tree is 
+\f1\i not 
+\f2\i0 balanced. 
+\f1\fs24 \
+
+\f2\fs32 That might sound hard, but the code is remarkably trivial. Here it is, with a couple of 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f3\b\fs32 \cf3 print() 
+\f2\b0 \cf2 statements inside so you can watch how it works on real data: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf11 \cb5 isBalanced\cf7 \cb5 () \cf6 -> \cf8 Bool \cf7 \{\
+\cf4    func \cf11 \cb5 minDepth\cf7 \cb5 (\cf2 from node\cf7 : \cf8 Node\cf6 <\cf2 T\cf6 >?\cf7 ) \cf6 -> \cf8 Int \cf7 \{\
+\cf4       guard let \cf2 node \cf6 = \cf2 node \cf4 else \cf7 \{ \cf4 return \cf10 \cb5 0 \cf7 \cb5 \}\
+\cf4       let \cf2 returnValue \cf6 = \cf10 \cb5 1 \cf6 \cb5 + \cf11 \cb5 min\cf7 \cb5 (\cf11 \cb5 minDepth\cf7 \cb5 (\cf2 from\cf7 : \cf2 node\cf7 .\cf2 left\cf7 ),\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb5 minDepth\cf7 \cb5 (\cf2 from\cf7 : \cf2 node\cf7 .\cf2 right\cf7 ))\
+\cf11 \cb5       print\cf7 \cb5 (\cf12 \cb5 "Got min depth \cf13 \\(\cf12 returnValue\cf13 ) \cf12 for \cf13 \\(\cf12 node\cf7 \cb5 .\cf12 \cb5 key\cf13 )\cf12 "\cf7 \cb5 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       return \cf2 returnValue\
+\cf7    \}\
+\cf4    func \cf11 \cb5 maxDepth\cf7 \cb5 (\cf2 from node\cf7 : \cf8 Node\cf6 <\cf2 T\cf6 >?\cf7 ) \cf6 -> \cf8 Int \cf7 \{\
+\cf4       guard let \cf2 node \cf6 = \cf2 node \cf4 else \cf7 \{ \cf4 return \cf10 \cb5 0 \cf7 \cb5 \}\
+\cf4       let \cf2 returnValue \cf6 = \cf10 \cb5 1 \cf6 \cb5 + \cf11 \cb5 max\cf7 \cb5 (\cf11 \cb5 maxDepth\cf7 \cb5 (\cf2 from\cf7 : \cf2 node\cf7 .\cf2 left\cf7 ),\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb5 maxDepth\cf7 \cb5 (\cf2 from\cf7 : \cf2 node\cf7 .\cf2 right\cf7 ))\
+\cf11 \cb5       print\cf7 \cb5 (\cf12 \cb5 "Got max depth \cf13 \\(\cf12 returnValue\cf13 ) \cf12 for \cf13 \\(\cf12 node\cf7 \cb5 .\cf12 \cb5 key\cf13 )\cf12 "\cf7 \cb5 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       return \cf2 returnValue\
+\cf7    \}\
+\cf4    guard let \cf2 root \cf6 = \cf2 root \cf4 else \cf7 \{ \cf4 return \cf10 \cb5 true \cf7 \cb5 \}\
+\cf4    let \cf2 difference \cf6 = \cf11 \cb5 maxDepth\cf7 \cb5 (\cf2 from\cf7 : \cf2 root\cf7 ) \cf6 - \cf11 \cb5 minDepth\cf7 \cb5 (\cf2 from\cf7 : \cf2 root\cf7 )\
+\cf4    return \cf2 difference \cf6 <= \cf10 \cb5 1\
+\cf7 \cb5 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 You could easily make the 
+\f3\b \cf3 minDepth() 
+\f2\b0 \cf2 and 
+\f3\b \cf3 maxDepth() 
+\f2\b0 \cf2 methods separate inside the class if you needed them for other purposes. 
+\f1\fs24 \
+}

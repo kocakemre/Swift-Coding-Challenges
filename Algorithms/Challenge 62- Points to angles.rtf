@@ -1,0 +1,148 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red148\green108\blue71;\red135\green135\blue135;\red73\green17\blue135;\red107\green0\blue109;
+\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c65098\c49804\c34902;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c50196\c0\c50196;
+\cssrgb\c0\c0\c100000;}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 62: Points to angles 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Write a function that accepts an array of 
+\f3\b \cf3 CGPoint 
+\f2\b0 \cf2 pairs, and returns an array of the angles 
+\f1\fs24 \
+
+\f2\fs32 between each point pair. Return the angles in degrees, where 0 or 360 is straight up. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 If it helps your thought process, imagine each point pair as being two touches on the screen: you have the first touch and the second, what is the angle between them? 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Here is some code you can test with: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 var \cf2 points \cf6 = \cf7 [(\cf8 first\cf7 : \cf8 CGPoint\cf7 , \cf2 second\cf7 : \cf8 CGPoint\cf7 )]()\
+\cf2 points\cf7 .\cf9 append\cf7 ((\cf8 first\cf7 : \cf8 CGPoint\cf7 .\cf2 zero\cf7 , \cf2 second\cf7 : \cf9 CGPoint\cf7 (\cf2 x\cf7 : \cf10 0\cf7 , \cf2 y\cf7 :\
+\cf6 -\cf10 100\cf7 )))\
+\cf2 points\cf7 .\cf9 append\cf7 ((\cf8 first\cf7 : \cf8 CGPoint\cf7 .\cf2 zero\cf7 , \cf2 second\cf7 : \cf9 CGPoint\cf7 (\cf2 x\cf7 : \cf10 100\cf7 , \cf2 y\cf7 :\
+\cf6 -\cf10 100\cf7 )))\
+\cf2 points\cf7 .\cf9 append\cf7 ((\cf8 first\cf7 : \cf8 CGPoint\cf7 .\cf2 zero\cf7 , \cf2 second\cf7 : \cf9 CGPoint\cf7 (\cf2 x\cf7 : \cf10 100\cf7 , \cf2 y\cf7 :\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 0\cf7 )))\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 points\cf7 .\cf9 append\cf7 ((\cf8 first\cf7 : \cf8 CGPoint\cf7 .\cf2 zero\cf7 , \cf2 second\cf7 : \cf9 CGPoint\cf7 (\cf2 x\cf7 : \cf10 100\cf7 , \cf2 y\cf7 :\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 100\cf7 )))\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 points\cf7 .\cf9 append\cf7 ((\cf8 first\cf7 : \cf8 CGPoint\cf7 .\cf2 zero\cf7 , \cf2 second\cf7 : \cf9 CGPoint\cf7 (\cf2 x\cf7 : \cf10 0\cf7 , \cf2 y\cf7 :\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 100\cf7 )))\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 points\cf7 .\cf9 append\cf7 ((\cf8 first\cf7 : \cf8 CGPoint\cf7 .\cf2 zero\cf7 , \cf2 second\cf7 : \cf9 CGPoint\cf7 (\cf2 x\cf7 : \cf6 -\cf10 100\cf7 , \cf2 y\cf7 :\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 100\cf7 )))\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 points\cf7 .\cf9 append\cf7 ((\cf8 first\cf7 : \cf8 CGPoint\cf7 .\cf2 zero\cf7 , \cf2 second\cf7 : \cf9 CGPoint\cf7 (\cf2 x\cf7 : \cf6 -\cf10 100\cf7 , \cf2 y\cf7 :\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 0\cf7 )))\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 points\cf7 .\cf9 append\cf7 ((\cf8 first\cf7 : \cf8 CGPoint\cf7 .\cf2 zero\cf7 , \cf2 second\cf7 : \cf9 CGPoint\cf7 (\cf2 x\cf7 : \cf6 -\cf10 100\cf7 , \cf2 y\cf7 :\
+\cf6 -\cf10 100\cf7 )))\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 print\cf7 (\cf9 challenge62\cf7 (\cf2 points\cf7 : \cf2 points\cf7 ))\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 If your code has worked correctly, that should print [0.0, 45.0, 90.0, 135.0, 180.0, 225.0, 270.0, 315.0]. Returning 360.0 for the first number is also acceptable. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Hints 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #1: 
+\f2\b0 You\'92re mapping an array of one type to an array of another type. Yes, that means 
+\f3\b \cf3 map() 
+\f2\b0 \cf2 is a good idea. 
+\f1\fs24 \
+
+\b\fs32 Hint #2: 
+\f2\b0 You\'92ll need to use 
+\f3\b \cf3 atan2() 
+\f2\b0 \cf2 to calculate the angle between any two points, providing the Y delta and the X delta as its two parameters. 
+\f1\fs24 \
+
+\b\fs32 Hint #3: 
+\f3 \cf3 atan2() 
+\f2\b0 \cf2 works in radians, so you\'92ll need to convert the value to degrees using the formula 
+\f3\b \cf3 degrees = radians * 180 / Double.pi
+\f2\b0 \cf2 . 
+\f1\fs24 \
+
+\b\fs32 Hint #4: 
+\f2\b0 Where \'930\'94 lies is of course arbitrary, but the convention is that 0 degrees runs along the positive X axis. You need to correct for this. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This is the kind of work you might once have thought you left behind at university, but positions and angles form the bedrock of advanced touch handling on iOS. It\'92s common to see code like this when working with 
+\f3\b \cf3 UIPanGesturizeRecognizer
+\f2\b0 \cf2 : \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4 \cf4 \cb5 let \cf2 velocity \cf6 = \cf2 recognizer\cf7 .\cf9 velocity\cf7 (\cf4 in\cf7 : \cf4 self\cf7 .\cf2 view\cf7 )\
+\cf4 var \cf2 angle \cf6 = \cf9 atan2\cf7 (\cf2 velocity\cf7 .\cf2 y\cf7 , \cf2 velocity\cf7 .\cf2 x\cf7 ) \cf6 * \cf10 180.0 \cf6 / \cf8 CGFloat\cf7 .\cf2 pi\
+\cf4 if \cf7 (\cf2 angle \cf6 < \cf10 0\cf7 ) \{ \cf2 angle \cf6 += \cf10 360.0 \cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 The adjustment at the end ensures the angles lies in the range 0 to 360. This challenge requires you to do that across an array of points, while also compensating for the 90-degree offset. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s my solution: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf9 challenge62\cf7 (\cf2 points\cf7 : [(\cf8 first\cf7 : \cf8 CGPoint\cf7 , \cf2 second\cf7 : \cf8 CGPoint\cf7 )]) \cf6 -\
+> \cf7 [\cf8 CGFloat\cf7 ] \{\
+\cf4    return \cf2 points\cf7 .\cf8 map \cf7 \{\
+\cf4       let \cf2 radians \cf6 = \cf9 atan2\cf7 (\cf2 $\cf10 0\cf7 .\cf8 first\cf7 .\cf2 y \cf6 - \cf2 $\cf10 0\cf7 .\cf2 second\cf7 .\cf2 y\cf7 , \cf2 $\cf10 0\cf7 .\cf8 first\cf7 .\cf2 x\
+\cf6 - \cf2 $\cf10 0\cf7 .\cf2 second\cf7 .\cf2 x\cf7 )\
+\cf4  var \cf2 degrees \cf6 = \cf7 (\cf2 radians \cf6 * \cf10 180 \cf6 / \cf8 CGFloat\cf7 .\cf2 pi\cf7 ) \cf6 - \cf10 90\
+\cf4       if \cf7 (\cf2 degrees \cf6 < \cf10 0\cf7 ) \{ \cf2 degrees \cf6 += \cf10 360.0 \cf7 \}\
+\cf4       if \cf2 degrees \cf6 == \cf10 360 \cf7 \{ \cf2 degrees \cf6 = \cf10 0 \cf7 \}\
+\cf4       return \cf2 degrees\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \cb5 \} \
+\} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Note: I added an 
+\f3\b \cf3 if degrees == 360 
+\f2\b0 \cf2 check in there so that the function returns 0 rather than 360, but that\'92s just personal preference \'96 it\'92s not required. 
+\f1\fs24 \
+\
+\
+\
+\
+}

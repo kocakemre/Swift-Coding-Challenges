@@ -1,0 +1,214 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red169\green0\blue15;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c72941\c0\c6667;\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid201\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 24: Add numbers inside a string 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Given a string that contains both letters and numbers, write a function that pulls out all the 
+\f1\fs24 \
+
+\f2\fs32 numbers then returns their sum. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93a1b2c3\'94 should return 6 (1 + 2 + 3). \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93a10b20c30\'94 should return 60 (10 + 20 + 30). \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93h8ers\'94 should return \'938\'94. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Creating an integer from a string returns 
+\f3\b \cf3 Int? 
+\f2\b0 \cf2 \'96 nil if it was a number, or an 
+\f3\b \cf3 Int 
+\f2\b0 \cf2 otherwise. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 Use the nil coalescing operator, 
+\f3\b \cf3 ??
+\f2\b0 \cf2 , to strip out any unwanted optionality.\uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 Don\'92t forget to catch trailing numbers, i.e. where the string ends with a number. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 You could solve this using regular expressions, in which case I\'92d grade it as taxing rather than tricky. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 This is a personal favorite problem of mine \'96 not because of its complexity, but more because of its usefulness for weeding out developers who have exaggerated a little on their r\'e9sum\'e9. \u8232 You see, you can take a na\'efve approach to this challenge and get a solution that works efficiently with very little code. However, to do that you need to know how to convert characters to strings, and strings to integers, as well as how to use nil coalescing if you want to make the code neat. As a result, someone who has puffed up their r\'e9sum\'e9 will find this harder than it ought to be, and their code will usually show them up. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 On the flip side, an experienced Swift developer who is out to impress might try and solve this using regular expressions, in which case now they have two challenges: summing the numbers, and making regular expressions in Swift not suck. 
+\f1\fs24 \
+
+\f2\fs32 Let\'92s take a look at the simple solution first, which is hopefully similar to the one you came up with. The algorithm is this: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+Create an empty string that represents the current number being read. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+Create a 
+\f3\b \cf3 sum 
+\f2\b0 \cf2 value that contains the total of all numbers so far, initialized to 0. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+Loop through every letter in the input string, converting the character to a 
+\f3\b \cf3 String
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+If we can convert that string to an integer, add it to the current number string. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	5.	}\expnd0\expndtw0\kerning0
+Otherwise it\'92s not a number, so convert the current number string to an integer, or 0 if \uc0\u8232 it\'92s an invalid integer, add it to the 
+\f3\b \cf3 sum 
+\f2\b0 \cf2 and clear the current number string. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	6.	}\expnd0\expndtw0\kerning0
+Finally, convert any remaining value in the current number string to an integer, and add \uc0\u8232 it to 
+\f3\b \cf3 sum
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	7.	}\expnd0\expndtw0\kerning0
+Return 
+\f3\b \cf3 sum
+\f2\b0 \cf2 . \uc0\u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 Here\'92s that list translated into code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge24a\cf7 (\cf2 string\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    var \cf2 currentNumber \cf9 = \cf10 ""\
+\cf4    var \cf2 sum \cf9 = \cf11 0\
+\cf4    for \cf2 letter \cf4 in \cf2 string\cf7 .\cf2 characters \cf7 \{\
+\cf4       let \cf2 strLetter \cf9 = \cf6 String\cf7 (\cf2 letter\cf7 )\
+\cf4       if \cf6 Int\cf7 (\cf2 strLetter\cf7 ) \cf9 != \cf11 nil \cf7 \{\
+\cf2          currentNumber \cf9 += \cf2 strLetter\
+\cf7       \} \cf4 else \cf7 \{\
+\cf2          sum \cf9 += \cf6 Int\cf7 (\cf2 currentNumber\cf7 ) \cf9 ?? \cf11 0\
+\cf2          currentNumber \cf9 = \cf10 ""\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \
+\} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf2 \cb5    sum \cf9 += \cf6 Int\cf7 (\cf2 currentNumber\cf7 ) \cf9 ?? \cf11 0\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 return \cf2 sum \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Solving the same problem using regular expressions is a real nightmare, and highlights the worst of Swift\'92s string handling problems. You see, creating a regex requires a Swift string going in, but works entirely using 
+\f3\b \cf3 NSRange 
+\f2\b0 \cf2 rather than Swift\'92s string ranges. This means you need to use 
+\f3\b \cf3 string.utf16.count 
+\f2\b0 \cf2 to calculate the size of the range, and using 
+\f3\b \cf3 string.characters.count 
+\f2\b0 \cf2 will introduce subtle bugs in your code. 
+\f1\fs24 \
+
+\f2\fs32 However, it gets really grim when trying to read the contents of each match. 
+\f3\b \cf3 NSRegularExpression 
+\f2\b0 \cf2 returns an array of 
+\f3\b \cf3 NSTextCheckingResult
+\f2\b0 \cf2 , which contains the 
+\f3\b \cf3 NSRange 
+\f2\b0 \cf2 of each match but not the contents, so you need to read the substring using that range... which isn\'92t possible in Swift, because it uses string ranges rather than 
+\f3\b \cf3 NSRange
+\f2\b0 \cf2 . *
+\f1\i Sigh*
+\f2\i0 ... 
+\f1\fs24 \
+
+\f2\fs32 Anyway, if you want to prove you have more time than sense, here\'92s how to solve it using regular expressions: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls3\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+Create the regex 
+\f3\b \cf3 (\\\\d+)
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+Use its 
+\f3\b \cf3 matches() 
+\f2\b0 \cf2 method to pull out an array of 
+\f3\b \cf3 NSTextCheckingResult 
+\f2\b0 \cf2 \uc0\u8232 objects. \u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+Typecast your input string as 
+\f3\b \cf3 NSString 
+\f2\b0 \cf2 to get a 
+\f3\b \cf3 substring() 
+\f2\b0 \cf2 method that works \uc0\u8232 with the 
+\f3\b \cf3 NSRange 
+\f2\b0 \cf2 provided by each 
+\f3\b \cf3 NSTextCheckingResult
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+Send that substring into 
+\f3\b \cf3 Int() 
+\f2\b0 \cf2 to get an optional integer. \uc0\u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	5.	}\expnd0\expndtw0\kerning0
+Strip out the optionality, then sum the integers. \uc0\u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 You can use 
+\f3\b \cf3 flatMap() 
+\f2\b0 \cf2 and 
+\f3\b \cf3 reduce() 
+\f2\b0 \cf2 for steps 4 and 5 if you really have something to prove, giving code like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge24b\cf7 (\cf2 string\cf7 : \cf8 String\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    let \cf2 regex \cf9 = \cf4 try\cf9 ! \cf6 NSRegularExpression\cf7 (\cf2 pattern\cf7 : \cf10 "(\\\\d+)"\cf7 ,\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 options\cf7 : []) 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 matches \cf9 = \cf2 regex\cf7 .\cf6 matches\cf7 (\cf4 in\cf7 : \cf2 string\cf7 , \cf2 options\cf7 : [], \cf2 range\cf7 :\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf6 \cb5 NSRange\cf7 (\cf2 location\cf7 : \cf11 0\cf7 , \cf2 length\cf7 : \cf2 string\cf7 .\cf2 utf16\cf7 .\cf8 count\cf7 ))\
+\cf4    let \cf2 allNumbers \cf9 = \cf2 matches\cf7 .\cf2 flatMap \cf7 \{ \cf6 Int\cf7 ((\cf2 string \cf4 as\
+\cf8 NSString\cf7 ).\cf6 substring\cf7 (\cf2 with\cf7 : \cf2 $\cf11 0\cf7 .\cf2 range\cf7 )) \}\
+\cf4    return \cf2 allNumbers\cf7 .\cf6 reduce\cf7 (\cf11 0\cf7 , \cf9 +\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That code runs 
+\f1\i significantly 
+\f2\i0 slower than the previous solution, largely because of the cost of creating the regex. If you were to run this method many times you should move the 
+\f3\b \cf3 NSRegularExpression 
+\f2\b0 \cf2 creation outside the method, at which point it runs \'93only\'94 about half the speed of the previous solution. 
+\f1\fs24 \
+
+\f2\fs32 If Swift 4 comes with a rethink of the way string ranges work, the regex solution would a better choice. Until then, I think it\'92s just trying too hard, regardless of the performance gains... 
+\f1\fs24 \
+}

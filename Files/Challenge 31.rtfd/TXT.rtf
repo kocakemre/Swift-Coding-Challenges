@@ -1,0 +1,146 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;\red0\green0\blue255;
+\red107\green0\blue109;\red169\green0\blue15;\red232\green135\blue8;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;\cssrgb\c0\c0\c100000;
+\cssrgb\c50196\c0\c50196;\cssrgb\c72941\c0\c6667;\cssrgb\c93333\c60000\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 31: Copy recursively 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy 
+\f1\fs24 \
+
+\f2\fs32 Write a function that accepts two paths: the first should point to a directory to copy, and the second should be where the directory should be copied to. Return true if the directory and all its contents were copied successfully; false if the copy failed, or the user specified something other than a directory. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If your directory exists and is readable, the destination is writeable, and the copy succeeded, your function should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Under all other circumstances you should return false: if the directory does not exist or was not readable, if the destination was not writeable, if a file was specified rather than a directory, or if the copy failed for any other reason. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f3 \cf3 FileManager 
+\f2\b0 \cf2 has a dedicated 
+\f3\b \cf3 copyItem() 
+\f2\b0 \cf2 method that is perfectly capable of recursively copying directories. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 To comply fully with the challenge, you must ensure the user does not specify a file to copy \'96 this should accept only directories. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 You should try the 
+\f3\b \cf3 fileExists() 
+\f2\b0 \cf2 method. It has a second parameter, specified as 
+\f3\b \cf3 inout
+\f2\b0 \cf2 , that returns whether the requested item is a directory. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 Never used 
+\f3\b \cf3 ObjCBool 
+\f2\b0 \cf2 before? Lucky you. Create your variable like this: 
+\f3\b \cf3 var isDirectory: ObjCBool = false
+\f2\b0 \cf2 . Now call 
+\f3\b \cf3 fileExists() 
+\f2\b0 \cf2 then use its 
+\f3\b \cf3 boolValue 
+\f2\b0 \cf2 property to read the boolean value. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 On its surface this challenge needs you to know a little about the filesystem in Swift, in particular how much work 
+\f3\b \cf3 FileManager 
+\f2\b0 \cf2 can do for you. 
+\f1\fs24 \
+
+\f2\fs32 However, you soon get hit with a cunning complexity: the 
+\f3\b \cf3 fileExists() 
+\f2\b0 \cf2 method returns true or false depending on whether the item exists, or also has an optional 
+\f3\b \cf3 inout 
+\f2\b0 \cf2 parameter that tells you whether the item was a directory. Cunningly, that 
+\f3\b \cf3 inout 
+\f2\b0 \cf2 parameter needs to be of type 
+\f3\b \cf3 ObjCBool
+\f2\b0 \cf2 , which is like a regular boolean except that it\'92s completely different and incompatible. Yay. 
+\f1\fs24 \
+
+\f2\fs32 Fortunately, you can create an 
+\f3\b \cf3 ObjCBool 
+\f2\b0 \cf2 like this: 
+\f4 \cf4 \cb5 var \cf2 isDirectory\cf6 : \cf7 ObjCBool \cf8 = \cf9 false 
+\f1\fs24 \cf2 \cb1 \
+
+\f2\fs32 Once you pass that into 
+\f3\b \cf3 fileExists()
+\f2\b0 \cf2 , it will be set to a new value that reflects the actual item you queried. You can then check whether it\'92s a directory by reading the 
+\f3\b \cf3 boolValue 
+\f2\b0 \cf2 property of your 
+\f3\b \cf3 ObjCBool
+\f2\b0 \cf2 , like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 guard \cf2 fm\cf6 .\cf10 fileExists\cf6 (\cf2 atPath\cf6 : \cf2 source\cf6 , \cf2 isDirectory\cf6 : \cf8 &\cf2 isDirectory\cf6 )\
+\cf8 || \cf2 isDirectory\cf6 .\cf2 boolValue \cf8 == \cf9 false \cf4 else \cf6 \{ \cf4 return \cf9 false \cf6 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 Now that you\'92ve checked the directory exists and that it is actually a directory, you can get onto the meat of this problem: copying it somewhere else. This is as simple as calling the 
+\f3\b \cf3 copyItem() 
+\f2\b0 \cf2 method of 
+\f3\b \cf3 FileManager
+\f2\b0 \cf2 , although you will need to wrap it inside 
+\f3\b \cf3 do/ catch 
+\f2\b0 \cf2 so you can catch any errors and return false, as the challenge requested. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s my solution: 
+\f1\fs24 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf2 {{\NeXTGraphic page99image11360.png \width9160 \height720
+}¬}\pard\pardeftab720\sl280\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 guard \cf2 fm\cf6 .\cf10 fileExists\cf6 (\cf2 atPath\cf6 : \cf2 source\cf6 , \cf2 isDirectory\cf6 : \cf8 &\cf2 isDirectory\cf6 )\
+\cf8 || \cf2 isDirectory\cf6 .\cf2 boolValue \cf8 == \cf9 false \cf4 else \cf6 \{ \cf4 return \cf9 false \cf6 \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5 func \cf10 challenge31\cf6 (\cf2 source\cf6 : \cf7 String\cf6 , \cf2 destination\cf6 : \cf7 String\cf6 ) \cf8 -> \cf7 Bool \cf6 \{\
+\cf4    let \cf2 fm \cf8 = \cf7 FileManager\cf6 .\cf2 default\
+\cf4    var \cf2 isDirectory\cf6 : \cf7 ObjCBool \cf8 = \cf9 false\
+\cf4    guard \cf2 fm\cf6 .\cf10 fileExists\cf6 (\cf2 atPath\cf6 : \cf2 source\cf6 , \cf2 isDirectory\cf6 :\
+\cf8 &\cf2 isDirectory\cf6 ) \cf8 || \cf2 isDirectory\cf6 .\cf2 boolValue \cf8 == \cf9 false \cf4 else \cf6 \{ \cf4 return\
+\cf9 false \cf6 \}\
+\cf4    let \cf2 sourceURL \cf8 = \cf10 URL\cf6 (\cf2 fileURLWithPath\cf6 : \cf2 source\cf6 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 \cb1 www.hackingwithswift.com 99 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 destinationURL \cf8 = \cf10 URL\cf6 (\cf2 fileURLWithPath\cf6 : \cf2 destination\cf6 )\
+\cf4    do \cf6 \{\
+\cf4       try \cf2 fm\cf6 .\cf10 copyItem\cf6 (\cf2 at\cf6 : \cf2 sourceURL\cf6 , \cf2 to\cf6 : \cf2 destinationURL\cf6 )\
+   \} \cf4 catch \cf6 \{\
+\cf10       print\cf6 (\cf11 "Copy failed: \cf12 \\(\cf11 error\cf6 .\cf11 localizedDescription\cf12 )\cf11 "\cf6 )\
+\cf4       return \cf9 false\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+
+\f4\fs32 \cf4 \cb5 return \cf9 true \cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+}

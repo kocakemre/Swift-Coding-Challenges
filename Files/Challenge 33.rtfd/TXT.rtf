@@ -1,0 +1,123 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red148\green108\blue71;\red135\green135\blue135;\red107\green0\blue109;\red0\green0\blue255;\red255\green255\blue255;
+\red73\green17\blue135;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c65098\c49804\c34902;\cssrgb\c60000\c60000\c60000;\cssrgb\c50196\c0\c50196;\cssrgb\c0\c0\c100000;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c36078\c14902\c60000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 33: Find duplicate filenames 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky 
+\f1\fs24 \
+
+\f2\fs32 Write a function that accepts the name of a directory to scan, and returns an array of filenames that appear more than once in that directory or any of its subdirectories. Your function should scan 
+\f1\i all 
+\f2\i0 subdirectories, including subdirectories of subdirectories. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If directory/subdir/a.txt exists and directory/sub/sub/sub/sub/subdir/a.txt exists, \'93a.txt\'94 should be in the array you return. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Ignore directories that have the same name; you care only about files. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If there are no files with duplicate names, return an empty array. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 There are several ways of solving this, but most people instinctively reach for recursion to allow them to scan any depth of directory structure. \uc0\u8232 
+\f1\b Hint #2: 
+\f3 \cf3 FileManager 
+\f2\b0 \cf2 has better solutions, though \'96 take some time to explore! \uc0\u8232 
+\f1\b Hint #3: 
+\f3 \cf3 FileManager 
+\f2\b0 \cf2 has an uncomfortable relationship between using 
+\f3\b \cf3 String 
+\f2\b0 \cf2 and 
+\f3\b \cf3 URL 
+\f2\b0 \cf2 for its data types. You should prefer the latter wherever possible, however your return value needs to be 
+\f3\b \cf3 [String] 
+\f2\b0 \cf2 because you care about duplicate names not paths. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 If you can\'92t read the directory that was requested, returning an empty array seems like a sensible thing to do. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 It\'92s entirely possible you solved this challenge using a recursive function: return a list of all files in the current directory, along with the result of calling the function again on each subdirectory. That takes a little thinking, but it\'92s an acceptable solution to this challenge.There is, however, a better solution: 
+\f3\b \cf3 FileManager 
+\f2\b0 \cf2 can perform a deep search of directories for you. The best way to do this is with a directory enumerator, which you create like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 guard let \cf2 files \cf5 = \cf2 fm\cf6 .\cf7 enumerator\cf6 (\cf2 at\cf6 : \cf2 directoryURL\cf6 ,\
+\cf2 includingPropertiesForKeys\cf6 : \cf8 nil\cf6 ) \cf4 else \cf6 \{ \cf4 return \cf6 [] \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 You can then loop over that enumerator and either get back a URL that points to a subdirectory or file, or you\'92ll get back nil. The enumerator will automatically recurse into every subdirectory (and every sub-subdirectory, and so on), which takes care of most of this challenge for you. 
+\f1\fs24 \
+
+\f2\fs32 One small fly in the ointment: looping over the iterator needs to be typecast to 
+\f3\b \cf3 URL
+\f2\b0 \cf2 , so we\'92ll be writing this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb9 for case let \cf2 file \cf4 as \cf8 URL \cf4 in \cf2 files \cf6 \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 There are two things that remain. First, eliminating directories: we don\'92t care if there are ten subdirectories called \'93test\'94, we only care about duplicate filenames. So, whenever we\'92re handed a URL that is a directory we are going to ignore it like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb9 guard \cf2 file\cf6 .\cf2 hasDirectoryPath \cf5 \cb9 == \cf8 \cb9 false \cf4 else \cf6 \{ \cf4 continue \cf6 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 The second remaining part of the challenge is to track duplicate filenames. We can solve this using two sets: one to track all filenames we\'92ve seen already, and one to track filenames that have been seen more than once. The challenge doesn\'92t mention whether the return value should list duplicate filenames only once, but clearly it\'92s more useful to do so, hence why I\'92m using a set. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s my solution in full: 
+\f1\fs24 \
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f4\fs32 \cf6 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb9 func \cf7 \cb9 challenge33\cf6 \cb9 (\cf4 in \cf2 directory\cf6 : \cf10 \cb9 String\cf6 \cb9 ) \cf5 \cb9 -> \cf6 \cb9 [\cf10 \cb9 String\cf6 \cb9 ] \{\
+\cf4    let \cf2 fm \cf5 \cb9 = \cf10 FileManager\cf6 \cb9 .\cf2 default\
+\cf4    let \cf2 directoryURL \cf5 \cb9 = \cf7 URL\cf6 \cb9 (\cf2 fileURLWithPath\cf6 : \cf2 directory\cf6 )\
+\cf4 guard let \cf2 files \cf5 \cb9 = \cf2 \cb9 fm\cf6 .\cf7 \cb9 enumerator\cf6 \cb9 (\cf2 at\cf6 : \cf2 directoryURL\cf6 ,\
+\cf2 includingPropertiesForKeys\cf6 : \cf8 nil\cf6 ) \cf4 else \cf6 \{ \cf4 return \cf6 [] \}\
+\cf4    var \cf2 duplicates \cf5 \cb9 = \cf10 Set\cf5 <\cf10 String\cf5 >\cf6 \cb9 ()\
+\cf4    var \cf2 seen \cf5 \cb9 = \cf10 Set\cf5 <\cf10 String\cf5 >\cf6 \cb9 ()\
+\cf4    for case let \cf2 file \cf4 as \cf8 URL \cf4 in \cf2 files \cf6 \{\
+\cf4       guard \cf2 file\cf6 .\cf2 hasDirectoryPath \cf5 \cb9 == \cf8 \cb9 false \cf4 else \cf6 \{ \cf4 continue \cf6 \}\
+\cf4       let \cf2 filename \cf5 \cb9 = \cf2 \cb9 file\cf6 .\cf2 lastPathComponent\
+\cf4       if \cf2 seen\cf6 .\cf7 \cb9 contains\cf6 \cb9 (\cf2 filename\cf6 ) \{\
+\cf2          duplicates\cf6 .\cf7 \cb9 insert\cf6 \cb9 (\cf2 filename\cf6 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \cb9 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf2 \cb9       seen\cf6 .\cf7 \cb9 insert\cf6 \cb9 (\cf2 filename\cf6 )\
+   \}\
+\cf4    return \cf7 \cb9 Array\cf6 \cb9 (\cf2 duplicates\cf6 )\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Recursion is always going to be necessary, but it\'92s nice to have iOS do it for us! 
+\f1\fs24 \
+}

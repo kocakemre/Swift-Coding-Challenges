@@ -1,0 +1,96 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red73\green17\blue135;\red135\green135\blue135;\red107\green0\blue109;\red148\green108\blue71;
+\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c36078\c14902\c60000;\cssrgb\c60000\c60000\c60000;\cssrgb\c50196\c0\c50196;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 42: Recreate index(of:) 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write an extension for all collections that reimplements the 
+\f3\b \cf3 index(of:) 
+\f2\b0 \cf2 method. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 This is one of the easiest standard library methods to reimplement, so please give it an especially good try before reading any hints. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 [1, 2, 3].challenge42(indexOf: 1) 
+\f2\b0 \cf2 should return 0. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 [1, 2, 3].challenge42(indexOf: 3) 
+\f2\b0 \cf2 should return 2. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 [1, 2, 3].challenge42(indexOf: 5) 
+\f2\b0 \cf2 should return nil. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You will need to extend 
+\f3\b \cf3 Collection 
+\f2\b0 \cf2 using a constraint on the type of element it stores. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 Your return type should be 
+\f3\b \cf3 Int? 
+\f2\b0 \cf2 because the item might not exist in the collection. 
+\f1\b Hint #3: 
+\f2\b0 This would be a good time to use 
+\f3\b \cf3 enumerated() 
+\f2\b0 \cf2 to retrieve items and their index \uc0\u8232 from a collection. \u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 This is a marvelously simple challenge that is perfect for helping someone learn algorithms \'96 it\'92s simple enough you can write it down on a piece of paper first time, but also demonstrates \u8232 the importance of optional and protocol extensions all in one. \u8232 To solve the challenge, you need to start by extending the 
+\f3\b \cf3 Collection 
+\f2\b0 \cf2 protocol using a constraint that elements must conform to 
+\f3\b \cf3 Equatable
+\f2\b0 \cf2 . Without that constraint you can\'92t use 
+\f3\b \cf3 ==
+\f2\b0 \cf2 , and therefore can\'92t tell whether you\'92ve found the correct item in the collection. \uc0\u8232 Once that\'92s done, you just need to loop through all the items in your collection, perhaps using 
+\f3\b \cf3 enumerated()
+\f2\b0 \cf2 , then return the matching index. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Here\'92s an example solution: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 extension \cf6 Collection \cf4 where \cf6 Iterator\cf7 .\cf6 Element\cf7 : \cf6 Equatable \cf7 \{\
+\cf4    func \cf8 challenge42\cf7 (\cf2 indexOf search\cf7 : \cf6 Iterator\cf7 .\cf6 Element\cf7 ) \cf9 -> \cf6 Int\cf9 ? \cf7 \{\
+\cf4       for \cf7 (\cf2 index\cf7 , \cf2 item\cf7 ) \cf4 in self\cf7 .\cf8 enumerated\cf7 () \{\
+\cf4          if \cf2 item \cf9 == \cf2 search \cf7 \{\
+\cf4             return \cf2 index\
+\cf7          \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 return \cf10 nil \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf7 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+}

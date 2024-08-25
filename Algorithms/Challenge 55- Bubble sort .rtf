@@ -1,0 +1,261 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red73\green17\blue135;\red135\green135\blue135;\red107\green0\blue109;\red148\green108\blue71;
+\red28\green117\blue20;\red0\green0\blue255;\red169\green0\blue15;\red232\green135\blue8;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c36078\c14902\c60000;\cssrgb\c60000\c60000\c60000;\cssrgb\c50196\c0\c50196;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c11373\c52157\c9804;\cssrgb\c0\c0\c100000;\cssrgb\c72941\c0\c6667;\cssrgb\c93333\c60000\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 55: Bubble sort 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Create an extension for arrays that sorts them using the bubble sort algorithm. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 A bubble sort repeatedly loops over the items in an array, comparing items that are next to each other and swapping them if they aren\'92t sorted. This looping continues until all items are in their correct order. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array
+\f3\b \cf3 [12, 5, 4, 9, 3, 2, 1]
+\f2\b0 \cf2 should become
+\f3\b \cf3 [1, 2, 3, 4, 5, 9, 12]
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 ["f", "a", "b"] 
+\f2\b0 \cf2 should become 
+\f3\b \cf3 ["a", "b", "f"]
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 [String]() 
+\f2\b0 \cf2 should become 
+\f3\b \cf3 []
+\f2\b0 \cf2 . \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You\'92ll need to extend the 
+\f3\b \cf3 Array 
+\f2\b0 \cf2 type, but only when its elements conform to 
+\f3\b \cf3 Comparable 
+\f2\b0 \cf2 so you can establish a sort order. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 You want to repeat your loop while a condition is true, so 
+\f3\b \cf3 repeat 
+\f2\b0 \cf2 while makes sense. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 Watch out for the case when the array is empty.\uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 You can swap two values using the global 
+\f3\b \cf3 swap() 
+\f2\b0 \cf2 function like this: 
+\f3\b \cf3 swap(&a, 
+\f2\b0 \cf2 \uc0\u8232 
+\f3\b \cf3 &b)
+\f2\b0 \cf2 .\uc0\u8232 
+\f1\b Hint #5: 
+\f2\b0 If you try printing out the array after each sorting pass you might spot a pattern that \uc0\u8232 you can use to optimize your code. \u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 \
+Bubble sort is taught in many \'96 if not most! \'96 university computer science classes. Not because it\'92s efficient (it really, really isn\'92t) but because it\'92s simple enough to explain and gives junior students a taste of a real algorithm. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 If you\'92ve never tried to implement it before, this challenge might have felt more like a \'93taxing\'94 grade, but hopefully you managed at least to implement a simple solution. Don\'92t worry if you don\'92t like your solution: there is no \'93good\'94 bubble sort, only bad and worse. 
+\f1\fs24 \
+
+\f2\fs32 Let\'92s take a look at a simple solution first: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 extension \cf6 Array \cf4 where \cf6 Element\cf7 : \cf6 Comparable \cf7 \{\
+\cf4    func \cf8 challenge55a\cf7 () \cf9 -> \cf7 [\cf6 Element\cf7 ] \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10       // refuse to sort invalid arrays\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       guard \cf6 count \cf9 > \cf11 1 \cf4 else \cf7 \{ \cf4 return self \cf7 \}\
+\cf4       var \cf2 returnValue \cf9 = \cf4 self\
+      var \cf2 swapsMade\cf7 : \cf6 Bool\
+\cf4       repeat \cf7 \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf10 false 
+\f1\fs24 \cf2 \cb1 \
+
+\f4\fs32 \cf10 \cb5 last one 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf10 \cb5 // we're looping from scratch, so reset swapsMade to\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 swapsMade \cf9 = \cf11 false\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 // loop over all items in the array, excluding the\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 for \cf2 index \cf4 in \cf11 0 \cf7 ..\cf9 < \cf2 returnValue\cf7 .\cf6 count \cf9 - \cf11 1 \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10    // pull out the current element and its successor\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    let \cf2 element \cf9 = \cf2 returnValue\cf7 [\cf2 index\cf7 ]\
+\cf4    let \cf2 next \cf9 = \cf2 returnValue\cf7 [\cf2 index \cf9 + \cf11 1\cf7 ]\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10    // if the current one is bigger than its successor...\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    if \cf7 (\cf2 element \cf9 > \cf2 next\cf7 ) \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10       // swap them\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8       swap\cf7 (\cf9 &\cf2 returnValue\cf7 [\cf2 index\cf7 ], \cf9 &\cf2 returnValue\cf7 [\cf2 index \cf9 +\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf11 1\cf7 ]) 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf10 \cb5 // and mark that we made a swap so the loop will repeat 
+\f1\fs24 \cf2 \cb1 \
+
+\f4\fs32 \cf10 \cb5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 swapsMade \cf9 = \cf11 true\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7 \}\
+   \}\
+\} \cf4 while \cf2 swapsMade \cf9 == \cf11 true\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 // send back the sorted array\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 return \cf2 returnValue\
+\cf7    \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That\'92s the simplest way I can think of implementing bubble sort, and hopefully you can see how it works. 
+\f1\fs24 \
+
+\f2\fs32 With only a small change we can make this algorithm a little faster, and if you\'92re not sure how try modifying the swapping check to this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 if \cf7 (\cf2 element \cf9 > \cf2 next\cf7 ) \{\
+\cf8    print\cf7 (\cf12 \cb5 "Before \cf13 \\(\cf12 returnValue\cf13 )\cf12 "\cf7 \cb5 )\
+\cf8    swap\cf7 (\cf9 &\cf2 returnValue\cf7 [\cf2 index\cf7 ], \cf9 &\cf2 returnValue\cf7 [\cf2 index \cf9 + \cf11 1\cf7 ])\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2    swapsMade \cf9 = \cf11 true\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8    print\cf7 (\cf12 \cb5 "After \cf13 \\(\cf12 returnValue\cf13 )\cf12 "\cf7 \cb5 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That will show how the sort is operating on a given array. Here\'92s part of the output you\'92ll see: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf6 \cb5 Before \cf7 [\cf11 12\cf7 , \cf11 5\cf7 , \cf11 4\cf7 , \cf11 9\cf7 , \cf11 3\cf7 , \cf11 2\cf7 , \cf11 1\cf7 ]\
+\cf6 After \cf7 [\cf11 5\cf7 , \cf11 12\cf7 , \cf11 4\cf7 , \cf11 9\cf7 , \cf11 3\cf7 , \cf11 2\cf7 , \cf11 1\cf7 ]\
+\cf6 Before \cf7 [\cf11 5\cf7 , \cf11 12\cf7 , \cf11 4\cf7 , \cf11 9\cf7 , \cf11 3\cf7 , \cf11 2\cf7 , \cf11 1\cf7 ]\
+\cf6 After \cf7 [\cf11 5\cf7 , \cf11 4\cf7 , \cf11 12\cf7 , \cf11 9\cf7 , \cf11 3\cf7 , \cf11 2\cf7 , \cf11 1\cf7 ]\
+\cf6 Before \cf7 [\cf11 5\cf7 , \cf11 4\cf7 , \cf11 12\cf7 , \cf11 9\cf7 , \cf11 3\cf7 , \cf11 2\cf7 , \cf11 1\cf7 ]\
+\cf6 After \cf7 [\cf11 5\cf7 , \cf11 4\cf7 , \cf11 9\cf7 , \cf11 12\cf7 , \cf11 3\cf7 , \cf11 2\cf7 , \cf11 1\cf7 ]\
+\cf6 Before \cf7 [\cf11 5\cf7 , \cf11 4\cf7 , \cf11 9\cf7 , \cf11 12\cf7 , \cf11 3\cf7 , \cf11 2\cf7 , \cf11 1\cf7 ]\
+\cf6 After \cf7 [\cf11 5\cf7 , \cf11 4\cf7 , \cf11 9\cf7 , \cf11 3\cf7 , \cf11 12\cf7 , \cf11 2\cf7 , \cf11 1\cf7 ]\
+\cf6 Before \cf7 [\cf11 5\cf7 , \cf11 4\cf7 , \cf11 9\cf7 , \cf11 3\cf7 , \cf11 12\cf7 , \cf11 2\cf7 , \cf11 1\cf7 ]\
+\cf6 After \cf7 [\cf11 5\cf7 , \cf11 4\cf7 , \cf11 9\cf7 , \cf11 3\cf7 , \cf11 2\cf7 , \cf11 12\cf7 , \cf11 1\cf7 ]\
+\cf6 Before \cf7 [\cf11 5\cf7 , \cf11 4\cf7 , \cf11 9\cf7 , \cf11 3\cf7 , \cf11 2\cf7 , \cf11 12\cf7 , \cf11 1\cf7 ]\
+\cf6 After \cf7 [\cf11 5\cf7 , \cf11 4\cf7 , \cf11 9\cf7 , \cf11 3\cf7 , \cf11 2\cf7 , \cf11 1\cf7 , \cf11 12\cf7 ]\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Notice how the 12 rises immediately to the top? Keep in mind that the bubble sort algorithm moves linearly through the array, swapping as needed. When the highest item in the array is reached, in any position in the array, it will rise to the top quickly. First it will get swapped with the item on its right, then the loop will move forward one place to where the item is now, and it will be swapped again. The loop will move forward again, and it will be swapped 
+\f1\i \cf2 again
+\f2\i0 \cf2 , and so on. What this means is that after the array has been looped over once, you can be sure the first largest item is in its final place. After the loop has completed a second time, the second largest item is in its final place, and so on. In fact, after the loop has completed 
+\f1\b N 
+\f2\b0 times, the 
+\f1\b Nth 
+\f2\b0 largest item is in its final place. This simple observation allows us to tweak our sort algorithm so that we loop from 0 up to the index of the highest sorted item \'96 everything after that is guaranteed to be sorted already, so there\'92s no need to keep checking. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s the optimized version: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf8 challenge55b\cf7 () \cf9 -> \cf7 [\cf6 Element\cf7 ] \{\
+\cf4    guard \cf6 count \cf9 > \cf11 0 \cf4 else \cf7 \{ \cf4 return \cf7 [\cf6 Element\cf7 ]() \}\
+\cf4    var \cf2 returnValue \cf9 = \cf4 self\
+   var \cf2 highestSortedIndex \cf9 = \cf6 count\
+\cf4    repeat \cf7 \{\
+\cf4       var \cf2 lastSwapIndex \cf9 = \cf11 0\
+\cf4       for \cf2 index \cf4 in \cf11 0 \cf7 ..\cf9 < \cf2 highestSortedIndex \cf9 - \cf11 1 \cf7 \{\
+\cf4          let \cf2 element \cf9 = \cf2 returnValue\cf7 [\cf2 index\cf7 ]\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 \cb1 www.hackingwithswift.com 189 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 next \cf9 = \cf2 returnValue\cf7 [\cf2 index \cf9 + \cf11 1\cf7 ]\
+\cf4          if \cf7 (\cf2 element \cf9 > \cf2 next\cf7 ) \{\
+\cf8             swap\cf7 (\cf9 &\cf2 returnValue\cf7 [\cf2 index\cf7 ], \cf9 &\cf2 returnValue\cf7 [\cf2 index \cf9 + \cf11 1\cf7 ])\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2             lastSwapIndex \cf9 = \cf2 index \cf9 + \cf11 1\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf2 \cb5       highestSortedIndex \cf9 = \cf2 lastSwapIndex\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7    \} \cf4 while \cf2 highestSortedIndex \cf9 != \cf11 0\
+\cf4    return \cf2 returnValue\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 That solution will still run slowly because ultimately it\'92s limited by the general weakness of bubble sorting, but it\'92s still an improvement of the previous version and hopefully easy enough for you to remember. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf10 \cb5 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

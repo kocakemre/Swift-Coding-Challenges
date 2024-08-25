@@ -1,0 +1,176 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 25: Calculate a square root by hand 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Taxing\uc0\u8232 Write a function that returns the square root of a positive integer, rounded down to the nearest 
+\f1\fs24 \
+
+\f2\fs32 integer, without using 
+\f3\b \cf3 sqrt()
+\f2\b0 \cf2 . 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 9 should return 3. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 16777216 should return 4096. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 16 should return 4. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The number 15 should return 3. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You can brute force this using a loop count from 0 up to the input number. 
+\f1\b Hint #2: 
+\f2\b0 A more efficient solution is using a binary search.\uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 A rounded-down integer square root will never be more than half its square. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 If you consider half your input number to be your upper bound, then calculate the mid-point between that and a lower bound that\'92s initially 0 (i.e., input number / 4), you can check whether that mid-point squared gives your input. \uc0\u8232 
+\f1\b Hint #5: 
+\f2\b0 If the mid-point is too low, make it the new lower bound then repeat. If the mid-point is too high, make it the new higher bound then repeat. \uc0\u8232 
+\f1\b Hint #6: 
+\f2\b0 Using this technique, you should be able to loop until you find the best answer. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 Like most coding interview problems, this one has a na\'efve solution, a smart solution, and a sneaky solution. \u8232  
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 The na\'efve solution is trivial: loop from 1 up to half the test number, checking to see whether that number squared is greater than the test number. If it is, return the number directly below. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s the code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge25a\cf7 (\cf2 input\cf7 : \cf8 Int\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    for \cf2 i \cf4 in \cf10 0 \cf7 ... \cf2 input \cf9 / \cf10 2 \cf7 \{\
+\cf4       if \cf2 i \cf9 * \cf2 i \cf9 > \cf2 input \cf7 \{\
+\cf4          return \cf2 i \cf9 - \cf10 1\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 return \cf10 0 \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 However, consider the second test case, which is calculating the square root of 16,777,216. That\'92s going to require 4097 multiplications before returning the correct response, which is massively wasteful. 
+\f1\fs24 \
+
+\f2\fs32 A smarter solution is to use a binary search, which massively reduces the search space. Given the input number 9 it works like this: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Start by specifying a high bound of half the input number plus one, rounding down so for the input number 10 that gives us a high bound of 6. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Now specify a low bound, which will be zero to begin with. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Calculate the mid-point of the two, which is equal to half of 
+\f3\b \cf3 upper - lower
+\f2\b0 \cf2 , plus \uc0\u8232 the lower. So that\'92s 
+\f3\b \cf3 lower + ((upper - lower) / 2)
+\f2\b0 \cf2 , which is 
+\f3\b \cf3 0 + ((6 - 
+\f2\b0 \cf2 \uc0\u8232 
+\f3\b \cf3 0) / 2)
+\f2\b0 \cf2 , which is 
+\f3\b \cf3 0 + (6 / 2)
+\f2\b0 \cf2 , which is 
+\f3\b \cf3 0 + 3 
+\f2\b0 \cf2 \'96 so our mid-point is 3. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+You then square your mid-point (3 x 3 is 9) and compare it against the input number. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If the square is less than the input it means that all the numbers from your low bound \uc0\u8232 up to the mid-point are also too low, and so don\'92t need to be checked, so you can set \u8232 the new low bound to be equal to your mid-point, then repeat. \u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If the square is higher than the input it means that all the numbers from the mid-point \uc0\u8232 up to the upper bound are also too high, and so don\'92t need need to be checked, so you can set the new high bound to be equal to your mid-point, then repeat. 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls3\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If the square is equal to the input, then you have your answer. \uc0\u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If you find that your lower bound + 1 is greater than or equal to your upper bound it \uc0\u8232 means you\'92ve overshot the mark, so you should return the lower bound. \u8232 I realize that sounds complicated, but it\'92s actually remarkably simple: \'93select the range it must be in, then try the middle of it. If you were too high you can eliminate the upper half of the range; if you were too low you can eliminate the lower half of the range. So, eliminate one half of the range then split the remaining half... and repeat.\'94 \u8232 This search technique is sometimes called a binary chop, because you halve your search space with each check. So to get 16,777,216 you halve to a range of 8,388,608, then halve that to a range of 4,194,304, then halve to a range of 2,097,152, then 1,048,576, then 524,288, then 262,144, then 131,072, then 65,536, and so on. \u8232 Using this approach takes only 11 loops to figure out the square root of 16,777,216, compared to 4097 loops using the na\'efve method, so it runs a great deal faster. Nice! Here\'92s the code: \u8232 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4 \cf4 \cb5 func \cf6 challenge19b\cf7 (\cf2 input\cf7 : \cf8 Int\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    guard \cf2 input \cf9 != \cf10 1 \cf4 else \cf7 \{ \cf4 return \cf10 1 \cf7 \}\
+\cf4    var \cf2 lowerBound \cf9 = \cf10 0\
+\cf4    var \cf2 upperBound \cf9 = \cf10 1 \cf9 + \cf2 input \cf9 / \cf10 2\
+\cf4    while \cf2 lowerBound \cf9 + \cf10 1 \cf9 < \cf2 upperBound \cf7 \{\
+\cf4       let \cf2 middle \cf9 = \cf2 lowerBound \cf9 + \cf7 ((\cf2 upperBound \cf9 - \cf2 lowerBound\cf7 ) \cf9 / \cf10 2\cf7 )\
+\cf4       let \cf2 middleSquared \cf9 = \cf2 middle \cf9 * \cf2 middle\
+\cf4       if \cf2 middleSquared \cf9 == \cf2 input \cf7 \{\
+\cf4          return \cf2 middle\
+\cf7       \} \cf4 else if \cf2 middleSquared \cf9 < \cf2 input \cf7 \{\
+\cf2          lowerBound \cf9 = \cf2 middle\
+\cf7       \} \cf4 else \cf7 \{\
+\cf2          upperBound \cf9 = \cf2 middle\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf7 \cb5 \} \
+\} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 lowerBound\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 So, that\'92s the na\'efve approach and the smart approach, but there\'92s also a sneaky approach: the challenge is to calculate the square root of an integer without using 
+\f3\b \cf3 sqrt()
+\f2\b0 \cf2 , but it 
+\f1\i didn\'92t 
+\f2\i0 say not to use the 
+\f3\b \cf3 pow() 
+\f2\b0 \cf2 function. If you request a number raised to the power of 0.5, you get its square root. The calculation isn\'92t precisely the same \'96 a true square root will yield ever so slightly different results, and will be optimized for that task \'96 but given that we\'92re working with integers the two will be identical. 
+\f1\fs24 \
+
+\f2\fs32 So, here\'92s how to solve the challenge using 
+\f3\b \cf3 pow()
+\f2\b0 \cf2 , which will run so fast it\'92s hard to benchmark meaningfully: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge25c\cf7 (\cf2 input\cf7 : \cf8 Int\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    return \cf6 Int\cf7 (\cf6 floor\cf7 (\cf6 pow\cf7 (\cf6 Double\cf7 (\cf2 input\cf7 ), \cf10 0.5\cf7 )))\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Note the extensive typecasting, which is unavoidable I\'92m afraid \'96 
+\f3\b \cf3 pow() 
+\f2\b0 \cf2 works with doubles, not integers, so we need to typecast and floor before converting to an integer for the return value. 
+\f1\fs24 \cf2 \
+}

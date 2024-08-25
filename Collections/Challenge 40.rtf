@@ -1,0 +1,140 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier;\f4\fmodern\fcharset0 Courier-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red163\green0\blue79;\red255\green255\blue255;
+\red148\green108\blue71;\red107\green0\blue109;\red135\green135\blue135;\red0\green0\blue255;\red0\green0\blue120;
+\red73\green17\blue135;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c70588\c0\c38431;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c65098\c49804\c34902;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c0\c0\c100000;\cssrgb\c0\c0\c54510;
+\cssrgb\c36078\c14902\c60000;}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 40: Missing numbers in array 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Create a function that accepts an array of unsorted numbers from 1 to 100 where zero or more 
+\f1\fs24 \
+
+\f2\fs32 numbers might be missing, and returns an array of the missing numbers. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 If your test array were created like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 var \cf2 testArray \cf5 = \cf6 Array\cf7 (\cf8 1\cf7 ...\cf8 100\cf7 )\
+\cf2 testArray\cf7 .\cf6 remove\cf7 (\cf2 at\cf7 : \cf8 25\cf7 )\
+\cf2 testArray\cf7 .\cf6 remove\cf7 (\cf2 at\cf7 : \cf8 20\cf7 )\
+\cf2 testArray\cf7 .\cf6 remove\cf7 (\cf2 at\cf7 : \cf8 6\cf7 )\
+\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Then your method should 
+\f4\b \cf9 [7, 21, 26]
+\f2\b0 \cf2 , because those are the numbers missing from the array. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Hints 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #1: 
+\f2\b0 There\'92s a na\'efve solution involving arrays, but it\'92s very slow.\uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 You should try using a 
+\f4\b \cf9 Set
+\f2\b0 \cf2 , which has a significantly faster 
+\f4\b \cf9 contains() 
+\f2\b0 \cf2 method. 
+\f1\fs24 \
+
+\b\fs32 Hint #3: 
+\f2\b0 You can compute the different between two sets using 
+\f4\b \cf9 symmetricDifference()
+\f2\b0 \cf2 . 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 If you create a new array with all numbers present, then you can loop over each number and check whether it exists in the input array. Any missing numbers get added to an array, and that array gets sent back as the return value for the method \'96 simple, right? 
+\f1\fs24 \
+
+\f2\fs32 Here it is in Swift: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 func \cf6 challenge40a\cf7 (\cf2 input\cf7 : [\cf10 \cb4 Int\cf7 \cb4 ]) \cf5 -> \cf7 [\cf10 \cb4 Int\cf7 \cb4 ] \{\
+\cf3    let \cf2 correctArray \cf5 = \cf6 Array\cf7 (\cf8 1\cf7 ...\cf8 100\cf7 )\
+\cf3    var \cf2 missingNumbers \cf5 = \cf7 [\cf10 \cb4 Int\cf7 \cb4 ]()\
+\cf3    for \cf2 number \cf3 in \cf2 correctArray \cf7 \{\
+\cf3       if \cf5 !\cf2 input\cf7 .\cf6 contains\cf7 (\cf2 number\cf7 ) \{\
+\cf2          missingNumbers\cf7 .\cf6 append\cf7 (\cf2 number\cf7 )\
+      \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \cb4 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4    return \cf2 missingNumbers\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 The problem is, that solution is slow. We know that the input array will contain 100 items give or take some number of missing items, which means 
+\f4\b \cf9 contains() 
+\f2\b0 \cf2 will have to search through as many as 100 items before it can confirm it has found a number. 
+\f1\fs24 \
+
+\f2\fs32 A much faster solution is to use a set, which has an O(n) 
+\f4\b \cf9 contains() 
+\f2\b0 \cf2 method \'96 it runs at the same speed no matter whether it contains one item or one thousand. You can construct a set directly from the input array, and immediately the code will run around 10x faster for our test case: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 func \cf6 challenge40b\cf7 (\cf2 input\cf7 : [\cf10 \cb4 Int\cf7 \cb4 ]) \cf5 -> \cf7 [\cf10 \cb4 Int\cf7 \cb4 ] \{\
+\cf3    let \cf2 correctArray \cf5 = \cf6 Array\cf7 (\cf8 1\cf7 ...\cf8 100\cf7 )\
+\cf3    let \cf2 inputSet \cf5 = \cf6 Set\cf7 (\cf2 input\cf7 )\
+\cf3    var \cf2 missingNumbers \cf5 = \cf7 [\cf10 \cb4 Int\cf7 \cb4 ]()\
+\cf3    for \cf2 number \cf3 in \cf2 correctArray \cf7 \{\
+\cf3       if \cf5 !\cf2 inputSet\cf7 .\cf6 contains\cf7 (\cf2 number\cf7 ) \{\
+\cf2          missingNumbers\cf7 .\cf6 append\cf7 (\cf2 number\cf7 )\
+      \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \cb4 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4    return \cf2 missingNumbers\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \cb4 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 A third possible option is to use set algebra: if we construct a set from both the correct answer and from the input array, we can calculate the missing numbers by subtracting one from the other, then sorting the result. 
+\f1\fs24 \
+
+\f2\fs32 This involves a little more work: this creates a new set with only elements that appear in both, creates an array out of that set, then sorts it. As a result, this solution performs about 50% slower than the previous one in my tests, but it\'92s at least worth reading the code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 func \cf6 challenge40c\cf7 (\cf2 input\cf7 : [\cf10 \cb4 Int\cf7 \cb4 ]) \cf5 -> \cf7 [\cf10 \cb4 Int\cf7 \cb4 ] \{\
+\cf3    let \cf2 inputSet \cf5 = \cf6 Set\cf7 (\cf2 input\cf7 )\
+\cf3    let \cf2 testSet \cf5 = \cf6 Set\cf7 (\cf8 1\cf7 ...\cf8 100\cf7 )\
+\cf3    return \cf6 Array\cf7 (\cf2 testSet\cf7 .\cf6 subtracting\cf7 (\cf2 inputSet\cf7 )).\cf6 sorted\cf7 ()\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \cb4 \} 
+\f1\fs24 \cf2 \cb1 \
+}

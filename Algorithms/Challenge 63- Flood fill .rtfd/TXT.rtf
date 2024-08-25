@@ -1,0 +1,323 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf820
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red148\green108\blue71;\red107\green0\blue109;\red135\green135\blue135;\red0\green0\blue255;
+\red73\green17\blue135;\red169\green0\blue15;\red232\green135\blue8;\red28\green117\blue20;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c65098\c49804\c34902;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c0\c0\c100000;
+\cssrgb\c36078\c14902\c60000;\cssrgb\c72941\c0\c6667;\cssrgb\c93333\c60000\c0;\cssrgb\c11373\c52157\c9804;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid1\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 63: Flood fill 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Taxing 
+\f1\fs24 \
+
+\f2\fs32 Write a function that accepts a two-dimensional array of integers that are 0 or 1, a new number to place, and a position to start. You should read the existing number at the start position, change it to the new number, then change any surrounding numbers that matched the start number, then change any surrounding 
+\f1\i those
+\f2\i0 , and so on - like a flood fill algorithm in Photoshop. 
+\f1\fs24 \
+
+\b\fs32 Tip #1: 
+\f2\b0 If you value your sanity, you will add 
+\f3\b \cf3 import GameplayKit 
+\f2\b0 \cf2 then generate your grid using this code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 random \cf6 = \cf7 GKMersenneTwisterRandomSource\cf8 (\cf2 seed\cf8 : \cf9 1\cf8 )\
+\cf4 var \cf2 grid \cf6 = \cf8 (\cf9 1\cf8 ...\cf9 10\cf8 ).\cf10 map \cf8 \{ \cf9 _ \cf4 in \cf8 (\cf9 1\cf8 ...\cf9 10\cf8 ).\cf10 map \cf8 \{ \cf9 _ \cf4 in\
+\cf7 Int\cf8 (\cf2 random\cf8 .\cf7 nextInt\cf8 (\cf2 upperBound\cf8 : \cf9 2\cf8 )) \} \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 That will allow you to produce the same grid every time, which ought to make debugging easier. (Note: I made 
+\f3\b \cf3 grid 
+\f2\b0 \cf2 a variable rather than a constant for a reason.) 
+\f1\fs24 \
+
+\b\fs32 Tip #2: 
+\f2\b0 A flood fill works by filling grid positions directly above, below, to the left, and to the right, stopping only when a different number is encountered. 
+\f1\fs24 \
+
+\b\fs32 Tip #3: 
+\f2\b0 If the arrays contained all zeros, filling 5 would cause the arrays to contain all 5s because all numbers would be filled. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Given the following set up: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 random \cf6 = \cf7 GKMersenneTwisterRandomSource\cf8 (\cf2 seed\cf8 : \cf9 1\cf8 )\
+\cf4 let \cf2 grid \cf6 = \cf8 (\cf9 1\cf8 ...\cf9 10\cf8 ).\cf10 map \cf8 \{ \cf9 _ \cf4 in \cf8 (\cf9 1\cf8 ...\cf9 10\cf8 ).\cf10 map \cf8 \{ \cf9 _ \cf4 in\
+\cf7 Int\cf8 (\cf2 random\cf8 .\cf7 nextInt\cf8 (\cf2 upperBound\cf8 : \cf9 2\cf8 )) \} \}\
+\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 You will have the following grid: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf8 \cb5 [\cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 ]\
+[\cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 ]\
+[\cf9 0\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 ]\
+[\cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 ]\
+[\cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 ]\
+[\cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 ]\
+[\cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 ]\
+[\cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 ]\
+[\cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 ]\
+[\cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 ]\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 After running this code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf7 \cb5 challenge63\cf8 (\cf2 fill\cf8 : \cf9 5\cf8 , \cf4 in\cf8 : \cf2 grid\cf8 , \cf2 at\cf8 : (\cf2 x\cf8 : \cf9 2\cf8 , \cf2 y\cf8 : \cf9 0\cf8 )) 
+\f2 \cf2 \cb1 You will have the following grid: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf8 \cb5 [\cf9 5\cf8 , \cf9 5\cf8 , \cf2 X\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 1\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 1\cf8 , \cf9 1\cf8 ]\
+[\cf9 5\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 ]\
+[\cf9 5\cf8 , \cf9 1\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 1\cf8 , \cf9 1\cf8 ]\
+[\cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 ]\
+[\cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 5\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 5\cf8 ]\
+[\cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 , \cf9 5\cf8 ]\
+[\cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 5\cf8 , \cf9 1\cf8 , \cf9 1\cf8 ]\
+[\cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 ]\
+[\cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 0\cf8 ]\
+[\cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 0\cf8 , \cf9 1\cf8 , \cf9 1\cf8 , \cf9 1\cf8 ]\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Note, in the above grid I marked with X where the fill started, but that will be a five too. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Hints 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #1: 
+\f2\b0 You can solve this using a recursive function, or using a loop.\uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 You will almost certainly find it useful to add 
+\f3\b \cf3 print() 
+\f2\b0 \cf2 statements inside your loop 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0\fs32 \cf2 www.hackingwithswift.com 223 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 or function that displays what square is being manipulated, and perhaps also the current grid. 
+\f1\fs24 \
+
+\b\fs32 Hint #3: 
+\f2\b0 Keep a stack of squares that need to be filled. Start by adding your initial square, then loop over that and remove one square to fill / spread from each time. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This is a not a difficult problem to solve, but 
+\f1\i is 
+\f2\i0 difficult to solve cleanly and efficiently, and, most important of all, in a way that can be explained clearly to someone else. 
+\f1\fs24 \
+
+\f2\fs32 Like I said in the hints, you could solve this using a loop or using a recursive function. I\'92ll show you both, but for pedagogical reasons I think the recursive function is significantly better. That\'92s not to say the looping option is 
+\f1\i wrong
+\f2\i0 , just that my job is to build a solution that\'92s useful for teaching purposes, and by that measure I think the recursive option is significantly easier to understand. 
+\f1\fs24 \
+
+\f2\fs32 Let\'92s start with the looping option. I\'92ve solved it this way using a nested function, because it makes the code fractionally nice. Here\'92s how it works: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+Take a copy of the original grid. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+Create an array of X/Y co-ordinates that need to be filled, giving it the initial start point \uc0\u8232 to begin with. \u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+Pull out the current number at the start position, so we know what numbers we\'92re \uc0\u8232 filling. \u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+While there are still items in the squares to fill array, pull out one and fill it. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	5.	}\expnd0\expndtw0\kerning0
+Now add any adjacent squares to the the array, but only if they are within the grid and \uc0\u8232 have the same starting number we used for the fill. \u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 That\'92s it. I made step 5 into a nested function that uses closure capturing for the grid array and start number because it made the code both neater and easier to understand. Here\'92s the code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf7 challenge63a\cf8 (\cf2 fill\cf8 : \cf10 Int\cf8 , \cf4 in \cf2 grid\cf8 : [[\cf10 Int\cf8 ]], \cf2 at point\cf8 : (\cf2 x\cf8 :\
+\cf10 Int\cf8 , \cf2 y\cf8 : \cf10 Int\cf8 )) \cf6 -> \cf8 [[\cf10 Int\cf8 ]] \{\
+\cf4    var \cf2 returnValue \cf6 = \cf2 grid\
+\cf4  var \cf2 squaresToFill \cf6 = \cf8 [\cf2 point\cf8 ]\
+\cf4    let \cf2 startNumber \cf6 = \cf2 grid\cf8 [\cf2 point\cf8 .\cf2 y\cf8 ][\cf2 point\cf8 .\cf2 x\cf8 ]\
+\cf4    func \cf7 tryAddMove\cf8 (\cf9 \cb5 _ \cf2 \cb5 move\cf8 : (\cf2 x\cf8 : \cf10 Int\cf8 , \cf2 y\cf8 : \cf10 Int\cf8 )) \{\
+\cf4       guard \cf2 move\cf8 .\cf2 x \cf6 >= \cf9 \cb5 0 \cf4 \cb5 else \cf8 \{ \cf4 return \cf8 \}\
+\cf4       guard \cf2 move\cf8 .\cf2 x \cf6 < \cf9 \cb5 10 \cf4 \cb5 else \cf8 \{ \cf4 return \cf8 \}\
+\cf4       guard \cf2 move\cf8 .\cf2 y \cf6 >= \cf9 \cb5 0 \cf4 \cb5 else \cf8 \{ \cf4 return \cf8  \}\
+\cf4       guard \cf2 move\cf8 .\cf2 y \cf6 < \cf9 \cb5 10 \cf4 \cb5 else \cf8  \{ \cf4 return \cf8 \}\
+\cf4       guard \cf2 returnValue\cf8 [\cf2 move\cf8 .\cf2 y\cf8 ][\cf2 move\cf8 .\cf2 x\cf8 ] \cf6 == \cf2 startNumber \cf4 else\
+\cf8 \{ \cf4 return \cf8 \}\
+\cf2       squaresToFill\cf8 .\cf7 append\cf8 (\cf2 move\cf8 )\
+   \}\
+\cf4    while let \cf2 square \cf6 = \cf2 squaresToFill\cf8 .\cf7 popLast\cf8 () \{\
+\cf4       guard \cf2 returnValue\cf8 [\cf2 square\cf8 .\cf2 y\cf8 ][\cf2 square\cf8 .\cf2 x\cf8 ] \cf6 != \cf2 fill \cf4 else\
+\cf8 \{ \cf4 continue \cf8 \}\
+\cf2       returnValue\cf8 [\cf2 square\cf8 .\cf2 y\cf8 ][\cf2 square\cf8 .\cf2 x\cf8 ] \cf6 = \cf2 fill\
+\cf7       tryAddMove\cf8 ((\cf2 x\cf8 : \cf2 square\cf8 .\cf2 x\cf8 , \cf2 y\cf8 : \cf2 square\cf8 .\cf2 y \cf6 - \cf9 \cb5 1\cf8 \cb5 ))\
+\cf7       tryAddMove\cf8 ((\cf2 x\cf8 : \cf2 square\cf8 .\cf2 x\cf8 , \cf2 y\cf8 : \cf2 square\cf8 .\cf2 y \cf6 + \cf9 \cb5 1\cf8 \cb5 ))\
+\cf7       tryAddMove\cf8 ((\cf2 x\cf8 : \cf2 square\cf8 .\cf2 x \cf6 - \cf9 \cb5 1\cf8 \cb5 , \cf2 y\cf8 : \cf2 square\cf8 .\cf2 y\cf8 ))\
+\cf7       tryAddMove\cf8 ((\cf2 x\cf8 : \cf2 square\cf8 .\cf2 x \cf6 + \cf9 \cb5 1\cf8 \cb5 , \cf2 y\cf8 : \cf2 square\cf8 .\cf2 y\cf8 ))\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf8 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 returnValue\
+\cf8 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf8 \cb5  
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 While that does solve the problem, it might be hard to follow. You can scatter calls to 
+\f3\b \cf3 print() 
+\f2\b0 \cf2 throughout to watch the algorithm work its way across the board, like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf7 challenge63a\cf8 (\cf2 fill\cf8 : \cf10 Int\cf8 , \cf4 in \cf2 grid\cf8 : [[\cf10 Int\cf8 ]], \cf2 at point\cf8 : (\cf2 x\cf8 :\
+\cf10 Int\cf8 , \cf2 y\cf8 : \cf10 Int\cf8 )) \cf6 -> \cf8 [[\cf10 Int\cf8 ]] \{\
+\cf4    var \cf2 returnValue \cf6 = \cf2 grid\
+\cf4    var \cf2 squaresToFill \cf6 = \cf8 [\cf2 point\cf8 ]\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8 \cb5 \
+\cf4    \cf4 \cb5 let \cf2 startNumber \cf6 = \cf2 grid\cf8 [\cf2 point\cf8 .\cf2 y\cf8 ][\cf2 point\cf8 .\cf2 x\cf8 ]\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    func \cf7 tryAddMove\cf8 (\cf9 \cb5 _ \cf2 \cb5 move\cf8 : (\cf2 x\cf8 : \cf10 Int\cf8 , \cf2 y\cf8 : \cf10 Int\cf8 )) \{\
+\cf4       guard \cf2 move\cf8 .\cf2 x \cf6 >= \cf9 \cb5 0 \cf4 \cb5 else \cf8 \{ \cf4 return \cf8 \}\
+\cf4       guard \cf2 move\cf8 .\cf2 x \cf6 < \cf9 \cb5 10 \cf4 \cb5 else \cf8 \{ \cf4 return \cf8 \}\
+\cf4       guard \cf2 move\cf8 .\cf2 y \cf6 >= \cf9 \cb5 0 \cf4 \cb5 else \cf8 \{ \cf4 return \cf8  \}\
+\cf4       guard \cf2 move\cf8 .\cf2 y \cf6 < \cf9 \cb5 10 \cf4 \cb5 else \cf8  \{ \cf4 return \cf8 \}\
+\cf4       guard \cf2 returnValue\cf8 [\cf2 move\cf8 .\cf2 y\cf8 ][\cf2 move\cf8 .\cf2 x\cf8 ] \cf6 == \cf2 startNumber \cf4 else\
+\cf8 \{ \cf4 return \cf8 \}\
+\cf7       print\cf8 (\cf11 \cb5 "\cf12 \\(\cf11 move\cf12 ) \cf11 is currently \cf12 \\(\cf11 returnValue\cf8 \cb5 [\cf11 \cb5 move\cf8 \cb5 .\cf11 \cb5 y\cf8 \cb5 ]\
+[\cf11 \cb5 move\cf8 \cb5 .\cf11 \cb5 x\cf8 \cb5 ]\cf12 \cb5 )\cf11 "\cf8 \cb5 )\
+\cf2       squaresToFill\cf8 .\cf7 append\cf8 (\cf2 move\cf8 )\
+   \}\
+\cf7    print\cf8 (\cf11 \cb5 "BEFORE"\cf8 \cb5 )\
+\cf2    returnValue\cf8 .\cf2 forEach \cf8 \{ \cf7 print\cf8 (\cf2 $\cf9 \cb5 0\cf8 \cb5 ) \}\
+\cf7    print\cf8 (\cf11 \cb5 ""\cf8 \cb5 )\
+\cf4    while let \cf2 square \cf6 = \cf2 squaresToFill\cf8 .\cf7 popLast\cf8 () \{\
+\cf4       guard \cf2 returnValue\cf8 [\cf2 square\cf8 .\cf2 y\cf8 ][\cf2 square\cf8 .\cf2 x\cf8 ] \cf6 != \cf2 fill \cf4 else\
+\cf8 \{ \cf4 continue \cf8 \}\
+\cf7       print\cf8 (\cf11 \cb5 "Filling \cf12 \\(\cf11 square\cf12 ) \cf11 with \cf12 \\(\cf11 fill\cf12 )\cf11 "\cf8 \cb5 )\
+\cf2       returnValue\cf8 [\cf2 square\cf8 .\cf2 y\cf8 ][\cf2 square\cf8 .\cf2 x\cf8 ] \cf6 = \cf2 fill\
+\cf7       print\cf8 (\cf11 \cb5 "****"\cf8 \cb5 )\
+\cf2       returnValue\cf8 .\cf2 forEach \cf8 \{ \cf7 print\cf8 (\cf2 $\cf9 \cb5 0\cf8 \cb5 ) \}\
+\cf7       tryAddMove\cf8 ((\cf2 x\cf8 : \cf2 square\cf8 .\cf2 x\cf8 , \cf2 y\cf8 : \cf2 square\cf8 .\cf2 y \cf6 - \cf9 \cb5 1\cf8 \cb5 ))\
+\cf7       tryAddMove\cf8 ((\cf2 x\cf8 : \cf2 square\cf8 .\cf2 x\cf8 , \cf2 y\cf8 : \cf2 square\cf8 .\cf2 y \cf6 + \cf9 \cb5 1\cf8 \cb5 ))\
+\cf7       tryAddMove\cf8 ((\cf2 x\cf8 : \cf2 square\cf8 .\cf2 x \cf6 - \cf9 \cb5 1\cf8 \cb5 , \cf2 y\cf8 : \cf2 square\cf8 .\cf2 y\cf8 ))\
+\cf7       tryAddMove\cf8 ((\cf2 x\cf8 : \cf2 square\cf8 .\cf2 x \cf6 + \cf9 \cb5 1\cf8 \cb5 , \cf2 y\cf8 : \cf2 square\cf8 .\cf2 y\cf8 ))\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf8 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf7 \cb5  print\cf8 (\cf11 \cb5 "AFTER"\cf8 \cb5 )\
+\cf2    returnValue\cf8 .\cf2 forEach \cf8 \{ \cf7 print\cf8 (\cf2 $\cf9 \cb5 0\cf8 \cb5 ) \}\
+\cf4    return \cf2 returnValue\
+\cf8 \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 That\'92s the same thing, just with calls to 
+\f3\b \cf3 print() 
+\f2\b0 \cf2 before, during, and after the fill \'96 you should be able to see squares being filled individually as the loop goes around. 
+\f1\fs24 \
+
+\f2\fs32 Another way to solve the same problem is using a recursive function call: you fill a square, which fills the squares around it, which fill the squares around 
+\f1\i them
+\f2\i0 , and so on. I made 
+\f3\b \cf3 grid 
+\f2\b0 \cf2 a variable rather than a constant for this very reason: we can make 
+\f3\b \cf3 grid 
+\f2\b0 \cf2 an 
+\f3\b \cf3 inout 
+\f2\b0 \cf2 parameter, thus enabling all the function calls to modify the same grid. 
+\f1\fs24 \
+
+\f2\fs32 This code is a great deal simpler than the looping option, because there\'92s no need for the nested function any more. Instead, I\'92ve made it accept an optional final parameter, 
+\f3\b \cf3 replacing
+\f2\b0 \cf2 , which is the number to replace. The first time the function is run that won\'92t be provided, so we\'92ll read it straight from the grid. But on subsequent runs \'96 when the function calls itself \'96 we need to pass that in, because the 
+\f3\b \cf3 point 
+\f2\b0 \cf2 parameter will be replaced by the new position to fill. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s the recursive solution: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf7 challenge63b\cf8 (\cf2 fill newNumber\cf8 : \cf10 Int\cf8 , \cf4 in \cf2 grid\cf8 : \cf4 inout \cf8 [[\cf10 Int\cf8 ]],\
+\cf2 at point\cf8 : (\cf2 x\cf8 : \cf10 Int\cf8 , \cf2 y\cf8 : \cf10 Int\cf8 ), \cf2 replacing\cf8 : \cf10 Int\cf6 ? = \cf9 \cb5 nil\cf8 \cb5 ) \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf13 \cb5    // bail out if this position is invalid\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5    guard \cf2 point\cf8 .\cf2 x \cf6 >= \cf9 \cb5 0 \cf4 \cb5 else \cf8 \{ \cf4 return \cf8 \}\
+\cf4    guard \cf2 point\cf8 .\cf2 x \cf6 < \cf9 \cb5 10 \cf4 \cb5 else \cf8 \{ \cf4 return \cf8 \}\
+\cf4    guard \cf2 point\cf8 .\cf2 y \cf6 >= \cf9 \cb5 0 \cf4 \cb5 else \cf8 \{ \cf4 return \cf8  \}\
+\cf4    guard \cf2 point\cf8 .\cf2 y \cf6 < \cf9 \cb5 10 \cf4 \cb5 else \cf8 \{ \cf4 return \cf8 \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf13 \cb5    // `replacing` will be set on 2nd and subsequent runs\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5    let \cf2 startNumber \cf6 = \cf2 replacing \cf6 ?? \cf2 grid\cf8 [\cf2 point\cf8 .\cf2 y\cf8 ][\cf2 point\cf8 .\cf2 x\cf8 ]\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8 \cb5 \
+\cf4   \cf4 \cb5  if \cf2 grid\cf8 [\cf2 point\cf8 .\cf2 y\cf8 ][\cf2 point\cf8 .\cf2 x\cf8 ] \cf6 == \cf2 startNumber \cf8 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf13 \cb5       // adjust this point\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb5       grid\cf8 [\cf2 point\cf8 .\cf2 y\cf8 ][\cf2 point\cf8 .\cf2 x\cf8 ] \cf6 = \cf2 newNumber\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf13 \cb5       // and fill in surrounding squares\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7 \cb5       challenge63b\cf8 (\cf2 fill\cf8 : \cf2 newNumber\cf8 , \cf4 in\cf8 : \cf6 &\cf2 grid\cf8 , \cf2 at\cf8 : (\cf2 x\cf8 : \cf2 point\cf8 .\cf2 x\cf8 ,\
+\cf2 y\cf8 : \cf2 point\cf8 .\cf2 y \cf6 - \cf9 \cb5 1\cf8 \cb5 ), \cf2 replacing\cf8 : \cf2 startNumber\cf8 )\
+\cf7       challenge63b\cf8 (\cf2 fill\cf8 : \cf2 newNumber\cf8 , \cf4 in\cf8 : \cf6 &\cf2 grid\cf8 , \cf2 at\cf8 : (\cf2 x\cf8 : \cf2 point\cf8 .\cf2 x\cf8 ,\
+\cf2 y\cf8 : \cf2 point\cf8 .\cf2 y \cf6 + \cf9 \cb5 1\cf8 \cb5 ), \cf2 replacing\cf8 : \cf2 startNumber\cf8 )\
+\cf7       challenge63b\cf8 (\cf2 fill\cf8 : \cf2 newNumber\cf8 , \cf4 in\cf8 : \cf6 &\cf2 grid\cf8 , \cf2 at\cf8 : (\cf2 x\cf8 : \cf2 point\cf8 .\cf2 x\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 - \cf9 \cb5 1\cf8 \cb5 , \cf2 y\cf8 : \cf2 point\cf8 .\cf2 y\cf8 ), \cf2 replacing\cf8 : \cf2 startNumber\cf8 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7       challenge63b\cf8 (\cf2 fill\cf8 : \cf2 newNumber\cf8 , \cf4 in\cf8 : \cf6 &\cf2 grid\cf8 , \cf2 at\cf8 : (\cf2 x\cf8 : \cf2 point\cf8 .\cf2 x\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 + \cf9 \cb5 1\cf8 \cb5 , \cf2 y\cf8 : \cf2 point\cf8 .\cf2 y\cf8 ), \cf2 replacing\cf8 : \cf2 startNumber\cf8 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf8 \cb5 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Even with comments added that\'92s still a shorter solution than using a loop, and I think more elegant too. You be the judge! 
+\f1\fs24 \
+}

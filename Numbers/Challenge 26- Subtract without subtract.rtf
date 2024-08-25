@@ -1,0 +1,165 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid201\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid3}
+{\list\listtemplateid4\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid301\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid4}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}{\listoverride\listid4\listoverridecount0\ls4}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 26: Subtract without subtract 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Taxing\uc0\u8232 Create a function that subtracts one positive integer from another, without using 
+\f3\b \cf3 -
+\f2\b0 \cf2 . 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 challenge26(subtract: 5, from: 9) 
+\f2\b0 \cf2 should return 4. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 challenge26(subtract: 10, from: 30) 
+\f2\b0 \cf2 should return 20. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 In your code you can use any other operator, or any other number, positive or negative, just not the 
+\f3\b \cf3 - 
+\f2\b0 \cf2 operator. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 Swift has a full set of bitwise operators \'96 operators that manipulate the binary digits of a number. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 You could try using bitwise NOT, which is 
+\f3\b \cf3 ~
+\f2\b0 \cf2 . \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 This question is looking for a basic grasp of mathematics: if you can\'92t subtract one number from another using 
+\f3\b \cf3 -
+\f2\b0 \cf2 , how can you do it? The answer is, of course, to flipping the sign on the number then adding it \'96 i.e., rather than subtracting 10, you add -10. \uc0\u8232 You could make an argument that flipping the sign on a number using 
+\f3\b \cf3 - 
+\f2\b0 \cf2 is different to using 
+\f3\b \cf3 - 
+\f2\b0 \cf2 for subtraction. That would give you a solution like this: \uc0\u8232 \u8232 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4 \cf4 \cb5 func \cf6 challenge26\cf7 (\cf2 subtract\cf7 : \cf8 Int\cf7 , \cf2 from\cf7 : \cf8 Int\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    return \cf2 from \cf9 + -\cf2 subtract\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+
+\f2 \cf2 \cb1 Technically, though, 
+\f3\b \cf3 - 
+\f2\b0 \cf2 in that instance is the unary minus operator, so it\'92s the same thing, \cf2 really.\
+A solution that fits the spirit of the challenge a bit better is multiplying by -1, like this: \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4 \cf4 \cb5 func \cf6 challenge26\cf7 (\cf2 subtract\cf7 : \cf8 Int\cf7 , \cf2 from\cf7 : \cf8 Int\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\cf4    return \cf2 from \cf9 + -\cf10 1 \cf9 * \cf2 subtract\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That\'92s a negative number, not the unary minus operator, so that fits both the letter and spirit of the challenge. 
+\f1\fs24 \
+
+\f2\fs32 However, for maximum effect, you can solve this challenge without typing 
+\f3\b \cf3 - 
+\f2\b0 \cf2 at all \'96 well, excluding the 
+\f3\b \cf3 -> 
+\f2\b0 \cf2 used in declaring the function\'92s return value. 
+\f1\fs24 \
+
+\f2\fs32 This technique depends on the 
+\f3\b \cf3 ~ 
+\f2\b0 \cf2 operator (a tilde), which is bitwise NOT. It causes all the binary digits in a number to be flipped. If this is not new to you, skip ahead \'96 I\'92m going to take a brief tangent into what it does behind the scenes. 
+\f1\fs24 \
+
+\f2\fs32 8-bit integers are stored using eight binary digits, where the right-most digit stores 1, the second right-most stores 2, then 4, 8, 16, 32, and 64. Depending on whether each of those binary digits are 1 or 0, Swift can represent numbers from 0 (all zeros) to 127 (all 1s). However, notice there are only seven of them \'96 1, 2, 4, 8, 16, 32, and 64 \'96 and we\'92re talking about 8-bit integers, so there ought to be 8, right? Right. 
+\f1\fs24 \
+
+\f2\fs32 That eighth digit is how we track whether a number is positive or negative. If the left-most digit is 0, all the digits on the right add up to a positive number. If the left-most digit is 1, all the digits on the right represent a negative number. 
+\f1\fs24 \
+
+\f2\fs32 Here are some examples of positive numbers: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+00000000 is 0 \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+00000001 is 1 \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+00000010 is 2 \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+00000011 is 3 \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+00000100 is 4 \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+00000101 is 5 \uc0\u8232 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls3\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+01000000 is 64 \uc0\u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+01111111 is 127 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls3\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\uc0\u8232 So, as long as that first digit is 0, the rest of the digits form a positive number. \u8232 Things are a little tricksier when you use negative numbers. Whereas the highest positive number starts with a zero and is followed by all ones, the lowest negative number starts with a one and is followed by all zeros \'96 it\'92s the exact opposite. \u8232 So: \u8232 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls4\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+00000000 is still 0 \uc0\u8232 \
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+10000000 is -128 \uc0\u8232 \
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+10000001 is -127 \uc0\u8232 \
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+10000010 is -126 \uc0\u8232 \
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+10000011 is -125 \uc0\u8232 \
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+10000100 is -124 \uc0\u8232 \
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+10000101 is -123 \uc0\u8232 \
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+11000000 is -64 \uc0\u8232 \
+\ls4\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+11111111 is -1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls4\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+\uc0\u8232 Now, all this becomes important when you flip the 1s and 0s. For example, 01000000 is 64, but if you make the 0s into 1s and the 1s into 0s you get 10111111, which is -65. Similarly, if you take 01010101, which is 85, and flip the bits, you get 10101010, which is -86. \u8232 Both times the negative number is identical to add one to the number and flipping its sign, i.e. making positive negative. And that\'92s where our solution comes in \'96 check this out: \
+\ls4\ilvl0
+\f4 \cf4 \cb5 func \cf6 challenge26\cf7 (\cf2 subtract\cf7 : \cf8 Int\cf7 , \cf2 from\cf7 : \cf8 Int\cf7 ) \cf9 -> \cf8 Int \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\ls4\ilvl0\cf4    return \cf2 from \cf9 + \cf7 (\cf9 ~\cf2 subtract \cf9 + \cf10 1\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\ls4\ilvl0\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls4\ilvl0
+\f2\fs32 \cf2 \uc0\u8232 So, to subtract one number from another, we flip the bits (64 becomes -65) then add one (to make -64), and add that to our input number to make subtraction. Done! \u8232 \
+}

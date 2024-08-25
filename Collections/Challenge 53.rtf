@@ -1,0 +1,477 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier;\f4\fmodern\fcharset0 Courier-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red163\green0\blue79;\red255\green255\blue255;
+\red148\green108\blue71;\red73\green17\blue135;\red135\green135\blue135;\red0\green0\blue255;\red107\green0\blue109;
+\red0\green0\blue120;\red28\green117\blue20;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c70588\c0\c38431;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c65098\c49804\c34902;\cssrgb\c36078\c14902\c60000;\cssrgb\c60000\c60000\c60000;\cssrgb\c0\c0\c100000;\cssrgb\c50196\c0\c50196;
+\cssrgb\c0\c0\c54510;\cssrgb\c11373\c52157\c9804;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid101\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 53: Linked lists with a loop 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Taxing 
+\f1\fs24 \
+
+\f2\fs32 Someone used the linked list you made previously, but they accidentally made one of the items link back to an earlier part of the list. As a result, the list can\'92t be traversed properly because it loops infinitely. 
+\f1\fs24 \
+
+\f2\fs32 Your job is to write a function that accepts your linked list as its parameter, and returns the node at the start of the loop, i.e. the one that is linked back to. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 You can simulate a looped link list with this code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 var \cf2 list \cf5 = \cf6 LinkedList\cf5 <\cf6 UInt32\cf5 >\cf7 ()\
+\cf3 var \cf2 previousNode\cf7 : \cf6 LinkedListNode\cf5 <\cf6 UInt32\cf5 >? = \cf8 nil\
+\cf3 var \cf2 linkBackNode\cf7 : \cf6 LinkedListNode\cf5 <\cf6 UInt32\cf5 >? = \cf8 nil\
+\cf3 var \cf2 linkBackPoint \cf5 = \cf9 Int\cf7 (\cf9 arc4random_uniform\cf7 (\cf8 1000\cf7 ))\
+\cf3 for \cf2 i \cf3 in \cf8 1\cf7 ...\cf8 1000 \cf7 \{\
+\cf3    let \cf2 node \cf5 = \cf9 LinkedListNode\cf7 (\cf2 value\cf7 : \cf9 arc4random\cf7 ())\
+\cf3    if \cf2 i \cf5 == \cf2 linkBackPoint \cf7 \{ \cf2 linkBackNode \cf5 = \cf2 node \cf7 \}\
+\cf3    if let \cf2 predecessor \cf5 = \cf2 previousNode \cf7 \{\
+\cf2       predecessor\cf7 .\cf2 next \cf5 = \cf2 node\
+\cf7    \} \cf3 else \cf7 \{\
+\cf2       list\cf7 .\cf2 start \cf5 = \cf2 node\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf2 \cb4    previousNode \cf5 = \cf2 node\
+\cf7 \}\
+\cf2 previousNode\cf5 ?\cf7 .\cf2 next \cf5 = \cf2 linkBackNode\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 You will need to use whatever 
+\f4\b \cf10 LinkedList 
+\f2\b0 \cf2 and 
+\f4\b \cf10 LinkedListNode 
+\f2\b0 \cf2 structures you created in the previous challenge. 
+\f1\fs24 \
+
+\f2\fs32 When your code has finished, your 
+\f4\b \cf10 findLoopStart() 
+\f2\b0 \cf2 should return the same node contained in the 
+\f4\b \cf10 linkBackNode 
+\f2\b0 \cf2 variable. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Hints 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #1: 
+\f2\b0 There are two ways to solve this: using a set or using mathematics. You could also use an array, but only if you had no regard at all for performance. 
+\f1\fs24 \
+
+\b\fs32 Hint #2: 
+\f2\b0 If you take the set approach you will need to conform to 
+\f4\b \cf10 Hashable
+\f2\b0 \cf2 , which in turn implies 
+\f4\b \cf10 Equatable
+\f2\b0 \cf2 . 
+\f1\fs24 \
+
+\b\fs32 Hint #3: 
+\f2\b0 To conform to 
+\f4\b \cf10 Hashable 
+\f2\b0 \cf2 you must be able to give each of your linked list nodes a unique 
+\f4\b \cf10 hashValue 
+\f2\b0 \cf2 integer. You could store this as a property in your linked list, and increment it by 1 every time a `getUniqueHashValue() method is called. 
+\f1\fs24 \
+
+\b\fs32 Hint #4: 
+\f2\b0 To conform to 
+\f4\b \cf10 Equatable 
+\f2\b0 \cf2 you will need to implement 
+\f4\b \cf10 static func == 
+\f2\b0 \cf2 on your linked list node. This could be as simple as returning true if the two hash values are the same. 
+\f1\fs24 \
+
+\b\fs32 Hint #5: 
+\f2\b0 You can then loop over the nodes in your list, checking whether they are in a 
+\f4\b \cf10 seen 
+\f2\b0 \cf2 set. If a node isn\'92t in the set, add it; if it 
+\f1\i is 
+\f2\i0 in the set, you have your loop point so return it. If you reach the end of your list it means you didn\'92t have a loop, so return nil. 
+\f1\fs24 \
+
+\b\fs32 Hint #6: 
+\f2\b0 You can also solve this problem with pure mathematics, which is both significantly faster and more memory efficient. If you ever learned to do tortoise and hare loop detection, now is your chance to feel smug! 
+\f1\fs24 \
+
+\b\fs32 Hint #7: 
+\f2\b0 Your solution to challenge 44 provides the starting point for the mathematical solution here. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This is a challenge that is easy if you took the right courses at university, but an exercise in yak shaving if you didn\'92t. It\'92s also an 
+\f1\i extremely 
+\f2\i0 common interview question, so it\'92s one you should definitely prepare if you\'92re serious. 
+\f1\fs24 \
+
+\f2\fs32 Let\'92s take a look at the na\'efve solution first, because it\'92s possibly the one you reached for instinctively: create a 
+\f4\b \cf10 seen 
+\f2\b0 \cf2 set, then loop through all the nodes in your list and add them to that set until you find a duplicate. You probably started wrote something like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 func \cf2 findLoopStartBA \cf5 -> \cf6 LinkedListNode\cf5 <\cf2 T\cf5 >? \cf7 \{\
+\cf3    var \cf2 currentNode \cf5 = \cf2 start\
+\cf3    var \cf2 seen \cf5 = \cf6 Set\cf5 <\cf6 LinkedListNode\cf5 <\cf2 T\cf5 >>\cf7 ()\
+\cf3    while let \cf2 node \cf5 = \cf2 currentNode \cf7 \{\
+\cf3       if \cf2 seen\cf7 .\cf9 contains\cf7 (\cf2 node\cf7 ) \{\
+\cf3          return \cf2 node\
+\cf7       \} \cf3 else \cf7 \{\
+\cf2          seen\cf7 .\cf9 insert\cf7 (\cf2 node\cf7 )\
+\cf2          currentNode \cf5 = \cf2 node\cf7 .\cf2 next\
+\cf7       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 return \cf8 nil \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That starts at the beginning of the list, then goes through every node. If the 
+\f4\b \cf10 seen 
+\f2\b0 \cf2 set contains the node we can return it because we\'92ve found our match; if not we add it then move on. If we get to the end of the loop without returning it means no loop was detected, so we can return nil. 
+\f1\fs24 \
+
+\f2\fs32 Yak shaving is a curious thing. The term comes from the idea that you find a task that needs to be done, such as changing a lightbulb, but while attempting that task you hit a problem, for example you realize you can\'92t reach the light because your ladder is broken. So you decide to borrow your friend\'92s ladder, but you realize you didn\'92t finish reading that book she lent you three months ago. So you decide to finish reading the book so you can return it and get the ladder, but as you sit down on a chair to read the book you hear the chair squeak loudly, so you decide to get up to find some oil... and after an hour you find yourself at the local zoo shaving a yak, all so that you can change the lightbulb. 
+\f1\fs24 \
+
+\f2\fs32 The code we just wrote is great, but only for definitions of \'93great\'94 that don\'92t include \'93working\'94. You see, you can\'92t add linked list nodes to a set, because they don\'92t conform to 
+\f4\b \cf10 Hashable
+\f2\b0 \cf2 . So you modify your class definition to this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 class \cf2 LinkedListNode\cf5 <\cf2 T\cf5 >\cf7 : \cf6 Hashable \cf7 \{\cb1 \uc0\u8232 
+\f2 \cf2 Done, right? Wrong. To conform to comparable you need to have a 
+\f4\b \cf10 hashValue 
+\f2\b0 \cf2 property that 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 stores a unique integer, so you add it: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 var \cf2 hashValue\cf7 : \cf6 Int\cb1 \uc0\u8232 
+\f1\fs24 \cf2 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 And of course that means modifying the initializer too: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 init\cf7 (\cf2 value\cf7 : \cf2 T\cf7 , \cf2 hashValue\cf7 : \cf6 Int\cf7 ) \{\
+\cf3    self\cf7 .\cf2 value \cf5 = \cf2 value\
+\cf3    self\cf7 .\cf2 hashValue \cf5 = \cf2 hashValue\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 And 
+\f1\i that 
+\f2\i0 means finding a unique hash value in the first place so you can pass it to the initializer, so you\'92ll need to add a property to the 
+\f4\b \cf10 LinkedList 
+\f2\b0 \cf2 class to store the highest hash value and a method to retrieve new ones: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 private var \cf2 uniqueHashValue \cf5 = \cf8 0\
+\cf3 func \cf9 getUniqueHashValue\cf7 () \cf5 -> \cf6 Int \cf7 \{\
+\cf2    uniqueHashValue \cf5 += \cf8 1\
+\cf3    return \cf2 uniqueHashValue\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Having that in place means you can now call the new 
+\f4\b \cf10 LinkedListNode 
+\f2\b0 \cf2 initializer with a unique hash value, like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 let \cf2 node \cf5 = \cf9 LinkedListNode\cf7 (\cf2 value\cf7 : \cf9 arc4random\cf7 (), \cf2 hashValue\cf7 :\
+\cf2 list\cf7 .\cf9 getUniqueHashValue\cf7 ())\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 And 
+\f1\i now 
+\f2\i0 you\'92re done. 
+\f1\i Not. 
+\i0\fs24 \
+
+\f2\fs32 You see, you can\'92t add things to a set without conforming to 
+\f4\b \cf10 Hashable
+\f2\b0 \cf2 , but the 
+\f4\b \cf10 Hashable 
+\f2\b0 \cf2 protocol builds on the 
+\f4\b \cf10 Equatable 
+\f2\b0 \cf2 protocol, which means you need to conform to 
+\f1\i that 
+\f2\i0 too. To conform to 
+\f4\b \cf10 Equatable 
+\f2\b0 \cf2 you must implement 
+\f4\b \cf10 func == 
+\f2\b0 \cf2 so Swift knows how to compare two instances of your type, so you need to add something like this to your 
+\f4\b \cf10 LinkedListNode 
+\f2\b0 \cf2 type: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 static func \cf5 ==\cf7 (\cf2 lhs\cf7 : \cf6 LinkedListNode\cf7 , \cf2 rhs\cf7 : \cf6 LinkedListNode\cf7 ) \cf5 ->\
+\cf6 Bool \cf7 \{\
+\cf3    return \cf2 lhs\cf7 .\cf2 hashValue \cf5 == \cf2 rhs\cf7 .\cf2 hashValue\
+\cf7 \}\
+\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 So, you added the 
+\f4\b \cf10 == 
+\f2\b0 \cf2 function to satisfy 
+\f4\b \cf10 Equatable
+\f2\b0 \cf2 , added the 
+\f4\b \cf10 hashValue 
+\f2\b0 \cf2 to satisfy 
+\f4\b \cf10 Hashable
+\f2\b0 \cf2 , added a new property and method to the 
+\f4\b \cf10 LinkedList 
+\f2\b0 \cf2 class, changed the 
+\f4\b \cf10 LinkedListNode 
+\f2\b0 \cf2 initializer, then changed the code to create your nodes... all so you can add nodes to a set and use its
+\f4\b \cf10 contains()
+\f2\b0 \cf2 method. 
+\f1\i That\'92s 
+\f2\i0 yak shaving. 
+\f1\fs24 \
+
+\f2\fs32 On the flip side, the yak is now shaved: the set solution I wrote way earlier now works as it ought to, so you could consider this challenge solved. 
+\f1\fs24 \
+
+\f2\fs32 However, there is a better solution \'96 and by \'93better\'94 I mean simpler, faster, and lighter on resources. This solution is called Floyd\'92s cycle-finding algorithm, sometimes called tortoise and hare, or fast runner / slow runner, and it\'92s actually a simple piece of mathematics genius. This isn\'92t CS101, but I love explaining things so here goes... 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+We have a tortoise, who moves through the linked list one node at a time. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+We have a hare, who is faster than the tortoise, and moves through the linked list two \uc0\u8232 nodes at a time. \u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If there is a loop in the list, then sooner or later tortoise and hare must meet. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+They won\'92t necessarily meet at the start of the loop; they might meet in the middle of \uc0\u8232 the loop. But soon or later, they 
+\f1\i must 
+\f2\i0 meet. If they don\'92t, there is no loop. \uc0\u8232 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf3 \cb4 static func \cf5 ==\cf7 (\cf2 lhs\cf7 : \cf6 LinkedListNode\cf7 , \cf2 rhs\cf7 : \cf6 LinkedListNode\cf7 ) \cf5 ->\
+\cf6 Bool \cf7 \{\
+\cf3    return \cf2 lhs\cf7 .\cf2 hashValue \cf5 == \cf2 rhs\cf7 .\cf2 hashValue\
+\cf7 \}\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2 \cf2 \cb1 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Because the hare moves faster than the tortoise, it\'92s impossible for them to meet before the loop. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+When they eventually meet somewhere in the loop, you send the tortoise back to the start node again, and then start it moving forward one space again. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+This time, though, every time the tortoise takes one step forward, the hare also takes one step forward \'96 rather than the previous two. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The point at which they meet will be the start of your loop. \uc0\u8232 That\'92s the rough overview, but to explain how it works we\'92re going to need to use a bit of (hopefully non-threatening) algebra. Relax: I\'92ve tried to make it as clear as possible, so hopefully this should all make sense. This is all assuming there 
+\f1\i is 
+\f2\i0 a loop, mind you \'96 if there isn\'92t, then we already returned nil and this is all very easy! \uc0\u8232 So, there\'92s a loop somewhere in our list, but we don\'92t know where. Before the loop starts, there\'92s a certain number of nodes that aren\'92t part of the loop. We don\'92t know how the number of nodes there are before the loop, so we\'92ll call that number 
+\f1\i B
+\f2\i0 . At the end of 
+\f1\i B 
+\f2\i0 is where the loop starts, and it\'92s our job to find it. \uc0\u8232 By the time the tortoise arrives at the start of the loop, the hare will have already arrived and moved on. The hare might have gone around the loop completely and now be back at the start of the loop, or it might be anywhere between the start and the end of the loop, but it will be in there somewhere, and it will eventually always meet the tortoise as the two of them go around. \u8232 When the tortoise and hare finally do meet, it will be a certain number of nodes into the loop. It might be zero (the start of the loop), 10, 1000, or whatever \'96 we don\'92t know. But they will eventually meet a certain number of steps into the loop, and we\'92ll call that meeting number 
+\f1\i M
+\f2\i0 . \uc0\u8232 So, when they meet, the tortoise will have moved 
+\f1\i B 
+\f2\i0 steps before the loop, plus 
+\f1\i M 
+\f2\i0 steps inside the loop, making 
+\f1\i B 
+\f2\i0 + 
+\f1\i M 
+\f2\i0 steps. Because the hare is moving two steps for every one step taken by the tortoise, it must have moved 2 x (
+\f1\i B 
+\f2\i0 + 
+\f1\i M
+\f2\i0 ) steps, i.e. precisely twice as many steps as the tortoise. \uc0\u8232 Still with me? Chin up \'96 we\'92re half way there!\u8232 At this point, the tortoise has moved 
+\f1\i B 
+\f2\i0 + 
+\f1\i M 
+\f2\i0 steps, and the hare has moved 2 x (
+\f1\i B 
+\f2\i0 + 
+\f1\i M
+\f2\i0 ) steps, \uc0\u8232 and they met \'96 they are at the same position in the linked list. This means the extra 
+\f1\i B 
+\f2\i0 + 
+\f1\i M 
+\f2\i0 steps moved by the hare was enough to bring it back to 
+\f1\i M 
+\f2\i0 in the loop. 
+\f1\fs24 \cf2 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 If moving 
+\f1\i B 
+\f2\i0 + 
+\f1\i M 
+\f2\i0 steps always returns you back to the same position, then moving 
+\f1\i M 
+\f2\i0 steps fewer will leave you at 
+\f1\i B
+\f2\i0 . So, all we need to do is find a way to make the hare move precisely 
+\f1\i B 
+\f2\i0 steps from the position where it met the tortoise and we\'92ll have the start of the loop. 
+\f1\fs24 \
+
+\f2\fs32 Now that the tortoise and hare have met, the algorithm changes. The hare stays in its position at 
+\f1\i M 
+\f2\i0 steps into the loop, but the tortoise goes back to the start of the linked list. They then resume moving, but this time they both move at the same speed: one square at a time. 
+\f1\fs24 \
+
+\f2\fs32 The tortoise is repeating its steps, doing exactly what it did before, but now the hare is moving at the same speed. However, the hare started at 
+\f1\i M
+\f2\i0 , which is the number of steps into the loop where it met the tortoise. We already know that moving 
+\f1\i B 
+\f2\i0 + 
+\f1\i M 
+\f2\i0 steps inside the loop leaves you where you started, but because the tortoise started at 
+\f1\i M 
+\f2\i0 it just needs to move 
+\f1\i B 
+\f2\i0 more steps to be at the start of the loop. 
+\f1\fs24 \
+
+\f2\fs32 By the time the tortoise has moved 
+\f1\i B 
+\f2\i0 steps, the hare has also moved 
+\f1\i B 
+\f2\i0 steps. As I said already, after 
+\f1\i B 
+\f2\i0 steps the hare will be at the start of the loop. But 
+\f1\i B 
+\f2\i0 is also the number of steps from the start of the linked list to the start of the loop, and we\'92ve been moving the tortoise one step for every step the hare took. 
+\f1\fs24 \
+
+\f2\fs32 As a result, after 
+\f1\i B 
+\f2\i0 steps have been taken, the tortoise and the hare will occupy the same position again, which means \'96 at last \'96 we can firmly identify the start of the loop: it\'92s the point at which the tortoise and the hare meet for the second time. 
+\f1\fs24 \
+
+\f2\fs32 Now, it\'92s very possible you read all that and it gave you misty-eyed happy memories of computer science classes, but it\'92s also possible \'96 nay, likely \'96 that you thought that all sounded terribly complicated and really you\'92d just like to see some code. Fortunately, writing the code for all that is a great deal easier than writing an explanation! 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s the code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 func \cf9 findLoopStartB\cf7 () \cf5 -> \cf6 LinkedListNode\cf5 <\cf2 T\cf5 >? \cf7 \{\
+\cf3    var \cf2 slow \cf5 = \cf2 start\
+\cf3    var \cf2 fast \cf5 = \cf2 start\
+\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4    // go through the list until we find the end\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb4    while \cf2 fast \cf5 != \cf8 nil \cf5 && \cf2 fast\cf5 ?\cf7 .\cf2 next \cf5 != \cf8 nil \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4       // slow moves one space, fast moves two\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb4       slow \cf5 = \cf2 slow\cf5 ?\cf7 .\cf2 next\
+      fast \cf5 = \cf2 fast\cf5 ?\cf7 .\cf2 next\cf5 ?\cf7 .\cf2 next\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4       // if the two met it means we found a loop, so exit the\
+loop\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb4       if \cf2 slow \cf5 === \cf2 fast \cf7 \{\
+\cf3          break\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf11 \cb4    // if fast or its successor is nil it means we made it to\
+the end of the list, so there's no loop\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb4    guard \cf2 fast \cf5 != \cf8 nil \cf5 || \cf2 fast\cf5 ?\cf7 .\cf2 next \cf5 != \cf8 nil \cf3 else \cf7 \{\
+\cf3       return \cf8 nil\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf11 \cb4    // if we're still here, we know for sure there's a loop\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 \cb4 slow \cf5 = \cf2 start 
+\f1\fs24 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf11 \cb4    // loop through until we find another match\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb4    while \cf2 slow\cf5 ! !== \cf2 fast\cf5 ! \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4       // move slow and fast the same speed now\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb4       slow \cf5 = \cf2 slow\cf5 ?\cf7 .\cf2 next\
+      fast \cf5 = \cf2 fast\cf5 ?\cf7 .\cf2 next\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf11 \cb4    // slow and fast now point to the same now, so return either\
+one of them\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf3 \cb4 return \cf2 slow \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That code doesn\'92t need any of the 
+\f4\b \cf10 Hashable 
+\f2\b0 \cf2 and 
+\f4\b \cf10 Equatable 
+\f2\b0 \cf2 complexity of the previous solution, plus it uses far less system resources and even runs about 6x faster. 
+\f1\fs24 \
+
+\f2\fs32 I would even say that even if my explanation didn\'92t quite make sense to you, the mathematics still hold true: start both at the beginning, move A forward one space and B forward two spaces until they meet, move A back to the beginning again, then move them both forward until they meet a second time \'96 and you have the start of your loop. 
+\f1\fs24 \
+
+\f2\fs32 Afterword: it\'92s now 2:30am, and it took me four hours to write the tortoise and hare explanation thanks to multiple rewrites. If it comes across as incoherent, please believe me: I did try! 
+\f1\fs24 \
+}

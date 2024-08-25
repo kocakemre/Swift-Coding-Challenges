@@ -1,0 +1,210 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red148\green108\blue71;\red169\green0\blue15;\red107\green0\blue109;\red135\green135\blue135;
+\red0\green0\blue255;\red73\green17\blue135;\red28\green117\blue20;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c65098\c49804\c34902;\cssrgb\c72941\c0\c6667;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;
+\cssrgb\c0\c0\c100000;\cssrgb\c36078\c14902\c60000;\cssrgb\c11373\c52157\c9804;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 58: Balanced brackets 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy 
+\f1\fs24 \
+
+\f2\fs32 Write a function that accepts a string containing the characters (, [, \{, <, >, \}, ], and ) in any arrangement and frequency. It should return true if the brackets are opened and closed in the correct order, and if all brackets are closed. Any other input should false. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93()\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93([])\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93([])(<\{\}>)\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93([]\{\}<[\{\}]>)\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93\'94 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93\}\{\'94 should return false. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93([)]\'94 should return false. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93([)\'94 should return false. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93([\'94 should return false. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93[<<<\{\}>>]\'94 should return false. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The string \'93hello\'94 should return false. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You should start by making the most simple check: does the string have only the eight different characters that are allowed? \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 Each type of opening bracket has only one matching opening bracket, so you should store that data somehow \'96 a dictionary would seem sensible. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 Every bracket need to be closed at some point, but not necessarily immediately \'96 it might be closed many characters later, for example. So, you need to push it onto a stack, then wait. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 As you loop over each character in the string, it\'92s either an opening bracket or a closing bracket. If it\'92s an opening one it can go on your stack; if it\'92s a closing one, then it should be the matching pair of whatever is on the end of your bracket stack. 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\b\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+Hint #5: 
+\f2\b0 If the function ends with anything left in the bracket stack it means there was one bracket that was not closed \'96 a failure. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This challenge requires a basic understanding of stacks: last in, first out (LIFO) collections that push items on to a data store then pop them off as needed. As each opening bracket comes in, we can push it onto the stack so that when it comes to reading back items the most recently opened bracket is the one we read first. 
+\f1\fs24 \
+
+\f2\fs32 Swift doesn\'92t have a native stack data type, but we can get the same behavior just by using an array and using its 
+\f3\b \cf3 append() 
+\f2\b0 \cf2 and 
+\f3\b \cf3 popLast() 
+\f2\b0 \cf2 methods. 
+\f1\fs24 \
+
+\f2\fs32 First things first, though: ensuring that only brackets appear in the string. This can be done by creating a 
+\f3\b \cf3 CharacterSet 
+\f2\b0 \cf2 from the list of good letters (
+\f3\b \cf3 ([\{<>\}])
+\f2\b0 \cf2 ), then inverting the set and ensuring the input string doesn\'92t match: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 validBrackets \cf6 = \cf7 "([\{<>\}])"\
+\cf4 let \cf2 validCharacterSet \cf6 = \cf8 CharacterSet\cf9 (\cf2 charactersIn\cf9 :\
+\cf2 validBrackets\cf9 ).\cf2 inverted\
+\cf4 guard \cf2 input\cf9 .\cf8 rangeOfCharacter\cf9 (\cf2 from\cf9 : \cf2 validCharacterSet\cf9 ) \cf6 == \cf10 nil\
+\cf4 else \cf9 \{ \cf4 return \cf10 false \cf9 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Once that\'92s done, we need to declare the relationships between opening and closing brackets, so Swift knows which closing bracket goes with each opening bracket. The easiest way to do that is with a dictionary, where the opening bracket is the dictionary key and the closing bracket is the value: 
+\f1\fs24 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf2 {{\NeXTGraphic page201image14832.png \width9034 \height729
+}¬}\pard\pardeftab720\sl280\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 let \cf2 matchingBrackets\cf9 : [\cf11 Character\cf9 : \cf11 Character\cf9 ] \cf6 = \cf9 [\cf7 "("\cf9 : \cf7 ")"\cf9 , \cf7 "["\cf9 :\
+\cf7 "]"\cf9 , \cf7 "\{"\cf9 : \cf7 "\}"\cf9 , \cf7 "<"\cf9 : \cf7 ">"\cf9 ]\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 Using this approach, when we meet a character like \'93)\'94 we can read the last used bracket from our stack, and check that 
+\f3\b \cf3 matchingBrackets[lastUsedBracket] 
+\f2\b0 \cf2 matches \'93)\'94. If not, the brackets were closed out of order and the string is invalid. 
+\f1\fs24 \
+
+\f2\fs32 Speaking of the stack, that\'92s as simple as creating an array to store 
+\f3\b \cf3 Character 
+\f2\b0 \cf2 instances, like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 var \cf2 usedBrackets \cf6 = \cf9 [\cf11 Character\cf9 ]()\cb1 \uc0\u8232 
+\f2 \cf2 If we make it to the end of the function without returning false \'96 i.e., if all closing brackets 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 matched their correct opening brackets \'96 then we can return true if the stack is empty, like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 return \cf2 usedBrackets\cf9 .\cf11 count \cf6 == \cf10 0\cb1 \uc0\u8232 
+\f2 \cf2 Done! Here\'92s my solution in full, with extra comments: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf8 challenge58\cf9 (\cf2 input\cf9 : \cf11 String\cf9 ) \cf6 -> \cf11 Bool \cf9 \{\
+\cf4    let \cf2 validBrackets \cf6 = \cf7 "([\{<>\}])"\
+\cf4    let \cf2 validCharacterSet \cf6 = \cf8 CharacterSet\cf9 (\cf2 charactersIn\cf9 :\
+\cf2 validBrackets\cf9 ).\cf2 inverted\
+\cf4    guard \cf2 input\cf9 .\cf8 rangeOfCharacter\cf9 (\cf2 from\cf9 : \cf2 validCharacterSet\cf9 ) \cf6 == \cf10 nil\
+\cf4 else \cf9 \{ \cf4 return \cf10 false \cf9 \}\
+\cf4    let \cf2 matchingBrackets\cf9 : [\cf11 Character\cf9 : \cf11 Character\cf9 ] \cf6 = \cf9 [\cf7 "("\cf9 : \cf7 ")"\cf9 ,\
+\cf7 "["\cf9 : \cf7 "]"\cf9 , \cf7 "\{"\cf9 : \cf7 "\}"\cf9 , \cf7 "<"\cf9 : \cf7 ">"\cf9 ]\
+\cf4    var \cf2 usedBrackets \cf6 = \cf9 [\cf11 Character\cf9 ]()\
+\cf4    for \cf2 bracket \cf4 in \cf2 input\cf9 .\cf2 characters \cf9 \{\
+\cf4       if \cf2 matchingBrackets\cf9 .\cf2 keys\cf9 .\cf8 contains\cf9 (\cf2 bracket\cf9 ) \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf12          // this is an opening bracket\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2          usedBrackets\cf9 .\cf8 append\cf9 (\cf2 bracket\cf9 )\
+      \} \cf4 else \cf9 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf12          // this is a closing bracket \'96 try to pull off our\
+previous open\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4          if let \cf2 previousBracket \cf6 = \cf2 usedBrackets\cf9 .\cf8 popLast\cf9 () \{\
+\
+\cf4 if \cf2 matchingBrackets\cf9 [\cf2 previousBracket\cf9 ] \cf6 != \cf2 bracket \cf9 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf12                // if they don't match, this is a bad string\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4                return \cf10 false\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf9 \}\cb1 \uc0\u8232 \cb5 \} \cf4 else \cf9 \{ 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf12 \cb5             // we don't have an opening bracket, this is a bad string 
+\f1\fs24 \cf2 \cb1 \
+
+\f4\fs32 \cf12 \cb5 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 return \cf10 false\
+\cf9          \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf9 \}\
+ \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 usedBrackets\cf9 .\cf11 count \cf6 == \cf10 0\
+\cf9 \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf12 \
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

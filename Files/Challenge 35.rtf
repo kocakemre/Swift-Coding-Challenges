@@ -1,0 +1,169 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;
+\red0\green0\blue255;\red169\green0\blue15;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;\cssrgb\c72941\c0\c6667;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 35: Convert images 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky 
+\f1\fs24 \
+
+\f2\fs32 Write a function that accepts a path to a directory, then converts to PNGs any JPEGs it finds in there, leaving the originals intact. If any JPEG can\'92t be converted the function should just quietly continue. 
+\f1\fs24 \
+
+\b\fs32 Tip #1: 
+\f2\b0 For the purpose of this task, just looking for \'93.jpg\'94 and \'93.jpeg\'94 file extensions is sufficient. 
+\f1\fs24 \
+
+\b\fs32 Tip #2: 
+\f2\b0 You can write this for iOS or macOS depending on your skills. iOS is easy to code but tricky to create a test environment for, and macOS is the opposite. If you can solve this on both platforms, I\'92d rate this Taxing. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If your directory exists and is readable, all JPEGs in there should be converted to PNGs. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If any JPEGs can\'92t be read, converted, or written, just continue on quietly. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 If you\'92re solving this on iOS, you will need to use 
+\f3\b \cf3 UIImage(contentsOfFile:) 
+\f2\b0 \cf2 and 
+\f3\b \cf3 UIImagePNGRepresentation()
+\f2\b0 \cf2 . \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 If you\'92re solving this on macOS, you will need to use 
+\f3\b \cf3 NSImage 
+\f2\b0 \cf2 and 
+\f3\b \cf3 NSBitmapImageRep
+\f2\b0 \cf2 . \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 Make sure and check the 
+\f3\b \cf3 pathExtension 
+\f2\b0 \cf2 property for each file. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 Calling 
+\f3\b \cf3 write() 
+\f2\b0 \cf2 on a 
+\f3\b \cf3 Data 
+\f2\b0 \cf2 instance throws an exception if things go wrong, but the challenge wants you to ignore it and carry on \'96 a perfect use for 
+\f3\b \cf3 try?
+\f2\b0 \cf2 , but make sure you silence the warning. \uc0\u8232 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 How you solve this depends on the platform you choose: there are 
+\f1\i some 
+\f2\i0 similarities, but just as many differences. 
+\f1\fs24 \
+
+\f2\fs32 Let\'92s take a look at iOS first, because it\'92s the easiest option: 
+\f1\fs24 \
+
+\f2\fs32 Get an array of all files in the target directory.\uc0\u8232 Loop over all files, ignoring any that don\'92t end with \'93jpeg\'94 or \'93jpg\'94.\u8232 Create a 
+\f3\b \cf3 UIImage 
+\f2\b0 \cf2 out of the file, then use 
+\f3\b \cf3 UIImagePNGRepresentation() 
+\f2\b0 \cf2 to create PNG data for it.\uc0\u8232 Create a new filename by replacing \'93jpg\'94 with \'93png\'94 in the filename.\u8232 Write the PNG data to disk using the new filename. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Here it \cf2 is in code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge35\cf7 (\cf4 in \cf2 directory\cf7 : \cf8 String\cf7 ) \{\
+\cf4    let \cf2 fm \cf9 = \cf8 FileManager\cf7 .\cf2 default\
+\cf4    let \cf2 directoryURL \cf9 = \cf6 URL\cf7 (\cf2 fileURLWithPath\cf7 : \cf2 directory\cf7 )\
+\cf4    guard let \cf2 files \cf9 = \cf4 try\cf9 ? \cf2 fm\cf7 .\cf6 contentsOfDirectory\cf7 (\cf2 at\cf7 :\
+\cf2 directoryURL\cf7 , \cf2 includingPropertiesForKeys\cf7 : \cf10 nil\cf7 ) \cf4 else \cf7 \{ \cf4 return \cf7 \}\
+\cf4    for \cf2 file \cf4 in \cf2 files \cf7 \{\
+\cf4       guard \cf2 file\cf7 .\cf2 pathExtension \cf9 == \cf11 "jpeg" \cf9 || \cf2 file\cf7 .\cf2 pathExtension\
+\cf9 == \cf11 "jpg" \cf4 else \cf7 \{ \cf4 continue\cf7 \}\
+\cf4       guard let \cf2 image \cf9 = \cf6 UIImage\cf7 (\cf2 contentsOfFile\cf7 : \cf2 file\cf7 .\cf2 path\cf7 ) \cf4 else\
+\cf7 \{ \cf4 continue \cf7 \}\
+\cf4       guard let \cf2 png \cf9 = \cf6 UIImagePNGRepresentation\cf7 (\cf2 image\cf7 ) \cf4 else\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \{ \cf4 continue \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5       let \cf2 newFilename \cf9 =\
+\cf2 file\cf7 .\cf6 deletingPathExtension\cf7 ().\cf6 appendingPathExtension\cf7 (\cf11 "png"\cf7 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10       _ \cf9 = \cf4 try\cf9 ? \cf2 png\cf7 .\cf6 write\cf7 (\cf2 to\cf7 : \cf2 newFilename\cf7 )\
+   \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Accomplishing the same task on macOS is harder: steps 1, 2, 4, and 5 are the same, but step 3 is missing the convenience functions from iOS. Yes, you can create an 
+\f3\b \cf3 NSImage 
+\f2\b0 \cf2 in a similar way to a 
+\f3\b \cf3 UIImage 
+\f2\b0 \cf2 (macOS even has a URL-based initializer, which is a bonus!), but getting that image into PNG data is non-trivial. 
+\f1\fs24 \
+
+\f2\fs32 There are several approaches you could take, but there\'92s only one I consider even vaguely straightforward: get the TIFF representation of the image (this is a property on 
+\f3\b \cf3 NSImage
+\f2\b0 \cf2 ), create a bitmap representation from that, then convert that to a PNG for writing. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s the code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge35\cf7 (\cf4 in \cf2 directory\cf7 : \cf8 String\cf7 ) \{\
+\cf4    let \cf2 fm \cf9 = \cf8 FileManager\cf7 .\cf2 default\
+\cf4    let \cf2 directoryURL \cf9 = \cf6 URL\cf7 (\cf2 fileURLWithPath\cf7 : \cf2 directory\cf7 )\
+\cf4    guard let \cf2 files \cf9 = \cf4 try\cf9 ? \cf2 fm\cf7 .\cf6 contentsOfDirectory\cf7 (\cf2 at\cf7 :\
+\cf2 directoryURL\cf7 , \cf2 includingPropertiesForKeys\cf7 : \cf10 nil\cf7 ) \cf4 else \cf7 \{ \cf4 return \cf7 \}\
+\cf4    for \cf2 file \cf4 in \cf2 files \cf7 \{\
+\cf4       guard \cf2 file\cf7 .\cf2 pathExtension \cf9 == \cf11 "jpeg" \cf9 || \cf2 file\cf7 .\cf2 pathExtension\
+\cf9 == \cf11 "jpg" \cf4 else \cf7 \{ \cf4 continue\cf7 \}\
+\cf4       guard let \cf2 image \cf9 = \cf6 NSImage\cf7 (\cf2 contentsOf\cf7 : \cf2 file\cf7 ) \cf4 else\
+\cf7 \{ \cf4 continue \cf7 \}\
+\cf4       guard let \cf2 tiffData \cf9 = \cf2 image\cf7 .\cf2 tiffRepresentation \cf4 else\
+\cf7 \{ \cf4 continue \cf7 \}\
+\cf4       guard let \cf2 imageRep \cf9 = \cf6 NSBitmapImageRep\cf7 (\cf2 data\cf7 : \cf2 tiffData\cf7 )\
+\cf4 else \cf7 \{ \cf4 continue \cf7 \}\
+\cf4       guard let \cf2 png \cf9 = \cf2 imageRep\cf7 .\cf6 representation\cf7 (\cf2 using\cf7 : .\cf10 PNG\cf7 ,\
+\cf2 properties\cf7 : [:]) \cf4 else \cf7 \{ \cf4 continue \cf7 \}\
+\cf4       let \cf2 newFilename \cf9 =\
+\cf2 file\cf7 .\cf6 deletingPathExtension\cf7 ().\cf6 appendingPathExtension\cf7 (\cf11 "png"\cf7 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10       _ \cf9 = \cf4 try\cf9 ? \cf2 png\cf7 .\cf6 write\cf7 (\cf2 to\cf7 : \cf2 newFilename\cf7 )\
+   \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Yes, that\'92s a lot of 
+\f3\b \cf3 guard 
+\f2\b0 \cf2 in one function, but it does help avoid a mess of optionality! 
+\f1\fs24 \
+}

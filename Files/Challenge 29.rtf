@@ -1,0 +1,81 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red148\green108\blue71;\red0\green0\blue255;
+\red73\green17\blue135;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c65098\c49804\c34902;\cssrgb\c0\c0\c100000;
+\cssrgb\c36078\c14902\c60000;}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 29: Documents directory 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Write a function that returns a 
+\f3\b \cf3 URL 
+\f2\b0 \cf2 to the user\'92s documents directory. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 \'95 Your function should need no input, and return a URL pointing to /Users/ yourUserName/Documents on macOS, and /path/to/container/Documents on iOS. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Hints 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #1: 
+\f2\b0 This is one you either know or you don\'92t. I\'92d be tempted to answer \'93that\'92s something I could find on Google\'94 if the answer fled from my brain in an interview. 
+\f1\fs24 \
+
+\b\fs32 Hint #2: 
+\f2\b0 You should investigate the 
+\f3\b \cf3 urls(for:in) 
+\f2\b0 \cf2 method of 
+\f3\b \cf3 FileManager
+\f2\b0 \cf2 . 
+\f1\b Hint #3: 
+\f2\b0 The user has only one documents directory. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This is the kind of question that gives coding interviews a bad rap: there\'92s no logic that you can figure out yourself, or any algorithm you might have learned in a class once. Instead, you either know the answer or you don\'92t, which is testing nothing other than your ability to memorize vast swathes of Cocoa Touch. 
+\f1\fs24 \
+
+\f2\fs32 There are three reasons I\'92m including it here. First, if you didn\'92t know how to do this, you do know now so you\'92ve learned something new. Second, it\'92s actually pretty easy to do once you know how, so you might as well get it under your belt in case you get hit with this question in the future. Third, this is useful code to have at hand: reading and writing to the user\'92s documents directory is very common on iOS, so you\'92ll almost certainly use this code in real projects. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s my solution: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge29\cf7 () \cf8 -> \cf9 URL \cf7 \{\
+\cf4    let \cf2 paths \cf8 =\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 FileManager\cf7 .\cf2 default\cf7 .\cf6 urls\cf7 (\cf4 for\cf7 : .\cf2 documentDirectory\cf7 ,\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 in\cf7 : .\cf2 userDomainMask\cf7 )\
+\cf4    return \cf2 paths\cf7 [\cf9 0\cf7 ]\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Like I said in the hints, though: if you get asked this during an interview, I\'92d be tempted to answer that it\'92s something trivial enough to be looked up online. I\'92m no fan of coding by Stack Overflow, and if someone said \'93I don\'92t know much about 
+\f3\b \cf3 UITableView 
+\f2\b0 \cf2 but I could look it up\'94 then I\'92d not think highly of their skills, but this particular problem is something so simple that it really is just a Google search away if you need it. 
+\f1\fs24 \
+}

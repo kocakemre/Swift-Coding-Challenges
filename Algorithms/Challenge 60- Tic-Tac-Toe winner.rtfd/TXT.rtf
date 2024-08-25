@@ -1,0 +1,240 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red0\green0\blue255;\red73\green17\blue135;
+\red148\green108\blue71;\red28\green117\blue20;\red169\green0\blue15;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c0\c0\c100000;\cssrgb\c36078\c14902\c60000;
+\cssrgb\c65098\c49804\c34902;\cssrgb\c11373\c52157\c9804;\cssrgb\c72941\c0\c6667;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 60: Tic-Tac-Toe winner 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Create a function that detects whether either player has won in a game of Tic-Tac-Toe. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 A tic-tac-toe board is 3x3, containing single letters that are either X, O, or empty. A win is three Xs or Os in a straight line. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 [["X", "", "O"], ["", "X", "O"], ["", "", "X"]] 
+\f2\b0 \cf2 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 [["X", "", "O"], ["X", "", "O"], ["X", "", ""]] 
+\f2\b0 \cf2 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 [["", "X", ""], ["O", "X", ""], ["O", "X", ""]] 
+\f2\b0 \cf2 should return true. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 [["", "X", ""], ["O", "X", ""], ["O", "", "X"]] 
+\f2\b0 \cf2 should return false. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 [["", "", ""], ["", "", ""], ["", "", ""]] 
+\f2\b0 \cf2 should return false. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Your board parameter should be 
+\f3\b \cf3 [[String]] 
+\f2\b0 \cf2 \'96 an array of array of strings. 
+\f1\b Hint #2: 
+\f2\b0 You can evaluate the rows and columns in a loop. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 You can evaluate diagonals using two checks: one from top left to bottom right, and one from bottom left to top right. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 You might want to use a nested function to make your code cleaner. \uc0\u8232 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 I think the best way to solve this challenge is incrementally: start with a simple solution that works correctly but could be more elegant, then improve it to remove duplicated code. 
+\f1\fs24 \
+
+\f2\fs32 For this challenge, the basic solution looks like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge60a\cf7 (\cf8 _ \cf2 board\cf7 : [[\cf9 String\cf7 ]]) \cf10 -> \cf9 Bool \cf7 \{\
+\cf4    for \cf2 i \cf4 in \cf8 0 \cf7 ..\cf10 < \cf8 3 \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11       // check each row\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       if \cf2 board\cf7 [\cf2 i\cf7 ][\cf8 0\cf7 ] \cf10 != \cf12 "" \cf10 && \cf2 board\cf7 [\cf2 i\cf7 ][\cf8 0\cf7 ] \cf10 == \cf2 board\cf7 [\cf2 i\cf7 ][\cf8 1\cf7 ] \cf10 &&\
+\cf2 board\cf7 [\cf2 i\cf7 ][\cf8 0\cf7 ] \cf10 == \cf2 board\cf7 [\cf2 i\cf7 ][\cf8 2\cf7 ] \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 return \cf8 true \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf11 \cb5       // check each column\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       if \cf2 board\cf7 [\cf8 0\cf7 ][\cf2 i\cf7 ] \cf10 != \cf12 "" \cf10 && \cf2 board\cf7 [\cf8 0\cf7 ][\cf2 i\cf7 ] \cf10 == \cf2 board\cf7 [\cf8 1\cf7 ][\cf2 i\cf7 ] \cf10 &&\
+\cf2 board\cf7 [\cf8 0\cf7 ][\cf2 i\cf7 ] \cf10 == \cf2 board\cf7 [\cf8 2\cf7 ][\cf2 i\cf7 ] \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 return \cf8 true \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+
+\f4\fs32 \cf7 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf11 \cb5    // now check diagonally top left to bottom right\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    if \cf2 board\cf7 [\cf8 0\cf7 ][\cf8 0\cf7 ] \cf10 != \cf12 "" \cf10 && \cf2 board\cf7 [\cf8 0\cf7 ][\cf8 0\cf7 ] \cf10 == \cf2 board\cf7 [\cf8 1\cf7 ][\cf8 1\cf7 ] \cf10 &&\
+\cf2 board\cf7 [\cf8 0\cf7 ][\cf8 0\cf7 ] \cf10 == \cf2 board\cf7 [\cf8 2\cf7 ][\cf8 2\cf7 ] \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 return \cf8 true \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf11 \cb5    // and check diagonally bottom left to top right\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    if \cf2 board\cf7 [\cf8 0\cf7 ][\cf8 2\cf7 ] \cf10 != \cf12 "" \cf10 && \cf2 board\cf7 [\cf8 0\cf7 ][\cf8 2\cf7 ] \cf10 == \cf2 board\cf7 [\cf8 1\cf7 ][\cf8 1\cf7 ] \cf10 &&\
+\cf2 board\cf7 [\cf8 0\cf7 ][\cf8 2\cf7 ] \cf10 == \cf2 board\cf7 [\cf8 2\cf7 ][\cf8 0\cf7 ] \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 return \cf8 true \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf11 \cb5    // if we're still here there's no winner\
+\pard\pardeftab720\sl280\partightenfactor0
+
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4    return \cf8 false\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 To make myself quite clear: that\'92s a great solution to the challenge. Seriously, if you got asked this question at an interview and you wrote the above, you\'92ve done very well. 
+\f1\fs24 \
+
+\f2\fs32 Could it be better? Sure \'96 and if you have time left on the clock, you could have another pass to improve what you have. Specifically, each of the checks for a win involve repeating one square three times: \'93is square X empty?\'94, \'93is square X equal to square Y?\'94 and \'93is square X equal to square Z?\'94 
+\f1\fs24 \
+
+\f2\fs32 To clean this up, and in doing so make the code much more readable, we can create a nested 
+\f3\b \cf3 isWin() 
+\f2\b0 \cf2 function that returns true if all three squares contain a move from the same player. 
+\f1\fs24 \
+
+\f2\fs32 So, this would be a sensible second pass for this challenge: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge60b\cf7 (\cf8 _ \cf2 board\cf7 : [[\cf9 String\cf7 ]]) \cf10 -> \cf9 Bool \cf7 \{\
+\cf4    func \cf6 isWin\cf7 (\cf8 _ \cf9 first\cf7 : \cf9 String\cf7 , \cf8 _ \cf2 second\cf7 : \cf9 String\cf7 , \cf8 _ \cf2 third\cf7 :\
+\cf9 String\cf7 ) \cf10 -> \cf9 Bool \cf7 \{\
+\cf4       guard \cf9 first \cf10 != \cf12 "" \cf4 else \cf7 \{ \cf4 return \cf8 false \cf7 \}\
+\cf4       return \cf9 first \cf10 == \cf2 second \cf10 && \cf9 first \cf10 == \cf2 third\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    for \cf2 i \cf4 in \cf8 0 \cf7 ..\cf10 < \cf8 3 \cf7 \{\
+\cf4       if \cf6 isWin\cf7 (\cf2 board\cf7 [\cf2 i\cf7 ][\cf8 0\cf7 ], \cf2 board\cf7 [\cf2 i\cf7 ][\cf8 1\cf7 ], \cf2 board\cf7 [\cf2 i\cf7 ][\cf8 2\cf7 ]) \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 return \cf8 true \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5       if \cf6 isWin\cf7 (\cf2 board\cf7 [\cf8 0\cf7 ][\cf2 i\cf7 ], \cf2 board\cf7 [\cf8 1\cf7 ][\cf2 i\cf7 ], \cf2 board\cf7 [\cf8 2\cf7 ][\cf2 i\cf7 ]) \{\
+\cf4          return \cf8 true\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    if \cf6 isWin\cf7 (\cf2 board\cf7 [\cf8 0\cf7 ][\cf8 0\cf7 ], \cf2 board\cf7 [\cf8 1\cf7 ][\cf8 1\cf7 ], \cf2 board\cf7 [\cf8 2\cf7 ][\cf8 2\cf7 ]) \{\
+\cf4       return \cf8 true\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 \cb1 www.hackingwithswift.com 213 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf7 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    if \cf6 isWin\cf7 (\cf2 board\cf7 [\cf8 0\cf7 ][\cf8 2\cf7 ], \cf2 board\cf7 [\cf8 1\cf7 ][\cf8 1\cf7 ], \cf2 board\cf7 [\cf8 2\cf7 ][\cf8 0\cf7 ]) \{\
+\cf4       return \cf8 true\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf8 false\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 With that change, it becomes clear that the final three 
+\f3\b \cf3 return 
+\f2\b0 \cf2 statements can be collapsed into one using 
+\f3\b \cf3 ||
+\f2\b0 \cf2 : if either the first one or the second check is a winning move then they will return true, otherwise false. 
+\f1\fs24 \
+
+\f2\fs32 So, a third iteration of this solution would look like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 challenge60c\cf7 (\cf8 _ \cf2 board\cf7 : [[\cf9 String\cf7 ]]) \cf10 -> \cf9 Bool \cf7 \{\
+\cf4    func \cf6 isWin\cf7 (\cf8 _ \cf9 first\cf7 : \cf9 String\cf7 , \cf8 _ \cf2 second\cf7 : \cf9 String\cf7 , \cf8 _ \cf2 third\cf7 :\
+\cf9 String\cf7 ) \cf10 -> \cf9 Bool \cf7 \{\
+\cf4       guard \cf9 first \cf10 != \cf12 "" \cf4 else \cf7 \{ \cf4 return \cf8 false \cf7 \}\
+\cf4       return \cf9 first \cf10 == \cf2 second \cf10 && \cf9 first \cf10 == \cf2 third\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    for \cf2 i \cf4 in \cf8 0 \cf7 ..\cf10 < \cf8 3 \cf7 \{\
+\cf4       if \cf6 isWin\cf7 (\cf2 board\cf7 [\cf2 i\cf7 ][\cf8 0\cf7 ], \cf2 board\cf7 [\cf2 i\cf7 ][\cf8 1\cf7 ], \cf2 board\cf7 [\cf2 i\cf7 ][\cf8 2\cf7 ]) \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 return \cf8 true \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5       if \cf6 isWin\cf7 (\cf2 board\cf7 [\cf8 0\cf7 ][\cf2 i\cf7 ], \cf2 board\cf7 [\cf8 1\cf7 ][\cf2 i\cf7 ], \cf2 board\cf7 [\cf8 2\cf7 ][\cf2 i\cf7 ]) \{\
+\cf4          return \cf8 true\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf6 isWin\cf7 (\cf2 board\cf7 [\cf8 0\cf7 ][\cf8 0\cf7 ], \cf2 board\cf7 [\cf8 1\cf7 ][\cf8 1\cf7 ], \cf2 board\cf7 [\cf8 2\cf7 ][\cf8 2\cf7 ]) \cf10 ||\
+\cf6 isWin\cf7 (\cf2 board\cf7 [\cf8 0\cf7 ][\cf8 2\cf7 ], \cf2 board\cf7 [\cf8 1\cf7 ][\cf8 1\cf7 ], \cf2 board\cf7 [\cf8 2\cf7 ][\cf8 0\cf7 ])\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 If you intend to iterate on your solutions like this, notice that I name my solutions \'93a\'94, \'93b\'94, and \'93c\'94. What you 
+\f1\i don\'92t 
+\f2\i0 want to do is modify your code in place then have nothing to show when your time runs out because you were part-way through something! 
+\f1\fs24 \
+}

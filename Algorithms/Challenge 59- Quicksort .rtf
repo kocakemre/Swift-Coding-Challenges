@@ -1,0 +1,342 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red73\green17\blue135;\red135\green135\blue135;\red107\green0\blue109;\red148\green108\blue71;
+\red0\green0\blue255;\red28\green117\blue20;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c36078\c14902\c60000;\cssrgb\c60000\c60000\c60000;\cssrgb\c50196\c0\c50196;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;\cssrgb\c11373\c52157\c9804;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}
+{\list\listtemplateid3\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat5\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid201\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid3}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}{\listoverride\listid3\listoverridecount0\ls3}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 59: Quicksort 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky 
+\f1\fs24 \
+
+\f2\fs32 Create an extension for arrays that sorts them using the quicksort algorithm. 
+\f1\fs24 \
+
+\b\fs32 Tip #1: 
+\f2\b0 The quicksort algorithm picks an item from its array to use as the pivot point, then splits itself into either two parts (less than or greater than) or three (less, greater, or equal). These parts then repeat the pivot and split until the entire array has been split, then it gets rejoined so that less, equal, and greater are in order. 
+\f1\fs24 \
+
+\b\fs32 Tip #2: 
+\f2\b0 I can write quicksort from memory, but I cannot write 
+\f1\i fully optimized 
+\f2\i0 quicksort from memory. It\'92s a complex beast to wrangle, and it requires careful thinking \'96 honestly, I have better things to keep stored in what little space I have up there! So, don\'92t feel bad if your attempt is far from ideal: there\'92s no point creating a perfect solution if you struggle to remember it during an interview. 
+\f1\fs24 \
+
+\b\fs32 Tip #3: 
+\f2\b0 Quicksort is an algorithm so well known and widely used that you don\'92t even write a space in its name \'96 it\'92s \'93quicksort\'94 rather than \'93quick sort\'94. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array
+\f3\b \cf3 [12, 5, 4, 9, 3, 2, 1]
+\f2\b0 \cf2 should become
+\f3\b \cf3 [1, 2, 3, 4, 5, 9, 12]
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 ["f", "a", "b"] 
+\f2\b0 \cf2 should become 
+\f3\b \cf3 ["a", "b", "f"]
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 [String]() 
+\f2\b0 \cf2 should become 
+\f3\b \cf3 []
+\f2\b0 \cf2 . \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You will need to extend 
+\f3\b \cf3 Array 
+\f2\b0 \cf2 with a constraint on their elements so that they must be 
+\f3\b \cf3 Comparable 
+\f2\b0 \cf2 \'96 that\'92s what lets us sort items. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 There are lots of ways to pick a pivot point; choosing a random item is probably best. 
+\f1\b Hint #3: 
+\f2\b0 You can do most of the work with 
+\f3\b \cf3 filter() 
+\f2\b0 \cf2 if you want. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 For maximum performance, try to solve the challenge in-place using 
+\f3\b \cf3 inout
+\f2\b0 \cf2 . 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Quicksort is an incredibly slow algorithm when implemented poorly, and an incredibly fast algorithm when implemented excellently. As you might imagine, the complexity of your code increases as the speed does, and in some respects making a flexible, re-usable form of quicksort feels like trying to run a marathon with your legs tied together. 
+\f1\fs24 \
+
+\f2\fs32 The requirement for this challenge was to extend arrays, which means you need to have used a method inside a constrained extension. So, let\'92s look at what I consider to be the ideal solution to this challenge: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 extension \cf6 Array \cf4 where \cf6 Element\cf7 : \cf6 Comparable \cf7 \{\
+\cf4    func \cf8 challenge59a\cf7 () \cf9 -> \cf7 [\cf6 Element\cf7 ] \{\
+\cf4       guard \cf6 count \cf9 > \cf10 1 \cf4 else \cf7 \{ \cf4 return self \cf7 \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11       // pivot on the center of the array\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       let \cf2 pivot \cf9 = \cf4 self\cf7 [\cf6 count \cf9 / \cf10 2\cf7 ]\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11       // create three new buckets that we'll sort ourselves\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf11 into 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 var \cf2 before \cf9 = \cf7 [\cf6 Element\cf7 ]()\
+\cf4 var \cf2 after \cf9 = \cf7 [\cf6 Element\cf7 ]()\
+\cf4 var \cf6 equal \cf9 = \cf7 [\cf6 Element\cf7 ]()\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf11 \cb5 // loop over all items, placing each one into a bucket by\
+comparing against our pivot\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       for \cf2 item \cf4 in self \cf7 \{\
+\cf4          if \cf2 item \cf9 < \cf2 pivot \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2             before\cf7 .\cf8 append\cf7 (\cf2 item\cf7 )\
+         \} \cf4 else if \cf2 item \cf9 > \cf2 pivot \cf7 \{\
+\cf2             after\cf7 .\cf8 append\cf7 (\cf2 item\cf7 )\
+         \} \cf4 else \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6             equal\cf7 .\cf8 append\cf7 (\cf2 item\cf7 )\
+         \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf11 \cb5       // call this function recursively then return the\
+combined input\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       return \cf2 before\cf7 .\cf8 challenge59a\cf7 () \cf9 + \cf6 equal \cf9 +\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 after\cf7 .\cf8 challenge59a\cf7 ()\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \cb5 \}\
+\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 That\'92s a pretty poor implementation of quicksort in terms of raw performance, but it certainly passes the challenge and ought to be simple enough to memorize. 
+\f1\fs24 \
+
+\f2\fs32 A slightly slower implementation that\'92s even easier to memorize looks like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf7 \cb5  \cf4 \cb5 func \cf8 challenge59b\cf7 \cb5 () \cf9 \cb5 -> \cf7 \cb5 [\cf6 \cb5 Element\cf7 \cb5 ] \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4 \cb5    guard \cf6 count \cf9 > \cf10 1 \cf4 else \cf7 \{ \cf4 return self \cf7 \}\
+\cf4    let \cf2 pivot \cf9 = \cf4 self\cf7 [\cf6 count \cf9 / \cf10 2\cf7 ]\
+\cf4    let \cf2 before \cf9 = \cf6 filter \cf7 \{ \cf2 $\cf10 0 \cf9 < \cf2 pivot \cf7 \}\
+\cf4    let \cf2 after \cf9 = \cf6 filter \cf7 \{ \cf2 $\cf10 0 \cf9 > \cf2 pivot \cf7 \}\
+\cf4    let \cf6 equal \cf9 = \cf6 filter \cf7 \{ \cf2 $\cf10 0 \cf9 == \cf2 pivot \cf7 \}\
+\cf4    return \cf2 before\cf7 .\cf8 challenge59b\cf7 () \cf9 + \cf6 equal \cf9 + \cf2 after\cf7 .\cf8 challenge59b\cf7 ()\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 The nice thing about this solution \'96 ignoring the repeated work being done by the calls to 
+\f3\b \cf3 filter() 
+\f2\b0 \cf2 \'96 is that it\'92s crystal clear how quicksort works. In fact, that code is only a little different to some of the (many!) quicksort-in-Swift implementations that were being posted just days after Swift was originally announced \'96 that\'92s how popular quicksort is! 
+\f1\fs24 \
+
+\f2\fs32 Now, I want to talk briefly about performance, which I realize is outside the remit of this book but it 
+\f1\i is 
+\f2\i0 important here because quicksort is sensitive to small changes. 
+\f1\fs24 \
+
+\f2\fs32 First, choosing a pivot point. In the two solutions above I used 
+\f3\b \cf3 self[count / 2]
+\f2\b0 \cf2 , however another popular choice is this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 let \cf2 pivot \cf9 = \cf4 self\cf7 \cb5 [\cf8 \cb5 Int\cf7 \cb5 (\cf8 \cb5 arc4random_uniform\cf7 \cb5 (\cf8 \cb5 UInt32\cf7 \cb5 (\cf6 \cb5 count\cf7 \cb5 )))] 
+\f2 \cf2 \cb1 Yes, choosing a completely random pivot. And yes, that\'92s a perfectly sensible thing to do. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 The truth is that picking a pivot point is 
+\f1\i complicated
+\f2\i0 , and in fact the way you choose a pivot really depends on your array. For example, if your array is often already sorted, using\uc0\u8232 
+\f3\b \cf3 count / 2 
+\f2\b0 \cf2 is a great choice. If your array is very large, then you\'92ll want to take a more complex approach because the time spent picking a better pivot is going to pay off with reduced sort time. So, you might choose something like median of three, where you pick three random elements from the array and pivot on whichever one lies in the center. 
+\f1\fs24 \
+
+\f2\fs32 The reason for choosing a random pivot point is that quicksort\'92s performance varies depending on its data. If you had the array 
+\f3\b \cf3 [1, 2, 500, 2, 1] 
+\f2\b0 \cf2 and you pivoted on the center, 500, you\'92ll do a lot of work for almost no gain. Choosing a random pivot point every time means that you minimize the chance of consistently choosing a bad pivot point, which helps quicksort perform well overall. 
+\f1\fs24 \
+
+\f2\fs32 Once you\'92ve chosen a good pivot point, how can you make quicksort fast? Well, it\'92s 
+\f1\i massively 
+\f2\i0 outside the remit of this book to discuss the extensive research that\'92s been done into quicksort, but I can at least walk you through what is probably the most optimized form of quicksort I can write from memory. It\'92s not the fastest out there, but it\'92s still about 25x faster than the solutions above while still being more or less readable \'96 and still passing this challenge. 
+\f1\fs24 \
+
+\f2\fs32 Let me walk you through how it works: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+The function works entirely in place, so it\'92s a 
+\f3\b \cf3 mutating 
+\f2\b0 \cf2 method. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+It\'92s called using left and right parameters, which marks the array start and end position \uc0\u8232 that\'92s being sorted. This will initially be 0 and the array length - 1. \u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+It picks a pivot at the end of the array, and also creates a variable that marks the point \uc0\u8232 in the array that will store where items are greater than the pivot. \u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+It then loops through the array, counting from 
+\f3\b \cf3 left 
+\f2\b0 \cf2 to 
+\f3\b \cf3 right
+\f2\b0 \cf2 . Again, initially that\'92s 0 \uc0\u8232 and the array length - 1. \u8232 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls3\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	5.	}\expnd0\expndtw0\kerning0
+If the current item being scanned is less than the pivot, it swaps them item with whatever is at the split point, then moves the split point up one place. \uc0\u8232 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls3\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	6.	}\expnd0\expndtw0\kerning0
+Move the 
+\f3\b \cf3 right 
+\f2\b0 \cf2 parameter (that\'92s the one being used as our pivot) to the split point. \uc0\u8232 \
+\ls3\ilvl0\kerning1\expnd0\expndtw0 {\listtext	7.	}\expnd0\expndtw0\kerning0
+Finally, call itself twice more, passing in the left-hand side first, then the right-hand \uc0\u8232 side second. \u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 That\'92s it. Like I said, you could make a faster one, but there\'92s always a trade-off between \'93that\'92s fast\'94 and \'93I can remember that.\'94 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s the code, first without comments so you can see how short it is: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 mutating func \cf8 challenge59c\cf7 (\cf2 left\cf7 : \cf6 Int\cf7 , \cf2 right\cf7 : \cf6 Int\cf7 ) \{\
+\cf4    guard \cf2 left \cf9 < \cf2 right \cf4 else \cf7 \{ \cf4 return \cf7 \}\
+\cf4    let \cf2 pivot \cf9 = \cf4 self\cf7 [\cf2 right\cf7 ]\
+\cf4    var \cf2 splitPoint \cf9 = \cf2 left\
+\cf4    for \cf2 i \cf4 in \cf2 left \cf7 ..\cf9 < \cf2 right \cf7 \{\
+\cf4       if self\cf7 [\cf2 i\cf7 ] \cf9 < \cf2 pivot \cf7 \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 \cb5 self\cf7 \cb5 [\cf2 \cb5 i\cf7 \cb5 ]) \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf7 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf7 \cb5 (\cf4 self\cf7 [\cf2 i\cf7 ], \cf4 self\cf7 [\cf2 splitPoint\cf7 ]) \cf9 = \cf7 (\cf4 self\cf7 [\cf2 splitPoint\cf7 ],\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 splitPoint \cf9 += \cf10 1\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7    (\cf4 self\cf7 [\cf2 right\cf7 ], \cf4 self\cf7 [\cf2 splitPoint\cf7 ]) \cf9 = \cf7 (\cf4 self\cf7 [\cf2 splitPoint\cf7 ],\
+\cf4 self\cf7 [\cf2 right\cf7 ])\
+\cf8    challenge59c\cf7 (\cf2 left\cf7 : \cf2 left\cf7 , \cf2 right\cf7 : \cf2 splitPoint \cf9 - \cf10 1\cf7 )\
+\cf8    challenge59c\cf7 (\cf2 left\cf7 : \cf2 splitPoint \cf9 + \cf10 1\cf7 , \cf2 right\cf7 : \cf2 right\cf7 )\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 And here it is with comments, so hopefully you can see exactly how it fits together: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 mutating func \cf8 challenge59c\cf7 (\cf2 left\cf7 : \cf6 Int\cf7 , \cf2 right\cf7 : \cf6 Int\cf7 ) \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11    // make sure we have a sensible range to work with\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    guard \cf2 left \cf9 < \cf2 right \cf4 else \cf7 \{ \cf4 return \cf7 \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11    // use the right-hand element, because that's moved last\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    let \cf2 pivot \cf9 = \cf4 self\cf7 [\cf2 right\cf7 ]\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11    // set our split point \'96 the marker where elements start\
+being greater than the pivot \'96 to be the left edge\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    var \cf2 splitPoint \cf9 = \cf2 left\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11    // count through all items in the array\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    for \cf2 i \cf4 in \cf2 left \cf7 ..\cf9 < \cf2 right \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11       // if this item is less than our pivot\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       if self\cf7 [\cf2 i\cf7 ] \cf9 < \cf2 pivot \cf7 \{\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 \cb5 self\cf7 \cb5 [\cf2 \cb5 i\cf7 \cb5 ]) 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf11 \cb5 // move it so that it's at the split point\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7 (\cf4 self\cf7 [\cf2 i\cf7 ], \cf4 self\cf7 [\cf2 splitPoint\cf7 ]) \cf9 = \cf7 (\cf4 self\cf7 [\cf2 splitPoint\cf7 ],\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 // then move the split point forward one place\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2          splitPoint \cf9 += \cf10 1\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf11 \cb5    // move our pivot item to the split point\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf7    (\cf4 self\cf7 [\cf2 right\cf7 ], \cf4 self\cf7 [\cf2 splitPoint\cf7 ]) \cf9 = \cf7 (\cf4 self\cf7 [\cf2 splitPoint\cf7 ],\
+\cf4 self\cf7 [\cf2 right\cf7 ])\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11    // recursively call this function on everything before the\
+split...\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8    challenge59c\cf7 (\cf2 left\cf7 : \cf2 left\cf7 , \cf2 right\cf7 : \cf2 splitPoint \cf9 - \cf10 1\cf7 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11    // ...and everything after the split\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8    challenge59c\cf7 (\cf2 left\cf7 : \cf2 splitPoint \cf9 + \cf10 1\cf7 , \cf2 right\cf7 : \cf2 right\cf7 )\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 There you go \'96 a quicksort implementation that\'92s suitably fast, and hopefully also easy enough for you to remember. 
+\f1\fs24 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

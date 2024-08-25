@@ -1,0 +1,185 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red148\green108\blue71;\red73\green17\blue135;\red135\green135\blue135;\red107\green0\blue109;
+\red169\green0\blue15;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c65098\c49804\c34902;\cssrgb\c36078\c14902\c60000;\cssrgb\c60000\c60000\c60000;\cssrgb\c50196\c0\c50196;
+\cssrgb\c72941\c0\c6667;\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 32: Word frequency 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky 
+\f1\fs24 \
+
+\f2\fs32 Write a function that accepts a filename on disk, loads it into a string, then returns the frequency of a word in that string, taking letter case into account. How you define \'93word\'94 is worth considering carefully. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+A file containing \'93Hello, world!\'94 should return 1 for \'93Hello\'94 \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+A file containing \'93Hello, world!\'94 should return 0 for \'93Hello,\'94 \'96 note the comma at the \uc0\u8232 end. \u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+A file containing \'93The rain in Spain falls mainly on the plain\'94 should return 1 for \uc0\u8232 Spain, and 1 for \'93in\'94; the \'93in\'94 inside rain, Spain, mainly, and plain does not count \u8232 because it\'92s not a word by itself. \u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+A file containing \'93I\'92m a great coder\'94 should return 1 for \'93I\'92m\'94. \uc0\u8232 
+\f1\b Tip: 
+\f2\b0 Create different files on your desktop for each of your pieces of sample input, then pass the paths to those files into your function. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Being able to ask questions about definitions \'96 \'93what is a word?\'94 is an important skill in white boarding tests. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 I would suggest that splitting by any non-alphabetic character is a safe choice for defining words to begin with, but watch out for that last test case. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 There\'92s a built-in character set for letters, which includes uppercase and lowercase letters. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 All character sets have an 
+\f3\b \cf3 inverted 
+\f2\b0 \cf2 property that gives you the opposite. For 
+\f3\b \cf3 letters 
+\f2\b0 \cf2 that gives you all non-letters. \uc0\u8232 
+\f1\b Hint #5: 
+\f2\b0 Once you have a set of all non-letters, you can remove 
+\f3\b \cf3 ' 
+\f2\b0 \cf2 and split your string on that. 
+\f1\b Hint #6: 
+\f2\b0 The 
+\f3\b \cf3 NSCountedSet 
+\f2\b0 \cf2 class can count words in an array extremely efficiently. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 There are two ways you could solve this, but both share a common component: getting an array of all the words. To do that, you should use 
+\f3\b \cf3 CharacterSet
+\f2\b0 \cf2 , which lets you either construct a character set from scratch or use one of the built-in sets. 
+\f1\fs24 \
+
+\f2\fs32 In this instance, the built-in 
+\f3\b \cf3 letters 
+\f2\b0 \cf2 character set is almost good enough: if we invert it, we\'92ll get every non-letter. However, the last test case requires us to match \'93I\'92m\'94 as one word, which means we can split on apostrophes. So, the code looks like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 var \cf2 nonletters \cf6 = \cf7 CharacterSet\cf8 .\cf2 letters\cf8 .\cf2 inverted\
+nonletters\cf8 .\cf9 remove\cf8 (\cf10 "'"\cf8 )\
+\cf4 let \cf2 allWords \cf6 = \cf2 inputString\cf8 .\cf9 components\cf8 (\cf2 separatedBy\cf8 : \cf2 nonletters\cf8 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Now that you have an array of all the words, there are three ways you could perform your counting. 
+\f1\fs24 \
+
+\f2\fs32 First, loop over every word then add 1 to its count, and finally put out the specific count for the word in question, like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 var \cf2 wordCounts \cf6 = \cf8 [\cf7 String\cf8 : \cf7 Int\cf8 ]()\
+\cf4 for \cf2 word \cf4 in \cf2 allWords \cf8 \{\
+\cf4    if \cf2 wordCounts\cf8 [\cf2 word\cf8 ] \cf6 == \cf11 \cb5 nil \cf8 \cb5 \{\
+\cf2       wordCounts\cf8 [\cf2 word\cf8 ] \cf6 = \cf11 \cb5 1\
+\cf8 \cb5    \} \cf4 else \cf8 \{\
+\cf2       wordCounts\cf8 [\cf2 word\cf8 ]\cf6 ! += \cf11 \cb5 1\
+\cf8 \cb5    \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf8 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 return \cf2 wordCounts\cf8 \cb5 [\cf7 \cb5 count\cf8 \cb5 ] \cf6 \cb5 ?? \cf11 0\cb1 \uc0\u8232 
+\f2 \cf2 The nil coalescing operator is needed at the end because reading a key from a dictionary 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 returns an optional. 
+\f1\fs24 \
+
+\f2\fs32 That code works, but it\'92s not terribly efficient \'96 while there are some situations where counting 
+\f1\i \cf2 every 
+\f2\i0 \cf2 word would be beneficial, it wasn\'92t in the spec for this challenge. So, at the very least we could store significantly less data by just counting the one specific word we cared about, like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 var \cf2 wordCount \cf6 = \cf11 \cb5 0\
+\cf4 \cb5 for \cf2 word \cf4 in \cf2 allWords \cf8 \{\
+\cf4    if \cf2 word \cf6 == \cf7 count \cf8 \{\
+\cf2       wordCount \cf6 += \cf11 \cb5 1\
+\cf8 \cb5    \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf8 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 return \cf2 wordCount\
+\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 That\'92s an improvement, and it certainly uses less memory now. But if you wanted to ace this challenge properly, the best solution of all is to use the Foundation type 
+\f3\b \cf3 NSCountedSet
+\f2\b0 \cf2 . This is a specialized set that stores each item only once, so you get the performance of regular sets, but 
+\f1\i \cf2 acts 
+\f2\i0 \cf2 like items are stored more than once, so you can ask \'93how many times does this item appear?\'94 
+\f1\fs24 \
+
+\f2\fs32 Using this, you can count all instances of a word like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 let \cf2 wordsSet \cf6 = \cf9 NSCountedSet\cf8 (\cf2 array\cf8 : \cf2 allWords\cf8 )\
+\cf4    return \cf2 wordsSet\cf8 .\cf9 count\cf8 (\cf4 for\cf8 : \cf7 count\cf8 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 Regardless of which option you choose, the easy part is loading the file into a string \'96 that can be done using the 
+\f3\b \cf3 contentsOfFile: 
+\f2\b0 \cf2 initializer for 
+\f3\b \cf3 String
+\f2\b0 \cf2 , like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 guard let \cf2 inputString \cf6 = \cf4 try\cf6 ? \cf9 String\cf8 (\cf2 contentsOfFile\cf8 : \cf2 filename\cf8 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 \cb5 else \cf8 \cb5 \{ \cf4 \cb5 return \cf11 0 \cf8 \cb5 \}\cf8 \cb1 \uc0\u8232 
+\f2 \cf2 That will either return the contents of the filename as a string, or return 0 immediately. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 So, here\'92s the final code for the function: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf9 challenge32\cf8 (\cf2 filename\cf8 : \cf7 String\cf8 , \cf7 count\cf8 : \cf7 String\cf8 ) \cf6 -> \cf7 Int \cf8 \{\
+\cf4    guard let \cf2 inputString \cf6 = \cf4 try\cf6 ? \cf9 String\cf8 (\cf2 contentsOfFile\cf8 :\
+\cf2 filename\cf8 ) \cf4 else \cf8 \{ \cf4 return \cf11 \cb5 0 \cf8 \cb5 \}\
+\cf4    var \cf2 nonletters \cf6 = \cf7 CharacterSet\cf8 .\cf2 letters\cf8 .\cf2 inverted\
+   nonletters\cf8 .\cf9 remove\cf8 (\cf10 "'"\cf8 )\
+\cf4    let \cf2 allWords \cf6 = \cf2 inputString\cf8 .\cf9 components\cf8 (\cf2 separatedBy\cf8 :\
+\cf2 nonletters\cf8 )\
+\cf4    let \cf2 wordsSet \cf6 = \cf9 NSCountedSet\cf8 (\cf2 array\cf8 : \cf2 allWords\cf8 )\
+\cf4  return \cf2 wordsSet\cf8 .\cf9 count\cf8 (\cf4 for\cf8 : \cf7 count\cf8 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf8 \cb5 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 As a side benefit, you also get the flexibility benefit from the dictionary code, in that if you need to query other words you can do so for free because all the work has been done up front. 
+\f1\fs24 \
+}

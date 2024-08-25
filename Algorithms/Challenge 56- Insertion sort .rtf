@@ -1,0 +1,188 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red73\green17\blue135;\red135\green135\blue135;\red107\green0\blue109;\red148\green108\blue71;
+\red0\green0\blue255;\red28\green117\blue20;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c36078\c14902\c60000;\cssrgb\c60000\c60000\c60000;\cssrgb\c50196\c0\c50196;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;\cssrgb\c11373\c52157\c9804;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 56: Insertion sort 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy\uc0\u8232 Create an extension for arrays that sorts them using the insertion sort algorithm. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 An insertion sort creates a new, sorted array by removing items individually from the input array and placing them into the correct position in the new array. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array
+\f3\b \cf3 [12, 5, 4, 9, 3, 2, 1]
+\f2\b0 \cf2 should become
+\f3\b \cf3 [1, 2, 3, 4, 5, 9, 12]
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 ["f", "a", "b"] 
+\f2\b0 \cf2 should become 
+\f3\b \cf3 ["a", "b", "f"]
+\f2\b0 \cf2 . \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The array 
+\f3\b \cf3 [String]() 
+\f2\b0 \cf2 should become 
+\f3\b \cf3 []
+\f2\b0 \cf2 . \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You can perform insertion sort in-place, but that takes a little more thinking. Aim for correctness first, and efficiency later. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 You will need to extend 
+\f3\b \cf3 Array 
+\f2\b0 \cf2 with a constraint on their elements so that they must be 
+\f3\b \cf3 Comparable 
+\f2\b0 \cf2 \'96 that\'92s what lets us sort items. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 In the most simple solution, you should be able to pick out an item from your source array, then search through your sorted destination array to find where it should go. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 If you want to try the in-place solution, pull out the current item you want to sort, then keep moving other elements to the right until you find the correct spot for your item. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 Insertion sort is much like bubble sort: it\'92s generally considered a bad choice for a real-world search algorithm, but it\'92s easy enough to teach. However, insertion sort is always faster than bubble sort, and in fact it\'92s the preferred choice of algorithm if you\'92re sorting small data sets \'96 Swift\'92s own 
+\f3\b \cf3 sort() 
+\f2\b0 \cf2 call uses it if your collection contains fewer than 20 items. I\'92m going to walk you through two solutions: one that is simple enough that you ought to be able to memorize it if you want, and a second, more efficient solution that performs the operation in place. First the easier solution. In this approach, we create a new, empty array that will be filled with sorted elements. Then we loop over every element in the unsorted array, and place each item individually into the sorted array. In the case where the sorted array is empty, we\'92ll just use 
+\f3\b \cf3 append()
+\f2\b0 \cf2 . 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Here\'92s the code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 extension \cf6 Array \cf4 where \cf6 Element\cf7 : \cf6 Comparable \cf7 \{\
+\cf4    func \cf8 challenge56a\cf7 () \cf9 -> \cf7 [\cf6 Element\cf7 ] \{\
+\cf4       guard \cf6 count \cf9 > \cf10 1 \cf4 else \cf7 \{ \cf4 return self \cf7 \}\
+\cf4       var \cf2 returnValue \cf9 = \cf7 [\cf6 Element\cf7 ]()\
+\cf4       for \cf2 unsorted \cf4 in self \cf7 \{\
+\cf4          if \cf2 returnValue\cf7 .\cf6 count \cf9 == \cf10 0 \cf7 \{\
+\cf2             returnValue\cf7 .\cf8 append\cf7 (\cf2 unsorted\cf7 )\
+         \} \cf4 else \cf7 \{\
+\cf4             var \cf2 placed \cf9 = \cf10 false\
+\cf4             for \cf7 (\cf2 index\cf7 , \cf6 sorted\cf7 ) \cf4 in \cf2 returnValue\cf7 .\cf8 enumerated\cf7 () \{\
+\cf4                if \cf2 unsorted \cf9 < \cf6 sorted \cf7 \{\
+\cf2                   returnValue\cf7 .\cf8 insert\cf7 (\cf2 unsorted\cf7 , \cf2 at\cf7 : \cf2 index\cf7 )\
+\cf2                   placed \cf9 = \cf10 true\
+\cf4                   break\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 if \cf9 !\cf2 placed \cf7 \{ 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf2 \cb5                returnValue\cf7 .\cf8 append\cf7 (\cf2 unsorted\cf7 )\
+            \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \
+\} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5       return \cf2 returnValue\
+\cf7    \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 I\'92ve tried to make that as simple as possible, so hopefully you can read it straight through. The key is in the inner loop: when we have a new item from the unsorted array, that loops through the sorted array and uses 
+\f3\b \cf3 enumerated() 
+\f2\b0 \cf2 and 
+\f3\b \cf3 < 
+\f2\b0 \cf2 to find the correct position. 
+\f1\fs24 \
+
+\f2\fs32 Sorting the array in place is a little trickier, because you don\'92t want to expand the array \'96 you just want to move the items around to make space as you sort. Stick with me, though: this improved solution is about 2x faster than the previous one. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s how the improved algorithm works: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+Take a copy of the original array. We\'92re sorting in place now, so we don\'92t want to modify the original. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+Loop through the array, starting position 1 (the second item) and continuing to the end. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+Take a copy of the item at the current index. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+Count backwards from the current position until either we\'92ve hit the start of the array. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	5.	}\expnd0\expndtw0\kerning0
+For each item that is greater than our current item, move it one place to the right in the \uc0\u8232 array, and keep counting backwards. \u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	6.	}\expnd0\expndtw0\kerning0
+Finally, when we either reach the start of the array or an item that\'92s greater than or \uc0\u8232 equal to us, we place our item back into the array. \u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 To explain this, imagine the following array: C, B, A. We\'92ll count from position 1, which is B, so we\'92ll put that into a temporary variable, and begin counting backwards. Going back one place we find that B is less than C (lexicographically), so we move C along one space to make the array C, C, A. Yes, C is in there twice. 
+\f1\fs24 \
+
+\f2\fs32 At this point we hit the start of the array, so we can place our item \'96 B \'96 back in there, so the array is now B, C, A. The loop goes around again, and now A gets placed into a temporary variable. A is less than C, so C gets copied one place to the right to make B, C, C. A is also less than B, so that gets moved too, to make B, B, C. Finally, we hit the start of the array again, so A gets put there, making A, B, C \'96 the array is sorted! 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s all that in code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf8 challenge56b\cf7 () \cf9 -> \cf7 [\cf6 Element\cf7 ] \{\
+\cf4    guard \cf6 count \cf9 > \cf10 1 \cf4 else \cf7 \{ \cf4 return self \cf7 \}\
+\cf4    var \cf2 returnValue \cf9 = \cf4 self\
+   for \cf2 i \cf4 in \cf10 1 \cf7 ..\cf9 < \cf6 count \cf7 \{\
+\cf4       var \cf2 currentItemIndex \cf9 = \cf2 i\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11       // take a copy of the current item\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       let \cf2 itemToPlace \cf9 = \cf2 returnValue\cf7 [\cf2 currentItemIndex\cf7 ]\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11       // keep going around until we're at the start of the\
+array or find an item that's greater or equal to us\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       while \cf2 currentItemIndex \cf9 > \cf10 0 \cf9 && \cf2 itemToPlace \cf9 <\
+\cf2 returnValue\cf7 [\cf2 currentItemIndex \cf9 - \cf10 1\cf7 ] \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11          // move this item to the right\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2          returnValue\cf7 [\cf2 currentItemIndex\cf7 ] \cf9 =\
+\cf2 returnValue\cf7 [\cf2 currentItemIndex \cf9 - \cf10 1\cf7 ]\
+\cf2          currentItemIndex \cf9 -= \cf10 1\
+\cf7       \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11       // place our item into its newly sorted place\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2       returnValue\cf7 [\cf2 currentItemIndex\cf7 ] \cf9 = \cf2 itemToPlace\
+\cf7    \}\
+\cf4    return \cf2 returnValue\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 It takes a little more thinking, but you get such a performance boost it\'92s worth doing. Remember, insertion sort is the preferred sorting algorithm for arrays with fewer than 20 items and is used by Swift itself \'96 this is one that\'92s worth getting right! 
+\f1\fs24 \
+}

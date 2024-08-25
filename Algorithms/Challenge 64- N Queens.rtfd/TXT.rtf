@@ -1,0 +1,342 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier;\f4\fmodern\fcharset0 Courier-Bold;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red135\green135\blue135;\red255\green255\blue255;
+\red0\green0\blue255;\red163\green0\blue79;\red148\green108\blue71;\red73\green17\blue135;\red0\green0\blue120;
+\red107\green0\blue109;\red28\green117\blue20;\red169\green0\blue15;\red232\green135\blue8;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c60000\c60000\c60000;\cssrgb\c100000\c100000\c100000;
+\cssrgb\c0\c0\c100000;\cssrgb\c70588\c0\c38431;\cssrgb\c65098\c49804\c34902;\cssrgb\c36078\c14902\c60000;\cssrgb\c0\c0\c54510;
+\cssrgb\c50196\c0\c50196;\cssrgb\c11373\c52157\c9804;\cssrgb\c72941\c0\c6667;\cssrgb\c93333\c60000\c0;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 64: N Queens 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Taxing 
+\f1\fs24 \
+
+\f2\fs32 There are 
+\f1\i M 
+\f2\i0 different ways you can place 
+\f1\i N 
+\f2\i0 queens on an 
+\f1\i N
+\f2\i0 x
+\f1\i N 
+\f2\i0 chessboard so that none of them are able to capture others. Write a function that calculates them all and prints them to the screen as a visual board layout, and returns the number of solutions it found. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 A queen moves in straight lines vertically, horizontally, or diagonally. You need to place all eight queens so that no two share the same row, column, or diagonal. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 In the more advanced version of this challenge you would be required to return only the fundamental solutions, which means unique positions excluding rotations and reflections. This is not a requirement here. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+In an 8x8 board you need to place 8 queens. There are 92 possible arrangements, so your function should print each of them then return 92. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+In a 10x10 board you need to place 10 queens. There are 724 possible arrangements, so your function should print each of them then return 724. \uc0\u8232 Here is a suggested example layout for solutions: \u8232 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3 \cf3 \cb4 .......\cf2 Q\
+\cf3 ...\cf2 Q\cf3 ....\
+\cf2 Q\cf3 .......\
+..\cf2 Q\cf3 .....\
+.....\cf2 Q\cf3 ..\
+.\cf2 Q\cf3 ......\
+......\cf2 Q\cf3 .\
+....\cf2 Q\cf3 ...\
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 \cb1 Hints 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #1: 
+\f2\b0 Your queen placement function ought to call itself. The first time it\'92s called it represents the first queen being placed, the second it\'92s the second queen, and so on. If you reach 
+\f1\i N 
+\f2\i0 then you\'92ve placed all the queens and you have a solution. 
+\f1\fs24 \
+
+\b\fs32 Hint #2: 
+\f2\b0 In order to be sure you\'92ve found all solutions, you need to exhaust all possible placements. 
+\f1\fs24 \
+
+\b\fs32 Hint #3: 
+\f2\b0 Sometimes you will have placed six queens and realized there\'92s nowhere valid for the seventh to go. Be prepared to backtrack. 
+\f1\fs24 \
+
+\b\fs32 Hint #4: 
+\f2\b0 Two queens occupy the same column if their X difference is equal to their Y difference, or their X difference is equal to their negative Y difference. 
+\f1\fs24 \
+
+\b\fs32 Hint #5: 
+\f2\b0 You can solve this problem using a one-dimensional array of integers. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 At its core this is a simple recursion challenge: you need to try placing every queen in every row and column, then try placing the second queen in every row and column that can\'92t be attacked by the first queen, then try placing the third queen in every row and column that can\'92t be attacked by the previous two queens, and so on. 
+\f1\fs24 \
+
+\f2\fs32 Using 
+\f1\i N
+\f2\i0 x
+\f1\i N 
+\f2\i0 is a sneaky trick, because it makes the challenge sound harder when really nothing really changes. Sure, you count to 
+\f1\i N 
+\f2\i0 rather than hard-coding 8, but that\'92s it - nothing else changes. 
+\f1\fs24 \
+
+\f2\fs32 I\'92m going to give you my solution shortly, as well as a full explanation so you can compare it to your own. However, first I want to discuss one part of the solution that might confuse you: I used a one-dimensional integer array. This means a solution for me looks like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 [\cf5 5\cf3 , \cf5 2\cf3 , \cf5 4\cf3 , \cf5 7\cf3 , \cf5 0\cf3 , \cf5 3\cf3 , \cf5 1\cf3 , \cf5 6\cf3 ]\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Each element represents one column in the table, and its position in the array represents the row. So, element 0 is 5, which means row 0 column 5 contains a queen. Each queen is placed in its equivalent row number, which also means that each queen is placed in the array position 
+\f1\fs24 \
+
+\f2\fs32 that matches its queen number. So, the first queen (queen 0) is also placed at element 0, and in the solution above occupies the six column (column 5, counting from 0.) 
+\f1\fs24 \
+
+\f2\fs32 Using this approach, consider these three board positions: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 [\cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 ]\
+[\cf5 7\cf3 , \cf5 7\cf3 , \cf5 7\cf3 , \cf5 7\cf3 , \cf5 7\cf3 , \cf5 7\cf3 , \cf5 7\cf3 , \cf5 7\cf3 ]\
+[\cf5 0\cf3 , \cf5 1\cf3 , \cf5 2\cf3 , \cf5 3\cf3 , \cf5 4\cf3 , \cf5 5\cf3 , \cf5 6\cf3 , \cf5 7\cf3 ]\
+\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Hopefully you can see that the first one represents eight queens lined up in the far-left column, the second one represents eight queens line up in the far-right column, and the third one represents the eight queens lined up diagonally top left to bottom right. 
+\f1\fs24 \
+
+\f2\fs32 Now, when my array starts I pre-fill it with zeros, so it starts life looking like this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 [\cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 , \cf5 0\cf3 ]\cb1 \uc0\u8232 
+\f2 \cf2 When I need to place a new queen into that array, I need to check it can\'92t be attacked by any 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 existing queen. This is done using two loops: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf2 boardLoop\cf3 : \cf6 for \cf2 column \cf6 in \cf5 0 \cf3 ..\cf7 < \cf2 board\cf3 .\cf8 count \cf3 \{\
+\cf6    for \cf2 row \cf6 in \cf5 0 \cf3 ..\cf7 < \cf2 queenNumber \cf3 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb4 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 The first loop contains a 
+\f4\b \cf9 boardLoop 
+\f2\b0 \cf2 label so that we can jump to the next column if we find any queen in the current column while inside the inner loop. The second loop counts from 0 up to our current queen number, which is important: because we place queens in order (0 first, 1 second, etc) and because queens use their number for their row (queen 0 is always on row 0, queen 1 is always on row 1), we don\'92t check beyond our current row. 
+\f1\fs24 \
+
+\f2\fs32 This is both more efficient and required: the default value of our array is 
+\f4\b \cf9 [0, 0, 0, 0, 0, 0, 0, 0]
+\f2\b0 \cf2 , so if we examined the full board it would look like eight rows of queen 0 at column 0 \'96 i.e., no move is valid. By counting from 0 to less than the queen number, we only consider rows before our current one, and so never hit this problem. 
+\f1\fs24 \
+
+\f2\fs32 OK, enough discussion, let\'92s talk about the whole structure of my solution: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+Create a one-dimensional array of eight integers, all initialized to zero, to represent the board. \uc0\u8232 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0\cf2 \kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+Call my 
+\f4\b \cf9 challenge64() 
+\f2\b0 \cf2 function with the board, asking it to place queen 0. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+If the queen number is equal to the size of the board, it means we\'92ve hit a solution so \uc0\u8232 we can print it out. In our case, though, we\'92re placing queen 0 so that won\'92t trigger. \u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+Enter two loops, as discussed above: the outer loop over every column, and the inner loop over the first 
+\f1\i N 
+\f2\i0 rows, where 
+\f1\i N 
+\f2\i0 is our queen number. We are placing queen 0, so \uc0\u8232 this won\'92t be used just yet. \u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	5.	}\expnd0\expndtw0\kerning0
+If we were placing a queen higher than 0, the loop checks that the row and column in \uc0\u8232 question can\'92t be attacked by previously placed queens. If any queen occupies the row \u8232 and column being checked, we exit the inner loop and jump to the next column. \u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	6.	}\expnd0\expndtw0\kerning0
+If we find a row and column with a valid move we take it, then recursively call \uc0\u8232 ourselves. This time, though, we add 1 to the queen number being placed, so that we\'92re placing the next queen. \u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 One small extra complexity is the need to return the total number of solutions that are found. To make that work, my function returns an integer representing the number of solutions it found. If it hits a solution it returns 1, otherwise it sums the return values from its recursive calls. 
+\f1\fs24 \
+
+\f2\fs32 So, that\'92s how it works. Time for the code, complete with lots of comments to make sure it\'92s clear: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf6 \cb4 func \cf10 challenge64\cf3 \cb4 (\cf2 board\cf3 : [\cf8 \cb4 Int\cf3 \cb4 ], \cf2 queen queenNumber\cf3 : \cf8 \cb4 Int\cf3 \cb4 ) \cf7 \cb4 -> \cf8 Int \cf3 \cb4 \{\
+\cf6 \cb4    if \cf2 \cb4 queenNumber \cf7 \cb4 == \cf2 \cb4 board\cf3 .\cf8 \cb4 count \cf3 \cb4 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4       // we hit a solution \'96 print it out\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10       print\cf3 \cb4 (\cf12 \cb4 "Solution:"\cf3 \cb4 , \cf2 board\cf3 )\
+\cf6 \cb4       for \cf2 \cb4 row \cf6 \cb4 in \cf5 \cb4 0 \cf3 ..\cf7 \cb4 < \cf2 \cb4 board\cf3 .\cf8 \cb4 count \cf3 \cb4 \{\
+\cf6 \cb4          for \cf2 \cb4 col \cf6 \cb4 in \cf5 \cb4 0 \cf3 ..\cf7 \cb4 < \cf2 \cb4 board\cf3 .\cf8 \cb4 count \cf3 \cb4 \{\
+\cf6 \cb4             if \cf2 \cb4 board\cf3 [\cf2 row\cf3 ] \cf7 \cb4 == \cf2 \cb4 col \cf3 \{\
+\cf10 \cb4                print\cf3 \cb4 (\cf12 \cb4 "Q"\cf3 \cb4 , \cf2 terminator\cf3 : \cf12 \cb4 ""\cf3 \cb4 )\
+            \} \cf6 \cb4 else \cf3 \cb4 \{\
+\cf10 \cb4                print\cf3 \cb4 (\cf12 \cb4 "."\cf3 \cb4 , \cf2 terminator\cf3 : \cf12 \cb4 ""\cf3 \cb4 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf3 \cb4 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f3\fs32 \cf10 \cb4 print\cf3 \cb4 (\cf12 \cb4 ""\cf3 \cb4 ) \} 
+\f1\fs24 \cf2 \cb1 \
+
+\f3\fs32 \cf10 \cb4 print\cf3 \cb4 (\cf12 \cb4 ""\cf3 \cb4 ) 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf6 \cb4       return \cf5 \cb4 1\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3    \} \cf6 \cb4 else \cf3 \cb4 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4       // keep track how many solutions were found by our\
+recursive calls\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6       var \cf8 count \cf7 = \cf5 \cb4 0\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4       // loop over every column\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 \cb4       boardLoop\cf3 : \cf6 \cb4 for \cf2 \cb4 column \cf6 \cb4 in \cf5 \cb4 0 \cf3 ..\cf7 \cb4 < \cf2 \cb4 board\cf3 .\cf8 \cb4 count \cf3 \cb4 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4          // check only queens that are placed already\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6          for \cf2 \cb4 row \cf6 \cb4 in \cf5 \cb4 0 \cf3 ..\cf7 \cb4 < \cf2 \cb4 queenNumber \cf3 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4             // find where this queen was placed\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6             let \cf2 \cb4 otherQueenColumn \cf7 \cb4 = \cf2 \cb4 board\cf3 [\cf2 row\cf3 ]\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4             // if this queen is placed in the column we are\
+checking, stop checking other queens and go to the next column\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6             if \cf2 \cb4 otherQueenColumn \cf7 \cb4 == \cf2 \cb4 column \cf3 \{ \cf6 \cb4 continue\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 \cb4 boardLoop \cf3 \cb4 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf11 \cb4             // calculate the difference in our row/column and\
+the checking queen's row/column\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6             let \cf2 \cb4 deltaRow \cf7 \cb4 = \cf2 \cb4 queenNumber \cf7 \cb4 - \cf2 \cb4 row\
+\cf6 \cb4             let \cf2 \cb4 deltaCol \cf7 \cb4 = \cf2 \cb4 otherQueenColumn \cf7 \cb4 - \cf2 \cb4 column\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4             // if we are on a diagonal with this queen, stop\
+checking other queens and proceed to the next column\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6             if \cf2 \cb4 deltaRow \cf7 \cb4 == \cf2 \cb4 deltaCol \cf3 \{ \cf6 \cb4 continue \cf2 \cb4 boardLoop \cf3 \}\
+\cf6 \cb4    if \cf2 \cb4 deltaRow \cf7 \cb4 == -\cf2 \cb4 deltaCol \cf3 \{ \cf6 \cb4 continue \cf2 \cb4 boardLoop \cf3 \}\
+         \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4          // if we're still here it means this move is valid, so\
+take a copy of the board and make the move on the copy\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6          var \cf2 \cb4 boardCopy \cf7 \cb4 = \cf2 \cb4 board\
+         boardCopy\cf3 [\cf2 queenNumber\cf3 ] \cf7 \cb4 = \cf2 \cb4 column\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4          // now call ourselves recursively, placing one queen\
+number higher, and adding it return value to our solution\
+counter\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf8          count \cf7 += \cf10 challenge64\cf3 \cb4 (\cf2 board\cf3 : \cf2 boardCopy\cf3 , \cf2 queen\cf3 :\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 queenNumber \cf7 \cb4 + \cf5 \cb4 1\cf3 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf3 \cb4 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf11 \cb4       // return our solution counter to the caller\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6       return \cf8 count\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf3 \cb4    \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf3 \cb4 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf11 \cb4 // create an initial board full of zeros\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 let \cf2 \cb4 emptyBoard \cf7 \cb4 = \cf3 \cb4 [\cf8 \cb4 Int\cf3 \cb4 ](\cf2 repeating\cf3 : \cf5 0\cf3 , \cf8 \cb4 count\cf3 \cb4 : \cf5 8\cf3 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf11 \cb4 // call the solution function with the first queen and an empty\
+board\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf6 let \cf2 \cb4 solutionCount \cf7 \cb4 = \cf10 challenge64\cf3 \cb4 (\cf2 board\cf3 : \cf2 emptyBoard\cf3 , \cf2 queen\cf3 : \cf5 0\cf3 )\
+\cf10 \cb4 print\cf3 \cb4 (\cf12 \cb4 "Found \cf13 \cb4 \\(\cf12 \cb4 solutionCount\cf13 \cb4 ) \cf12 \cb4 solutions"\cf3 \cb4 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Again, notice how the 
+\f1\i N
+\f2\i0 x
+\f1\i N 
+\f2\i0 part of the problem made almost no difference \'96 it just means looping up to 
+\f4\b \cf9 board.count 
+\f2\b0 \cf2 rather than 8. 
+\f1\fs24 \
+
+\f2\fs32 With comments added my solution might look like a lot of code, but I hope you can see the algorithm itself is quite simple: it just brute-force places queens until it has placed them all. 
+\f1\fs24 \
+
+\f2\fs32 Using a one-dimensional array for my board and placing queens by row helps reduce the workload, and even a modest Mac can find all 2,279,184 solutions in a 15x15 board in under a minute. 
+\f1\fs24 \
+
+\f2\fs32 If you don\'92t mind using 
+\f4\b \cf9 inout 
+\f2\b0 \cf2 for your board rather than making changes on a copy, you can make the algorithm perform more than 2x faster with no other changes. In my opinion, using 
+\f4\b \cf9 inout 
+\f2\b0 \cf2 for speed is only a good idea if you\'92re working with performance-critical code \'96 the principle of least astonishment applies to code too, and making copies of your data structure is easier to understand. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f3\fs32 \cf3 \cb4 \
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+\
+}

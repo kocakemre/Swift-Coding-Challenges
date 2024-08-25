@@ -1,0 +1,235 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red135\green135\blue135;\red73\green17\blue135;\red148\green108\blue71;\red28\green117\blue20;
+\red0\green0\blue255;\red169\green0\blue15;\red107\green0\blue109;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c65098\c49804\c34902;\cssrgb\c11373\c52157\c9804;
+\cssrgb\c0\c0\c100000;\cssrgb\c72941\c0\c6667;\cssrgb\c50196\c0\c50196;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}
+{\list\listtemplateid2\listhybrid{\listlevel\levelnfc0\levelnfcn0\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{decimal\}.}{\leveltext\leveltemplateid101\'02\'00.;}{\levelnumbers\'01;}\fi-360\li720\lin720 }{\listname ;}\listid2}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}{\listoverride\listid2\listoverridecount0\ls2}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 36: Print error lines 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Taxing\uc0\u8232 Write a function that accepts accepts a path to a log file on disk, and returns how many lines 
+\f1\fs24 \
+
+\f2\fs32 start with \'93[ERROR]\'94. The log file could be as large as 10GB, but may also not exist. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If the file contains 100,000,000 lines and eight start with \'93[ERROR]\'94 your function should return 8. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+If the file does not exist, cannot be loaded, or contains zero lines starting with \'93[ERROR]\'94 your function should return 0. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You can use the 
+\f3\b \cf3 contentsOfFile 
+\f2\b0 \cf2 initializer for strings, but only if you want to be laughed out of the room. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 This is a job for 
+\f3\b \cf3 FileHandle
+\f2\b0 \cf2 , which opens a file and reads chunks of a size you specify using 
+\f3\b \cf3 readData(ofLength:)
+\f2\b0 \cf2 . \uc0\u8232 
+\f1\b Hint #3: 
+\f3 \cf3 FileHandle 
+\f2\b0 \cf2 doesn\'92t care about line breaks, so it will read as much data as you ask. It\'92s down to you to use 
+\f3\b \cf3 range(of:) 
+\f2\b0 \cf2 to find zero or more line breaks inside the chunk you read. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 To make things neater, I created a custom class to store my file reading code \'96 you might want to consider doing the same. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 This is a challenge that ought to be easy, but sadly is far harder than you think because Swift doesn\'92t have any neat APIs for streaming data. A number of brave people have stepped up to try to create third-party components, not least Dave DeLong with his Objective-C DDFileReader component, but clearly it wouldn\'92t be a great answer to this question if you just pulled in a third-party component! So, instead I want to show you a solution that is a lot simpler. I took the structure of Dave\'92s DDFileReader, converted it to Swift, stripped out everything that wasn\'92t essential, then refactored what remained to make it as simple as possible. I\'92m afraid even then it\'92s not simple enough to remember, but hopefully you can at least see the 
+\f1\i structure 
+\f2\i0 of the solution and that might be enough to help you recreate it if needed. 
+\f1\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Here\'92s how the code works: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls2\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	1.	}\expnd0\expndtw0\kerning0
+It\'92s a new class called 
+\f3\b \cf3 ChunkedFileReader 
+\f2\b0 \cf2 that is responsible for opening a file and reading lines until the end of the file is reached. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	2.	}\expnd0\expndtw0\kerning0
+I\'92ve made it read lines 4 characters at a time (
+\f3\b \cf3 chunkSize
+\f2\b0 \cf2 ), which is an absurdly small amount in production, but great as a test so you can step through it at runtime to see how it works. (A chunk size of between 1024 and 8192 bytes would be more sensible for production.) \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	3.	}\expnd0\expndtw0\kerning0
+You initialize the class by passing it a filename. It then creates a buffer, which is what it reads the file into over time. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	4.	}\expnd0\expndtw0\kerning0
+Every time you call its 
+\f3\b \cf3 readLine() 
+\f2\b0 \cf2 method, it attempts to find the next line break. It does this by reading 
+\f3\b \cf3 chunkSize 
+\f2\b0 \cf2 bytes into its buffer and scanning for the delimiter \'93\\n\'94. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	5.	}\expnd0\expndtw0\kerning0
+If no line break is found, it keeps reading chunks and placing them into the buffer. \uc0\u8232 \
+\ls2\ilvl0\kerning1\expnd0\expndtw0 {\listtext	6.	}\expnd0\expndtw0\kerning0
+Eventually, either a line break is found or the file ends. Either way, if the buffer has \uc0\u8232 data inside it gets converted into a string and sent back. \u8232 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf2 I used \'93\\n\'94 for the delimiter \'96 the marker for where lines end \'96 which suits this challenge nicely. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s my 
+\f3\b \cf3 ChunkedFileReader 
+\f2\b0 \cf2 class, with inline comments: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 class \cf2 ChunkedFileReader \cf6 \{\
+\cf4    var \cf2 fileHandle\cf6 : \cf7 FileHandle\cf8 ?\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9 // we keep adding to the buffer until eventually we find a\
+line break or hit the end of the file\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    var \cf2 buffer\cf6 : \cf7 Data\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9    // this should be between 1024 and 8192 for production; it\
+determines how much of the file is read in each step\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    let \cf2 chunkSize\cf6 : \cf7 Int \cf8 = \cf10 4\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9    // this determines what we consider to be an end of line\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    let \cf2 delimiter \cf8 = \cf11 "\\n"\cf6 .\cf12 data\cf6 (\cf2 using\cf6 : .\cf2 utf8\cf6 )\cf8 !\
+\cf4    init\cf6 (\cf2 path\cf6 : \cf7 String\cf6 ) \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9       // open the file handle and prepare the buffer\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2       fileHandle \cf8 = \cf12 FileHandle\cf6 (\cf2 forReadingAtPath\cf6 : \cf2 path\cf6 )\
+\cf2       buffer \cf8 = \cf12 Data\cf6 (\cf2 capacity\cf6 : \cf2 chunkSize\cf6 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    func \cf12 readLine\cf6 () \cf8 -> \cf7 String\cf8 ? \cf6 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9       // find the delimiter in our buffer\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       var \cf2 rangeOfDelimiter \cf8 = \cf2 buffer\cf6 .\cf12 range\cf6 (\cf2 of\cf6 : \cf2 delimiter\cf6 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9       // loop until we finally find a delimiter\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       while \cf2 rangeOfDelimiter \cf8 == \cf10 nil \cf6 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9          // try to read a chunk from the file handle, or bail\
+out if it didn't work\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4          guard let \cf2 chunk \cf8 = \cf2 fileHandle\cf8 ?\cf6 .\cf12 readData\cf6 (\cf2 ofLength\cf6 :\
+\cf2 chunkSize\cf6 ) \cf4 else \cf6 \{ \cf4 return \cf10 nil \cf6 \}\
+\cf4          if \cf2 chunk\cf6 .\cf7 count \cf8 == \cf10 0 \cf6 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9             // the chunk was read successfully, but was empty \'96\
+we reached the end of the file\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4             if \cf2 buffer\cf6 .\cf7 count \cf8 > \cf10 0 \cf6 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9                // the buffer has something left in it; send it\
+back, and make sure to clear the buffer's remnants when it's\
+finished\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4                defer \cf6 \{ \cf2 buffer\cf6 .\cf7 count \cf8 = \cf10 0 \cf6 \}\
+\cf4                return \cf12 String\cf6 (\cf2 data\cf6 : \cf2 buffer\cf6 , \cf2 encoding\cf6 : .\cf2 utf8\cf6 )\
+            \}\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9             // we reached the end of the file and the buffer\
+was empty; send back nil\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4             return \cf10 nil\
+\cf6          \} \cf4 else \cf6 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9             // we read some data; append it to our buffer\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2             buffer\cf6 .\cf12 append\cf6 (\cf2 chunk\cf6 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9             // now re-scan for the delimiter\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2             rangeOfDelimiter \cf8 = \cf2 buffer\cf6 .\cf12 range\cf6 (\cf2 of\cf6 : \cf2 delimiter\cf6 )\
+         \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf9 \cb5       // we can only make it here if we found a delimiter, but\
+it might be anywhere inside our buffer; we want to pull out\
+everything in our buffer from the start up to where the\
+delimiter lies\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       let \cf2 rangeOfLine \cf8 = \cf12 Range\cf6 (\cf10 0 \cf6 ..\cf8 <\
+\cf2 rangeOfDelimiter\cf8 !\cf6 .\cf2 upperBound\cf6 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9       // convert that range of our buffer into a string\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       let \cf2 line \cf8 = \cf12 String\cf6 (\cf2 data\cf6 : \cf2 buffer\cf6 .\cf12 subdata\cf6 (\cf4 in\cf6 : \cf2 rangeOfLine\cf6 ),\
+\cf2 encoding\cf6 : .\cf2 utf8\cf6 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9       // then remove it from the buffer\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2       buffer\cf6 .\cf12 removeSubrange\cf6 (\cf2 rangeOfLine\cf6 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf9       // send the line back, removing the trailing line break\
+at the end.\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2       line\cf8 ?\cf6 .\cf12 trimmingCharacters\cf6 (\cf4 in\cf6 : .\cf2 whitespacesAndNewlines\cf6 )\
+   \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 So: it reads in chunk after chunk from the file until it eventually finds a line break, at which point it pulls out everything from the start of the buffer up to the line break and returns it as a line. The remainder of the buffer stays in place, waiting for the next 
+\f3\b \cf3 readLine() 
+\f2\b0 \cf2 call. 
+\f1\fs24 \
+
+\f2\fs32 Of course, all that doesn\'92t actually satisfy the challenge that was set, it just puts the foundations in place. And in fact it does nearly all the work, so all that remains is to create a new 
+\f3\b \cf3 ChunkedFileReader 
+\f2\b0 \cf2 instance and continually call its 
+\f3\b \cf3 readLine() 
+\f2\b0 \cf2 method and look for the string prefix \'93[ERROR\'94]: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf12 challenge36\cf6 (\cf2 filename\cf6 : \cf7 String\cf6 ) \cf8 -> \cf7 Int \cf6 \{\
+\cf4    var \cf2 totalErrors \cf8 = \cf10 0\
+\cf4    let \cf2 reader \cf8 = \cf12 ChunkedFileReader\cf6 (\cf2 path\cf6 : \cf2 filename\cf6 )\
+\cf4    while let \cf2 line \cf8 = \cf2 reader\cf6 .\cf12 readLine\cf6 () \{\
+\cf4       if \cf2 line\cf6 .\cf12 hasPrefix\cf6 (\cf11 "[ERROR]"\cf6 ) \{\
+\cf2          totalErrors \cf8 += \cf10 1\
+\cf6       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf6 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 totalErrors\
+\cf6 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 Done! 
+\f1\fs24 \
+
+\f2\fs32 It\'92s a real shame that this task \'96 a fairly fundamental one, if you ask me \'96 takes so much work. Perhaps Apple will add their own chunked file reader to the standard library in the future... 
+\f1\fs24 \
+}

@@ -1,0 +1,103 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red0\green0\blue255;\red73\green17\blue135;
+\red148\green108\blue71;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c0\c0\c100000;\cssrgb\c36078\c14902\c60000;
+\cssrgb\c65098\c49804\c34902;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 45: Traversing the tree 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Easy 
+\f1\fs24 \
+
+\b\fs32 Note: this challenge cannot be attempted until you have first completed challenge 54. 
+\b0\fs24 \
+
+\f2\fs32 Write a new method for your binary search tree that traverses the tree in order, running a closure on each node. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 Traversing a node in order means visiting its left value, then visiting its own value, then visiting its right value. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Assuming a binary tree created from the array [2, 1, 3]: 
+\f1\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 tree.root?.traverse \{ print($0.key) \} 
+\f2\b0 \cf2 should print 1, 2, 3. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 var sum = 0; tree.root?.traverse \{ sum += $0.key \}; 
+\f2\b0 \cf2 \uc0\u8232 
+\f3\b \cf3 print(sum) 
+\f2\b0 \cf2 should print 6. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 var values = [Int](); tree.root?.traverse 
+\f2\b0 \cf2 \uc0\u8232 
+\f3\b \cf3 \{ values.append($0.key) \}; print(values.count) 
+\f2\b0 \cf2 should print 3. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Your entire function can be just three lines of code. Yes, it really is that easy \'96 hurray for recursion! \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 You can write this method for the binary tree class or for its nodes; it really doesn\'92t matter. I chose to write it for the nodes so that I can print partial trees. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 Make sure it accepts a closure parameter that itself accepts one parameter (your 
+\f3\b \cf3 Node<T> 
+\f2\b0 \cf2 equivalent) and returns void. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 Remember the left and/or right node may not exist. \uc0\u8232 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 Once you\'92ve expended all the effort creating a binary tree, working with it is remarkably easy and this challenge is a great example of that. 
+\f1\fs24 \
+
+\f2\fs32 Traversing a binary tree in order means going through each node, applying a closure to its left node, applying a closure to itself, and applying a closure to its right node. There are an unknown number of nodes in any position in the binary tree, so this is a perfect candidate for recursion. 
+\f1\fs24 \
+
+\f2\fs32 Consider a tree with one item at the top, two items beneath, four items beneath that, and eight items at the bottom. Starting from the top, we need to move its left node, then the left node again, then the left node again, then the last left node. That\'92s our first value to print. We can then move up one level to print the parent value, then move down again to print the right node. Next we move up to the grandparent and print its value, then its right node, then move up again, and so on. 
+\f1\fs24 \
+
+\f2\fs32 This might sound hard in theory, but in code it\'92s almost magical in its simplicity. Here\'92s my solution in full: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 traverse\cf7 (\cf8 _ \cf2 body\cf7 : (\cf9 Node\cf10 <\cf2 T\cf10 >\cf7 ) \cf10 -> \cf9 Void\cf7 ) \{\
+\cf2    left\cf10 ?\cf7 .\cf6 traverse\cf7 (\cf2 body\cf7 )\
+\cf6    body\cf7 (\cf4 self\cf7 )\
+\cf2    right\cf10 ?\cf7 .\cf6 traverse\cf7 (\cf2 body\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\i\fs32 \cf2 Boom. 
+\f2\i0 Another challenge aced! 
+\f1\fs24 \
+}

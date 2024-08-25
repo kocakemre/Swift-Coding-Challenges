@@ -1,0 +1,127 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red148\green108\blue71;\red135\green135\blue135;\red73\green17\blue135;\red0\green0\blue255;
+\red107\green0\blue109;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c65098\c49804\c34902;\cssrgb\c60000\c60000\c60000;\cssrgb\c36078\c14902\c60000;\cssrgb\c0\c0\c100000;
+\cssrgb\c50196\c0\c50196;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 61: Find prime numbers 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Write a function that returns an array of prime numbers from 2 up to but excluding 
+\f1\i N
+\f2\i0 , taking 
+\f1\fs24 \
+
+\f2\fs32 care to be as efficient as possible.\uc0\u8232 
+\f1\b Tip: 
+\f2\b0 Calculating primes is easy. Calculating primes 
+\f1\i efficiently 
+\f2\i0 is not. Take care! 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 challenge61(upTo: 10) 
+\f2\b0 \cf2 should return 2, 3, 5, 7. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 challenge61(upTo: 11) 
+\f2\b0 \cf2 should return 2, 3, 5, 7; remember to exclude \uc0\u8232 the upper bound. \u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 challenge61(upTo: 12) 
+\f2\b0 \cf2 should return 2, 3, 5, 7, 11. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 Writing code to find whether one number is prime or not is very different to writing code to find 
+\f1\i all 
+\f2\i0 prime numbers \'96 there\'92s a reason this is in the algorithms chapter. \uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 When given a number, you decide whether it\'92s prime by checking whether it has any factors. When given a range of numbers, you want to take the opposite approach: assume all numbers are prime, then remove numbers that are composites by multiplying primes. \uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 This is known as the Sieve of Eratosthenes: take the number 2, then mark all multiples of 2 as being not prime. Then take the number 3 and repeat. Then 5 (no need to check 4; that\'92s a multiple of 2), then 7 (no need to check 6; that\'92s a multiple of 3), and so on. What remains must be prime. \uc0\u8232 
+\f1\b Hint #4: 
+\f2\b0 Once you have an array containing which numbers are prime and which are not, you just need to extract the numbers that are prime and return them. \uc0\u8232 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 The Sieve of Eratosthenes is an algorithm I teach to children because it\'92s so smart it feels like cheating. Not only does it run screamingly fast, but it\'92s easy enough you can explain in under a minute and remember for the rest of your life. I also lead a secret life as a classical studies student, so its ancient origins are especially appealing to me! 
+\f1\fs24 \
+
+\f2\fs32 Here it is: mark your entire range of numbers as being prime, so let\'92s say that\'92s 0 to 10. We know that 0 and 1 can\'92t be prime by definition, so we mark those as not prime. Now we loop from 2 up to the maximum of our range: if that number is currently marked prime, then we can mark all its multiples as not prime. So, 2 is prime, which means 4, 6, and 8 are not, so we mark them as not prime. We then continue to the next number, which is 3, and mark its multiples as not prime: 6 and 9. We then continue to 4, but it\'92s already been marked as not prime so we can continue to 5, and so on. 
+\f1\fs24 \
+
+\f2\fs32 That\'92s it. That\'92s the entire algorithm, and even though it\'92s over 2000 years old it still remains one of the most efficient ways to find ranges of prime numbers \'96 so it\'92s the perfect solution to this challenge. 
+\f1\fs24 \
+
+\f2\fs32 As always I\'92ve provided my solution below, but it bears a little explanation. My sieve array is declared as this: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 var \cf2 sieve \cf6 = \cf7 [\cf8 Bool\cf7 ](\cf2 repeating\cf7 : \cf9 true\cf7 , \cf8 count\cf7 : \cf8 max\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 If 
+\f3\b \cf3 max 
+\f2\b0 \cf2 were 10, that would create an array of 10 elements, all set to 
+\f3\b \cf3 true 
+\f2\b0 \cf2 \'96 we mark all numbers as being prime to start with. I then mark positions 0 and 1 as being false, because 0 and 1 aren\'92t prime by definition. So, my array doesn\'92t contain the numbers itself. Instead, it contains whether the number at that index is prime, so 
+\f3\b \cf3 sieve[3] 
+\f2\b0 \cf2 should ultimately be true because 3 is prime. 
+\f1\fs24 \
+
+\f2\fs32 Flipping booleans between true and false is faster than removing items from an array, but isn\'92t suitable for the return value in this challenge. So, we need to convert the boolean array into an integer array, including only numbers that are prime. Because my boolean array uses index to identify each number, what we want to do is return the index of any boolean that is true. Fortunately, that\'92s trivial by combining 
+\f3\b \cf3 enumerated() 
+\f2\b0 \cf2 with 
+\f3\b \cf3 flatMap()
+\f2\b0 \cf2 : the former gives us both the index and boolean value for each element, and the latter can be used to convert \'93index of item or nil\'94 into an array of integers because it strips out nils. 
+\f1\fs24 \
+
+\f2\fs32 With all that in mind, here\'92s my solution: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf10 challenge61\cf7 (\cf2 upTo \cf8 max\cf7 : \cf8 Int\cf7 ) \cf6 -> \cf7 [\cf8 Int\cf7 ] \{\
+\cf4    guard \cf8 max \cf6 > \cf9 1 \cf4 else \cf7 \{ \cf4 return \cf7 [] \}\
+\cf4    var \cf2 sieve \cf6 = \cf7 [\cf8 Bool\cf7 ](\cf2 repeating\cf7 : \cf9 true\cf7 , \cf8 count\cf7 : \cf8 max\cf7 )\
+\cf2    sieve\cf7 [\cf9 0\cf7 ] \cf6 = \cf9 false\
+\cf2    sieve\cf7 [\cf9 1\cf7 ] \cf6 = \cf9 false\
+\cf4    for \cf2 number \cf4 in \cf9 2 \cf7 ..\cf6 < \cf8 max \cf7 \{\
+\cf4       if \cf2 sieve\cf7 [\cf2 number\cf7 ] \cf6 == \cf9 true \cf7 \{\
+\cf4          for \cf2 multiple \cf4 in \cf10 stride\cf7 (\cf2 from\cf7 : \cf2 number \cf6 * \cf2 number\cf7 , \cf2 to\cf7 :\
+\cf2 sieve\cf7 .\cf8 count\cf7 , \cf2 by\cf7 : \cf2 number\cf7 ) \{\
+\cf2             sieve\cf7 [\cf2 multiple\cf7 ] \cf6 = \cf9 false\
+\cf7          \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 sieve\cf7 .\cf10 enumerated\cf7 ().\cf2 flatMap \cf7 \{ \cf2 $\cf9 1 \cf6 == \cf9 true \cf6 ? \cf2 $\cf9 0 \cf7 : \cf9 nil \cf7 \}\
+\}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 How fast is it? Well, if you compile it in fully optimized mode, it can calculate all the primes up to 10 million in about 0.05 seconds on a modern Mac \'96 not bad! 
+\f1\fs24 \
+}

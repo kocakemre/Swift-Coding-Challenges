@@ -1,0 +1,267 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red73\green17\blue135;\red135\green135\blue135;\red107\green0\blue109;\red148\green108\blue71;
+\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c36078\c14902\c60000;\cssrgb\c60000\c60000\c60000;\cssrgb\c50196\c0\c50196;\cssrgb\c65098\c49804\c34902;
+\cssrgb\c0\c0\c100000;}
+{\*\listtable{\list\listtemplateid1\listhybrid{\listlevel\levelnfc23\levelnfcn23\leveljc0\leveljcn0\levelfollow0\levelstartat1\levelspace360\levelindent0{\*\levelmarker \{disc\}}{\leveltext\leveltemplateid1\'01\uc0\u8226 ;}{\levelnumbers;}\fi-360\li720\lin720 }{\listname ;}\listid1}}
+{\*\listoverridetable{\listoverride\listid1\listoverridecount0\ls1}}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 47: Recreate min() 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Write an extension for all collections that reimplements the 
+\f3\b \cf3 min() 
+\f2\b0 \cf2 method. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\sa320\partightenfactor0
+\ls1\ilvl0
+\f2\fs32 \cf2 \kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 [1, 2, 3].challenge47() 
+\f2\b0 \cf2 should return 1. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 ["q", "f", "k"].challenge47() 
+\f2\b0 \cf2 should return \'93f\'94. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 [4096, 256, 16].challenge47() 
+\f2\b0 \cf2 should return 16. \uc0\u8232 \
+\ls1\ilvl0\kerning1\expnd0\expndtw0 {\listtext	\'95	}\expnd0\expndtw0\kerning0
+The code 
+\f3\b \cf3 [String]().challenge47() 
+\f2\b0 \cf2 should return nil. \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Hints 
+\f2\b0\fs32 \uc0\u8232 
+\f1\b Hint #1: 
+\f2\b0 You\'92ll need to extend the 
+\f3\b \cf3 Collection 
+\f2\b0 \cf2 type with a constraint.\uc0\u8232 
+\f1\b Hint #2: 
+\f2\b0 Finding the smallest of any value requires using the 
+\f3\b \cf3 < 
+\f2\b0 \cf2 operator, which is guaranteed \uc0\u8232 to exist when something conforms to 
+\f3\b \cf3 Comparable
+\f2\b0 \cf2 .\uc0\u8232 
+\f1\b Hint #3: 
+\f2\b0 The collection might be empty, so you\'92ll need to return an optional value. 
+\f1\b Hint #4: 
+\f2\b0 You can\'92t compare an optional value against a non-optional one\uc0\u8232 
+\f1\b Hint #5: 
+\f2\b0 You can solve this quite beautifully using 
+\f3\b \cf3 reduce()
+\f2\b0 \cf2 . \uc0\u8232 
+\f0\b\fs37\fsmilli18667 Solution 
+\f2\b0\fs32 \uc0\u8232 As you might expect, there\'92s a na\'efve solution, a smart solution, and a sneaky solution. I want to show you all three, because there\'92s a good chance you\'92ll learn something new along the way \'96 you\'92re getting good value for money, right? \u8232 Let\'92s take a look at the na\'efve solution first: \u8232 
+\f4 \cf4 \cb5 extension \cf6 Collection \cf4 where \cf6 Iterator\cf7 .\cf6 Element\cf7 : \cf6 Comparable \cf7 \{\
+\pard\tx220\tx720\pardeftab720\li720\fi-720\sl360\partightenfactor0
+\ls1\ilvl0\cf4 func \cf8 challenge47a\cf7 () \cf9 -> \cf6 Iterator\cf7 .\cf6 Element\cf9 ? \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       var \cf2 lowest\cf7 : \cf6 Iterator\cf7 .\cf6 Element\cf9 ?\
+\cf4       for \cf2 item \cf4 in self \cf7 \{\
+\cf4          if let \cf2 unwrappedLowest \cf9 = \cf2 lowest \cf7 \{\
+\cf4             if \cf2 item \cf9 < \cf2 unwrappedLowest \cf7 \{\
+\cf2                lowest \cf9 = \cf2 item\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \}\cb1 \uc0\u8232 \cb5 \} \cf4 else \cf7 \{ 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf2 \cb5             lowest \cf9 = \cf2 item\
+\cf7          \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5       return \cf2 lowest\
+\cf7    \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 So, make the lowest value an optional of the same type as our element, then loop through all items. For each item, unwrap our lowest and check whether the new item is lower; if so, replace it and move on. 
+\f1\fs24 \
+
+\f2\fs32 That certainly works, but the optionality here is just getting in the way. A smarter solution is to jettison optionality entirely, because if we can\'92t get at least one value from the collection we might as well early return. 
+\f1\fs24 \
+
+\f2\fs32 So, we can use 
+\f3\b \cf3 guard 
+\f2\b0 \cf2 to pull out 
+\f3\b \cf3 self.first
+\f2\b0 \cf2 . If that returns nil it means the collection is empty so we can return nil immediately. However, if it 
+\f1\i isn\'92t 
+\f2\i0 empty it means we definitely have a return value and can therefore forget about optionality the rest of the time. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s how this improved solution works: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf8 challenge47b\cf7 () \cf9 -> \cf6 Iterator\cf7 .\cf6 Element\cf9 ? \cf7 \{\
+\cf4    guard var \cf2 lowest \cf9 = \cf4 self\cf7 .\cf6 first \cf4 else \cf7 \{ \cf4 return \cf10 nil \cf7 \}\
+\cf4    for \cf2 item \cf4 in self \cf7 \{\
+\cf4 if \cf2 item \cf9 < \cf2 lowest \cf7 \{\
+\cf2          lowest \cf9 = \cf2 item\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 lowest\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 That\'92s significantly shorter and easier to read. Optionality is a firm guarantee of program safety, but it\'92s also an epic pain in the backside \'96 if you can ditch it, you should do so. 
+\f1\fs24 \
+
+\f2\fs32 The current code has a small problem, which is that the first item in the collection is read twice: once for the initial value, and once again when the loop starts. Honestly, that cost is tiny, and of course becomes increasingly small as the size of the collection increases. However, it\'92s possible that your collection stores custom objects that are expensive to compare, so I want to show you how to fix this problem. 
+\f1\fs24 \
+
+\f2\fs32 All collections are backed by an iterator, which is what produces elements and allows us to constrain extensions using 
+\f3\b \cf3 Iterator.Element
+\f2\b0 \cf2 . They also come with a 
+\f3\b \cf3 makeIterator() 
+\f2\b0 \cf2 method, that allows you to move through the entire collection and pull out items by calling its 
+\f3\b \cf3 next() 
+\f2\b0 \cf2 method. The first time you call 
+\f3\b \cf3 next() 
+\f2\b0 \cf2 you\'92ll receive the first item; the second time you call it you\'92ll get the second, and so on. Helpfully, you can call these methods whenever and wherever you want \'96 as long as you use the same iterator, your position will be preserved. 
+\f1\fs24 \
+
+\f2\fs32 So, rather than using 
+\f3\b \cf3 self.first 
+\f2\b0 \cf2 for our 
+\f3\b \cf3 guard 
+\f2\b0 \cf2 statement, we\'92ll instead create an iterator then use the first return value from its 
+\f3\b \cf3 next() 
+\f2\b0 \cf2 method. This means we can continue to loop over the iterator using a 
+\f3\b \cf3 while 
+\f2\b0 \cf2 loop and 
+\f3\b \cf3 next()
+\f2\b0 \cf2 , and won\'92t compare the first value to itself. 
+\f1\fs24 \
+
+\f2\fs32 So, here\'92s the doubly improved code, which takes the crown for the fastest solution covered here: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf8 challenge47c\cf7 () \cf9 -> \cf6 Iterator\cf7 .\cf6 Element\cf9 ? \cf7 \{\
+\cf4    var \cf2 it \cf9 = \cf8 makeIterator\cf7 ()\
+\cf4    guard var \cf2 lowest \cf9 = \cf2 it\cf7 .\cf8 next\cf7 () \cf4 else \cf7 \{ \cf4 return \cf10 nil \cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 \cb1 www.hackingwithswift.com 147 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 while let \cf2 item \cf9 = \cf2 it\cf7 .\cf8 next\cf7 () \{\
+\cf4       if \cf2 item \cf9 < \cf2 lowest \cf7 \{\
+\cf2          lowest \cf9 = \cf2 item\
+\cf7       \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5    return \cf2 lowest\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 OK, enough of that solution. Let\'92s take a look at some alternatives, starting with 
+\f3\b \cf3 reduce()
+\f2\b0 \cf2 . You can solve this challenge in just two lines of code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf8 challenge47d\cf7 () \cf9 -> \cf6 Iterator\cf7 .\cf6 Element\cf9 ? \cf7 \{\
+\cf4    guard let \cf2 lowest \cf9 = \cf4 self\cf7 .\cf6 first \cf4 else \cf7 \{ \cf4 return \cf10 nil \cf7 \}\
+\cf4    return \cf8 reduce\cf7 (\cf2 lowest\cf7 ) \{ \cf2 $\cf10 1 \cf9 < \cf2 $\cf10 0 \cf9 ? \cf2 $\cf10 1 \cf7 : \cf2 $\cf10 0 \cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That isn\'92t the fastest, but you must admit it\'92s beautiful in its simplicity. Using 
+\f3\b \cf3 reduce() 
+\f2\b0 \cf2 with the ternary operator effectively makes this into a fight to the death: the winner of the previous round advances to the next one, until the method finally returns. 
+\f1\fs24 \
+
+\f2\fs32 That code does suffer from the same problem we already tackled: it evaluates the first element twice. Sadly this is difficult to avoid with 
+\f3\b \cf3 reduce()
+\f2\b0 \cf2 , because you can\'92t reduce an iterator. However, Swift has a workaround that might interest you \'96 it\'92s not especially efficient if you want to squeeze out maximum performance, but it does let you treat an iterator like any other sequence. 
+\f1\fs24 \
+
+\f2\fs32 The workaround is the 
+\f3\b \cf3 IteratorSequence 
+\f2\b0 \cf2 data type. It is initialized from an iterator, but includes all the functionality you\'92re used to in sequences, such as 
+\f3\b \cf3 for-in 
+\f2\b0 \cf2 loops \'96 and, critically here, 
+\f3\b \cf3 reduce()
+\f2\b0 \cf2 . So, we could rewrite the previous solution using 
+\f3\b \cf3 IteratorSequence 
+\f2\b0 \cf2 like so: 
+\f1\fs24 \
+\pard\pardeftab720\sl280\partightenfactor0
+\cf2 {{\NeXTGraphic page148image14224.png \width9160 \height720
+}¬}\pard\pardeftab720\sl280\partightenfactor0
+\cf2 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 func \cf8 challenge47e\cf7 () \cf9 -> \cf6 Iterator\cf7 .\cf6 Element\cf9 ? \cf7 \{\
+\cf4    var \cf2 it \cf9 = \cf8 makeIterator\cf7 ()\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f0 \cf2 www.hackingwithswift.com 148 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 guard let \cf2 lowest \cf9 = \cf2 it\cf7 .\cf8 next\cf7 () \cf4 else \cf7 \{ \cf4 return \cf10 nil \cf7 \}\
+\cf4    return \cf8 IteratorSequence\cf7 (\cf2 it\cf7 ).\cf8 reduce\cf7 (\cf2 lowest\cf7 ) \{ \cf2 $\cf10 1 \cf9 < \cf2 $\cf10 0 \cf9 ? \cf2 $\cf10 1 \cf7 :\
+\cf2 $\cf10 0 \cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 I should add that there\'92s a cost to converting an iterator to a sequence, and it\'92s probably greater than the cost of evaluating one item twice. 
+\f1\fs24 \
+
+\f2\fs32 Finally, a sneaky solution: call 
+\f3\b \cf3 sorted() 
+\f2\b0 \cf2 then return its 
+\f3\b \cf3 first 
+\f2\b0 \cf2 property. This ensures all items are placed in their correct order, so 
+\f3\b \cf3 first 
+\f2\b0 \cf2 is guaranteed to be the smallest item, or nil if the collection is empty. Here it is in code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf8 challenge47f\cf7 () \cf9 -> \cf6 Iterator\cf7 .\cf6 Element\cf9 ? \cf7 \{\
+\cf4    return self\cf7 .\cf8 sorted\cf7 ().\cf6 first\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This solution certainly works, and involves writing almost no code, but it\'92s far from the most efficient. Keep in mind that 
+\f3\b \cf3 sorted() 
+\f2\b0 \cf2 has to do multiple comparisons in order to place items in their correct order, as well as multiple moves, so it involves far more operations than are required to solve this challenge. 
+\f1\fs24 \
+}

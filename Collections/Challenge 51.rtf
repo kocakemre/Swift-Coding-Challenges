@@ -1,0 +1,237 @@
+{\rtf1\ansi\ansicpg1252\cocoartf1504\cocoasubrtf810
+{\fonttbl\f0\fswiss\fcharset0 Helvetica;\f1\froman\fcharset0 Times-Roman;\f2\froman\fcharset0 TimesNewRomanPSMT;
+\f3\fmodern\fcharset0 Courier-Bold;\f4\fmodern\fcharset0 Courier;}
+{\colortbl;\red255\green255\blue255;\red0\green0\blue0;\red0\green0\blue120;\red163\green0\blue79;
+\red255\green255\blue255;\red107\green0\blue109;\red135\green135\blue135;\red148\green108\blue71;\red73\green17\blue135;
+\red28\green117\blue20;\red0\green0\blue255;}
+{\*\expandedcolortbl;;\cssrgb\c0\c0\c0;\cssrgb\c0\c0\c54510;\cssrgb\c70588\c0\c38431;
+\cssrgb\c100000\c100000\c100000;\cssrgb\c50196\c0\c50196;\cssrgb\c60000\c60000\c60000;\cssrgb\c65098\c49804\c34902;\cssrgb\c36078\c14902\c60000;
+\cssrgb\c11373\c52157\c9804;\cssrgb\c0\c0\c100000;}
+\margl1440\margr1440\vieww15300\viewh16500\viewkind0
+\deftab720
+\pard\pardeftab720\sl560\sa240\partightenfactor0
+
+\f0\b\fs48 \cf2 \expnd0\expndtw0\kerning0
+Challenge 51: Reversing linked lists 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Difficulty: 
+\f2\b0 Tricky\uc0\u8232 Expand your code from challenge 43 so that it has a 
+\f3\b \cf3 reversed() 
+\f2\b0 \cf2 method that returns a copy 
+\f1\fs24 \
+
+\f2\fs32 of itself in reverse. 
+\f1\fs24 \
+
+\b\fs32 Tip: 
+\f2\b0 Don\'92t cheat! It is 
+\f1\i not 
+\f2\i0 a solution to this problem just to reverse the alphabet letters before you create your linked list. Create the linked list alphabetically, then write code to reverse it. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Sample input and output 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 \'95 When you call 
+\f3\b \cf3 reversed() 
+\f2\b0 \cf2 on your alphabet list, running 
+\f3\b \cf3 printNodes() 
+\f2\b0 \cf2 on the return value should print the English alphabet printed to the screen in reverse, i.e. \'93z y x ... d b c a\'94. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Hints 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\b\fs32 \cf2 Hint #1: 
+\f2\b0 Most of the work is just producing a copy of the linked list. 
+\f1\b Hint #2: 
+\f2\b0 Having to work on a copy makes this a little more interesting. 
+\f1\fs24 \
+
+\b\fs32 Hint #3: 
+\f2\b0 You could create two methods: one for copying, and one for reversing a copy in place. If you do this, please think carefully about Swift\'92s naming conventions! 
+\f1\fs24 \
+
+\b\fs32 Hint #4: 
+\f2\b0 You need to create a 
+\f3\b \cf3 newNext 
+\f2\b0 \cf2 variable that starts as nil. Then traverse the full list, pull out its 
+\f3\b \cf3 next 
+\f2\b0 \cf2 value, then change the current node\'92s 
+\f3\b \cf3 next 
+\f2\b0 \cf2 property to be 
+\f3\b \cf3 newNext
+\f2\b0 \cf2 . You can then continue on to whatever node was in 
+\f3\b \cf3 next
+\f2\b0 \cf2 , and repeat until the end of the list is reached. 
+\f1\fs24 \
+\pard\pardeftab720\sl440\sa240\partightenfactor0
+
+\f0\b\fs37\fsmilli18667 \cf2 Solution 
+\f1\b0\fs24 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This is such a simple task, and yet it\'92s massive pain point for developers. On paper it\'92s trivial: you can imagine in your head a series of boxes with arrows moving left to right, and it\'92s your job to make the arrows move right to left. But in practice this can be devilish to solve, because for some reason your brain decides to go on a vacation rather than stick around and help you out. The task is made doubly difficult by the fact that you almost certainly used a class for your linked list data types, and copying classes isn\'92t automatic like you get with structs. Splitting the work into two methods has the advantage of making your code easier to understand and also more flexible in the future, but does mean going through your list twice. 
+\f1\fs24 \
+
+\f2\fs32 Let\'92s take a look at the all-in-one solution first: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 reversed\cf7 () \cf8 -> \cf9 LinkedList\cf8 <\cf2 T\cf8 > \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10    // create our copy for the return value\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    let \cf2 copy \cf8 = \cf9 LinkedList\cf8 <\cf2 T\cf8 >\cf7 ()\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10    // if we have nodes to copy...\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4    if let \cf2 startNode \cf8 = \cf2 start \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10       // copy the original start node\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       var \cf2 previousCopyNode \cf8 = \cf6 LinkedListNode\cf7 (\cf2 value\cf7 :\
+\cf2 startNode\cf7 .\cf2 value\cf7 )\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10       // now start copying from the next node\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4       var \cf2 currentNode \cf8 = \cf2 start\cf8 ?\cf7 .\cf2 next\
+\cf4       while let \cf2 node \cf8 = \cf2 currentNode \cf7 \{\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10          // create a copy of this node\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf4          let \cf2 copyNode \cf8 = \cf6 LinkedListNode\cf7 (\cf2 value\cf7 : \cf2 node\cf7 .\cf2 value\cf7 )\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf10 forward 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf10 \cb5 // make it point to the node we created previously\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 copyNode\cf7 .\cf2 next \cf8 = \cf2 previousCopyNode\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf10 // then make it the previous node, so we can move\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2 previousCopyNode \cf8 = \cf2 copyNode\
+currentNode \cf8 = \cf2 currentNode\cf8 ?\cf7 .\cf2 next\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf10 \cb5       // we're at the end of the list, which is our new start\
+\pard\pardeftab720\sl360\partightenfactor0
+\cf2       copy\cf7 .\cf2 start \cf8 = \cf2 previousCopyNode\
+\cf7    \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf4 return \cf2 copy \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 That\'92s a perfectly valid solution to this challenge, so we could easily stop here and move on. But I\'92d also like to explore with a smarter alternative: making a separate 
+\f3\b \cf3 copy() 
+\f2\b0 \cf2 method, then creating a 
+\f3\b \cf3 reverse() 
+\f2\b0 \cf2 method that reverses a linked list in place. 
+\f1\fs24 \
+
+\f2\fs32 The official Apple way to implement copying is with the 
+\f3\b \cf3 NSCopying 
+\f2\b0 \cf2 protocol, which forces you to return 
+\f3\b \cf3 Any 
+\f2\b0 \cf2 from your copy method rather than, you know, a 
+\f1\i useful 
+\f2\i0 type. So, we\'92ll skip that and just create our own 
+\f3\b \cf3 copy() 
+\f2\b0 \cf2 method, which is a modified version of the 
+\f3\b \cf3 reversed() 
+\f2\b0 \cf2 method I already showed you \'96 it does the same thing, but leaves the nodes in their existing order. 
+\f1\fs24 \
+
+\f2\fs32 Here\'92s the code: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 copy\cf7 () \cf8 -> \cf9 LinkedList\cf8 <\cf2 T\cf8 > \cf7 \{\
+\cf4    let \cf2 copy \cf8 = \cf9 LinkedList\cf8 <\cf2 T\cf8 >\cf7 ()\
+\cf4    if let \cf2 startNode \cf8 = \cf2 start \cf7 \{\
+\cf2       copy\cf7 .\cf2 start \cf8 = \cf6 LinkedListNode\cf7 (\cf2 value\cf7 : \cf2 startNode\cf7 .\cf2 value\cf7 )\
+\cf4       var \cf2 previousCopyNode \cf8 = \cf2 copy\cf7 .\cf2 start\
+\cf4       var \cf2 currentNode \cf8 = \cf2 start\cf8 ?\cf7 .\cf2 next\
+\cf4       while let \cf2 node \cf8 = \cf2 currentNode \cf7 \{\
+\cf4          let \cf2 copyNode \cf8 = \cf6 LinkedListNode\cf7 (\cf2 value\cf7 : \cf2 node\cf7 .\cf2 value\cf7 )\
+\cf2          previousCopyNode\cf8 ?\cf7 .\cf2 next \cf8 = \cf2 copyNode\
+         previousCopyNode \cf8 = \cf2 copyNode\
+         currentNode \cf8 = \cf2 currentNode\cf8 ?\cf7 .\cf2 next\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} \
+\} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 return \cf2 copy \cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 With that in place we can write a 
+\f3\b \cf3 reverse() 
+\f2\b0 \cf2 method that reverses a linked list in place. This is 
+\f1\i much 
+\f2\i0 simpler than copying and reversing at the same time: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 reverse\cf7 () \{\
+\cf4    var \cf2 currentNode \cf8 = \cf2 start\
+\cf4    var \cf2 newNext\cf7 : \cf9 LinkedListNode\cf8 <\cf2 T\cf8 >? = \cf11 nil\
+\cf4    while let \cf2 node \cf8 = \cf2 currentNode \cf7 \{\
+\cf4       let \cf2 next \cf8 = \cf2 node\cf7 .\cf2 next\
+      node\cf7 .\cf2 next \cf8 = \cf2 newNext\
+      newNext \cf8 = \cf2 node\cf7 ;\
+\cf2       currentNode \cf8 = \cf2 next\
+\cf7    \}\
+\cf2    start \cf8 = \cf2 newNext\
+\cf7 \}\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2 \cf2 \cb1 At this point we have a 
+\f3\b \cf3 copy() 
+\f2\b0 \cf2 method and a 
+\f3\b \cf3 reverse() 
+\f2\b0 \cf2 method, which means we can finally implement 
+\f3\b \cf3 reversed() 
+\f2\b0 \cf2 to satisfy the challenge: 
+\f1\fs24 \
+\pard\pardeftab720\sl360\partightenfactor0
+
+\f4\fs32 \cf4 \cb5 func \cf6 reversed\cf7 () \cf8 -> \cf9 LinkedList\cf8 <\cf2 T\cf8 > \cf7 \{\
+\cf4    let \cf2 copy \cf8 = \cf4 self\cf7 .\cf6 copy\cf7 ()\
+\cf2    copy\cf7 .\cf6 reverse\cf7 ()\
+\cf4    return \cf2 copy\
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+\cf7 \} 
+\f1\fs24 \cf2 \cb1 \
+\pard\pardeftab720\sl360\sa240\partightenfactor0
+
+\f2\fs32 \cf2 This approach took a little more thinking, and isn\'92t quite as fast as in-place reversing because of the need to traverse the list twice, but a) you get to follow Swift\'92s naming conventions 
+\f1\fs24 \
+
+\f2\fs32 (
+\f3\b \cf3 reverse() 
+\f2\b0 \cf2 and 
+\f3\b \cf3 reversed() 
+\f2\b0 \cf2 match 
+\f3\b \cf3 sort() 
+\f2\b0 \cf2 and 
+\f3\b \cf3 sorted()
+\f2\b0 \cf2 ), and b) you have more flexibility in your linked list going forward, because you can write other methods that require a copy to be made without having to duplicate the copying all the time. 
+\f1\fs24 \
+}
